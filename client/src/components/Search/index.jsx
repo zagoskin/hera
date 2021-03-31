@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './search.css';
-import { getContentList } from '../../api/search';
+import { getContentList } from '../../api-front/search';
 import AcademicCard from '../AcademicCard/index';
 
 export default function Search(){
