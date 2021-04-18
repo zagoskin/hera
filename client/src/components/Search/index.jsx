@@ -11,7 +11,7 @@ export default function Search(){
 
   const searchPapers = async (e) => {
     e.preventDefault();
-
+    
     const res = await getContentList(query); 
     console.log('resultados:');
     console.log(res);
@@ -42,7 +42,7 @@ export default function Search(){
       {contents ? 
       <div className="card-list">
         {/* contents.filter(content => content.algunValor tipo citas o algo > 0).map a esto  */}
-        {contents.map(content => (
+        {contents.map(content => ( content.error ? null :
           <AcademicCard content={content} key={content.DOI}/>
         ))}
       </div>

@@ -2,7 +2,8 @@ import React from 'react';
 import './card.css';
 
 export default function AcademicCard({content}){
-
+  console.log('En Academic Card');
+  console.log(content);
   return (
     <div className="card">
       <div className="card--score">
