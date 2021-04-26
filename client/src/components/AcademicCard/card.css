@@ -6,8 +6,18 @@
   background-color: white;
 }
 
-.card--score {
-  display: block;
+.card--scoreCrossref {
+  display: inline-block;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.75);
+  margin-bottom: 2rem;
+  background-image: linear-gradient(
+    to right,
+    white,
+    rgb(224, 252, 253),
+    rgb(204, 253, 255),
+    rgb(179, 233, 243)
+  );
 }
 
 .card--content {
@@ -23,35 +33,54 @@
 .card--score--image {
   float: left;
   margin: 0 auto;
-  width: 30%;
-  height: 30%;
+  width: 20%;
+  height: 20%;
 }
 
 .card--score--text {
   font-family: helveticaneueetw01-55rg, helvetica neue, Helvetica, Arial,
     sans-serif;
-  padding-top: 2rem;
-  font-size: 3rem;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.card--score--text p {
+  font-size: 1rem;
 }
 
 .card--desc {
   display: flex;
 }
 
+a:visited {
+  color: blue;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
 @media (min-width: 786px) {
+  .card--scoreCrossref {
+    width: 100%;
+  }
   .card--score--image {
     float: left;
     margin: 0 auto;
-    width: 20%;
-    height: 20%;
+    width: 15%;
+    height: 15%;
   }
 
   .card--score--text {
-    padding-top: 4rem;
-    font-size: 4rem;
+    font-size: 3rem;
+    font-weight: lighter;
   }
   .card--title {
     margin-bottom: 0.5rem;
     font-size: 4rem;
+  }
+
+  .card--score--text p {
+    font-size: 2rem;
   }
 }
