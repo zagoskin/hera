@@ -1,6 +1,6 @@
 import { api } from './url';
 
-export const getContentList = async (query) => {
+export const getContentCrossref = async (query) => {
   try {
     const res = await fetch(`/api/getContents`, {
       method: 'POST',
