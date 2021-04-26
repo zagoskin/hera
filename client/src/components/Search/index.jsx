@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './search.css';
-import { getContentList } from '../../api-front/search';
+import { getContentCrossref } from '../../api-front/search';
 import AcademicCard from '../AcademicCard/index';
 
 export default function Search(){
@@ -12,9 +12,10 @@ export default function Search(){
   const searchPapers = async (e) => {
     e.preventDefault();
     
-    const res = await getContentList(query); 
-    console.log('resultados:');
-    console.log(res);
+    const crossrefData = await getContentCrossref(query); 
+    var res = [{
+      crossref: crossrefData[0]
+    }]
     // let parser = new DOMParser();
     // for (let i=0; i < res.length; i++){
     //   if (res[i].abstract){
@@ -43,7 +44,7 @@ export default function Search(){
       <div className="card-list">
         {/* contents.filter(content => content.algunValor tipo citas o algo > 0).map a esto  */}
         {contents.map(content => ( content.error ? null :
-          <AcademicCard content={content} key={content.DOI}/>
+          <AcademicCard content={content} key={content.crossref.DOI}/>
         ))}
       </div>
       : null
