@@ -93,6 +93,7 @@
   margin-bottom: 1rem;
 }
 .card--doaj--text--warning {
+  margin-top: 2rem;
   border: 1px;
   border-radius: 15px;
   border-style: double;

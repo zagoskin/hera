@@ -25,16 +25,17 @@ export default function AcademicCard({content}){
         {content.doaj.total === 0 ? 
         <div className="card--doaj--text--warning">
           No incluido en DOAJ
-        </div> :
-        <div className="card--doaj--text--success">
+        </div> : [
+        <div className="card--doaj--text--success" key={content.doaj.total}>
           Indexado por DOAJ
-        </div>}
-        {content.doaj.results[0].admin.seal ? 
-          <a href='https://doaj.org/apply/seal/'>
-            
-            <span className='card--doaj--seal'>☑ DOAJ Seal</span>
-          </a>
-        : null
+        </div>,
+          (content.doaj.results[0].admin.seal ? 
+            <a href='https://doaj.org/apply/seal/' key={content.doaj.results[0].id}>
+              
+              <span className='card--doaj--seal'>☑ DOAJ Seal</span>
+            </a>
+          : null
+          )]
         }
            
       </div>

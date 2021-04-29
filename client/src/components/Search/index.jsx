@@ -15,7 +15,8 @@ export default function Search(){
     const crossrefData = await getContentsCrossref(query); 
     var res = [{
       crossref: crossrefData[0],
-      abstract: crossrefData[0].abstract
+      abstract: crossrefData[0].abstract,
+      DOI: crossrefData[0].DOI
     }]
 
     var doajData = null;
@@ -57,7 +58,7 @@ export default function Search(){
       <div className="card-list">
         {/* contents.filter(content => content.algunValor tipo citas o algo > 0).map a esto  */}
         {contents.map(content => ( content.error ? null :
-          <AcademicCard content={content} key={content.crossref.DOI}/>
+          <AcademicCard content={content} key={content.DOI}/>
         ))}
       </div>
       : null
