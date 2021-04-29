@@ -1,8 +1,8 @@
 import { api } from './url';
 
-export const getContentCrossref = async (query) => {
+export const getContentsCrossref = async (query) => {
   try {
-    const res = await fetch(`/api/getContents`, {
+    const res = await fetch(`/api/getContentsCrossref`, {
       method: 'POST',
       body: new URLSearchParams({
         'query': query
@@ -11,18 +11,32 @@ export const getContentCrossref = async (query) => {
         "Content-Type": "application/x-www-form-urlencoded",
       }
     });
-    console.log('Contents de la API en front:')
+    console.log('Contents de la API en front Crossref:')
     const contents = await res.json();
     console.log(contents);
-    // const doi = contents.message.items[0].DOI;
-    // console.log(doi);
-    // const redalycData = await fetch(`http://148.215.1.70/redalyc/oai?verb=GetRecord&identifier=oai:redalyc.org:10201906&metadataPrefix=oai_dc`, {
-    //   credentials: 'include'
-    // });
-    // console.log('redalycData');
-    // console.log(redalycData);
 
-     return [contents];
+    return [contents];
+  } catch(e) {
+    console.error(e);
+  }
+}
+
+export const getContentsDoaj = async (DOI) => {
+  try {
+    const res = await fetch(`/api/getContentsDoaj`, {
+      method: 'POST',
+      body: new URLSearchParams({
+        'DOI': DOI
+      }),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      }
+    });
+    console.log('Contents de la API en front DOAJ:')
+    const contents = await res.json();
+    console.log(contents);
+
+    return [contents];
   } catch(e) {
     console.error(e);
   }
