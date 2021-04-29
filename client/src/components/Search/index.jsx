@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './search.css';
-import { getContentCrossref } from '../../api-front/search';
+import { getContentsCrossref, getContentsDoaj } from '../../api-front/search';
 import AcademicCard from '../AcademicCard/index';
 
 export default function Search(){
@@ -12,10 +12,23 @@ export default function Search(){
   const searchPapers = async (e) => {
     e.preventDefault();
     
-    const crossrefData = await getContentCrossref(query); 
+    const crossrefData = await getContentsCrossref(query); 
     var res = [{
-      crossref: crossrefData[0]
+      crossref: crossrefData[0],
+      abstract: crossrefData[0].abstract
     }]
+
+    var doajData = null;
+    if (crossrefData[0].DOI){
+      doajData = await getContentsDoaj(crossrefData[0].DOI);
+    }
+    
+    res[0] = {
+      ...res[0], 
+      doaj: doajData[0]
+    };
+
+    console.log(res);
     // let parser = new DOMParser();
     // for (let i=0; i < res.length; i++){
     //   if (res[i].abstract){
