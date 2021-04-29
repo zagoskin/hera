@@ -2,8 +2,8 @@ const path = require('path');
 const express = require("express");
 const fetch = require("node-fetch");
 const e = require('express');
-const url = `https://api.crossref.org/works`;
-
+const urlCrossRef = `https://api.crossref.org/works`;
+const urlDoaj = `https://doaj.org/api/v2/search/articles/`;
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -18,14 +18,30 @@ app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
-app.post("/api/getContents", async (req, res) => {
-  console.log('Reqs desde el front al back:');
-  const data  = await fetch(url + `?query=${req.body.query}&sort=score&rows=1`);
+app.post("/api/getContentsCrossref", async (req, res) => {
+  //console.log('Reqs desde el front al back:');
+  const data  = await fetch(urlCrossRef + `?query=${req.body.query}&sort=score&rows=1`);
   if (data.ok){
-    console.log('Request successful');
+    //console.log('Request successful');
     const jsonData = await data.json();
-    console.log(jsonData.message.items[0]);
+    //console.log(jsonData.message.items[0]);
     res.send(jsonData.message.items[0]);;
+  } else {
+    console.log('Request failed', res.ok);
+    res.send( { error: 'Something went wrong' });
+  }
+  //TODO: PARSEAR ESTA RESPUESTA CUANDO NO SEA 503
+  console.log('Data returned');
+});
+
+app.post("/api/getContentsDoaj", async (req, res) => {
+  //console.log('Reqs desde el front al back:');
+  const data  = await fetch(urlDoaj + `doi:${req.body.DOI}`);
+  if (data.ok){
+    console.log('Request successful DOAJ');
+    const jsonData = await data.json();
+    console.log(jsonData);
+    res.send(jsonData);;
   } else {
     console.log('Request failed', res.ok);
     res.send( { error: 'Something went wrong' });
