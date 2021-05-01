@@ -4,6 +4,8 @@ const fetch = require("node-fetch");
 const e = require('express');
 const urlCrossRef = `https://api.crossref.org/works`;
 const urlDoaj = `https://doaj.org/api/v2/search/articles/`;
+const urlMicrosoft = `https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate`;
+const microsoftSusKey = 'e49b412041094951957423bde5ad243a';
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -47,6 +49,21 @@ app.post("/api/getContentsDoaj", async (req, res) => {
     res.send( { error: 'Something went wrong' });
   }
   //TODO: PARSEAR ESTA RESPUESTA CUANDO NO SEA 503
+  console.log('Data returned');
+});
+
+app.post("/api/getContentsMicrosoft", async (req, res) => {
+  const doiUP = req.body.DOI.toUpperCase();
+  const data  = await fetch(urlMicrosoft + `?expr=DOI=='${doiUP}'&attributes=DOI,Ti,CC,ECC,AA.AuN,AA.AuId,AA.S,F.DFN&subscription-key=${microsoftSusKey}`);
+  if (data.ok){
+    console.log('Request successful DOAJ');
+    const jsonData = await data.json();
+    console.log(jsonData);
+    res.send(jsonData);;
+  } else {
+    console.log('Request failed', res.ok);
+    res.send( { error: 'Something went wrong' });
+  }
   console.log('Data returned');
 });
 
