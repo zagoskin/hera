@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './search.css';
-import { getContentsCrossref, getContentsDoaj } from '../../api-front/search';
+import { getContentsCrossref, getContentsDoaj, getContentsMicrosoft } from '../../api-front/search';
 import AcademicCard from '../AcademicCard/index';
 
 export default function Search(){
@@ -11,35 +11,32 @@ export default function Search(){
 
   const searchPapers = async (e) => {
     e.preventDefault();
-    
+
     const crossrefData = await getContentsCrossref(query); 
-    var res = [{
-      crossref: crossrefData[0],
-      abstract: crossrefData[0].abstract,
-      DOI: crossrefData[0].DOI
-    }]
-
     var doajData = null;
-    if (crossrefData[0].DOI){
-      doajData = await getContentsDoaj(crossrefData[0].DOI);
-    }
-    
-    res[0] = {
-      ...res[0], 
-      doaj: doajData[0]
-    };
+    var microsoftData = null;
 
+    //cuando haya busqueda por DOI esto siempre lo hago independientemente si crossref lo tiene o no
+    if (crossrefData.DOI){
+      doajData = await getContentsDoaj(crossrefData.DOI);
+      microsoftData = await getContentsMicrosoft(crossrefData.DOI);
+    }
+
+    var res = [{
+      crossref: crossrefData,
+      doaj: doajData,
+      microsoft: microsoftData,
+      abstract: crossrefData.abstract,
+      DOI: crossrefData.DOI
+    }]
+    
+    console.log('Todos los resultados:');
     console.log(res);
-    // let parser = new DOMParser();
-    // for (let i=0; i < res.length; i++){
-    //   if (res[i].abstract){
-    //     res[i] = {
-    //       ...res[i],
-    //       abstract: parser.parseFromString(res[i].abstract, 'text/html').body,
-    //     };
-    //   }  
-    // }
-    // console.log(res);
+    // res[0] = {
+    //   ...res[0], 
+    //   doaj: doajData[0]
+    // };
+
     setContents(res);
   }
 

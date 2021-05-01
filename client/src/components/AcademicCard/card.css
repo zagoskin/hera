@@ -6,33 +6,44 @@
   background-color: white;
 }
 
-.card--crossref {
+.card--crossref,
+.card--doaj,
+.card--microsoft {
   display: inline-block;
   border-radius: 15px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.75);
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+.card--crossref {
   background-image: linear-gradient(
     to right,
     white,
     rgb(224, 252, 253),
     rgb(204, 253, 255),
-    rgb(179, 233, 243)
+    rgb(61, 135, 148)
   );
-  margin-bottom: 1.5rem;
 }
-
 .card--doaj {
-  display: inline-block;
-  border-radius: 15px;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.75);
   background-image: linear-gradient(
     to right,
     white,
     rgb(255, 248, 236),
     rgb(253, 239, 216),
-    rgb(255, 219, 161)
+    rgb(218, 160, 68)
   );
-  margin-bottom: 1.5rem;
-  width: 100%;
+}
+
+.card--microsoft {
+  background-image: linear-gradient(
+    to right,
+    white,
+    rgb(221, 229, 255),
+    rgb(213, 223, 255),
+    rgb(196, 210, 255),
+    rgb(60, 93, 202)
+  );
+  overflow: hidden;
 }
 
 .card--content {
@@ -59,6 +70,13 @@
   height: 22%;
 }
 
+.card--microsoft--image {
+  float: left;
+  margin: 0 auto;
+  width: 16%;
+  height: 16%;
+}
+
 .card--crossref--text {
   font-family: helveticaneueetw01-55rg, helvetica neue, Helvetica, Arial,
     sans-serif;
@@ -68,9 +86,24 @@
 }
 
 .card--crossref--text p,
-.card--doaj--text p {
+.card--doaj--text p,
+.card--microsoft--text p {
   font-size: 1rem;
   font-weight: lighter;
+}
+
+.card--microsoft--text {
+  font-family: Calibri;
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  font-weight: bolder;
+  overflow: auto;
+}
+
+.card--microsoft--text--cc {
+  margin-left: 10%;
+  width: 40%;
+  float: left;
 }
 
 .card--doaj--text {
@@ -84,10 +117,9 @@
   padding-right: 1rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  margin-left: 25%;
-  margin-right: 25%;
-  margin-top: 1rem;
-  left: 30%;
+  margin-left: 30%;
+  margin-right: 20%;
+  margin-top: 0.5rem;
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -123,6 +155,38 @@
   background-color: #fd5a3b;
 }
 
+.card--microsoft--fos--title {
+  text-align: center;
+  margin-right: 20%;
+}
+.card--microsoft--fos {
+  margin-left: 5%;
+  margin-bottom: 25%;
+  width: 90%;
+  text-align: center;
+  white-space: pre-wrap;
+}
+.card--microsoft--fos--badge {
+  color: black;
+  float: left;
+  margin: 0.25rem;
+
+  width: 25%;
+  border: 0.5px;
+  border-radius: 15px;
+  font-size: 1rem;
+  border-style: solid;
+  border-color: rgb(42, 41, 41);
+  background-image: linear-gradient(
+    to right,
+    rgb(209, 242, 250),
+    rgb(212, 241, 253),
+    rgb(167, 229, 255),
+    rgb(144, 212, 243),
+    rgb(122, 199, 235),
+    rgb(67, 143, 179)
+  );
+}
 .card--doaj--text .card--desc {
   display: flex;
 }
@@ -164,21 +228,32 @@ a:hover {
     font-weight: lighter;
   }
 
+  .card--microsoft--text {
+    font-family: Calibri;
+    font-size: 2.5rem;
+    margin-top: 1.5rem;
+    font-weight: 500;
+    overflow: auto;
+  }
   .card--doaj--text--warning,
   .card--doaj--text--success {
     font-size: 3rem;
     font-weight: bold;
     padding-left: 3rem;
     padding-right: 3rem;
-    padding-top: 1.5rem;
     padding-bottom: 1.5rem;
-    margin-top: 2rem;
-    margin-left: 25%;
-    margin-right: 35%;
+    margin-left: 30%;
+    margin-right: 30%;
     margin-bottom: 0;
+  }
+  .card--doaj--text--success {
+    padding-top: 0.25rem;
+    margin-top: 1rem;
   }
 
   .card--doaj--text--warning {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
     border: 1px;
     border-radius: 15px;
     border-style: solid;
@@ -206,7 +281,7 @@ a:hover {
   }
   .card--doaj--seal {
     font-family: "Source Sans Pro", sans-serif;
-    margin-left: 20%;
+    margin-left: 25%;
     margin-top: 20%;
     color: #282624;
     font-size: 2rem;
@@ -217,5 +292,9 @@ a:hover {
     border-style: solid;
     border-color: rgb(199, 44, 44);
     background-color: #fd5a3b;
+  }
+
+  .card--microsoft--fos--badge {
+    font-size: 2rem;
   }
 }

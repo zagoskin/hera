@@ -2,6 +2,7 @@ import React from 'react';
 import './card.css';
 import crossrefLogo from '../../images/crossrefLogo.png';
 import doajLogo from '../../images/doajLogo.png';
+import microsoftLogo from '../../images/microsoftLogo.png';
 
 export default function AcademicCard({content}){
   return (
@@ -37,8 +38,36 @@ export default function AcademicCard({content}){
           : null
           )]
         }
-           
       </div>
+
+      <div className="card--microsoft">
+        <img className="card--microsoft--image"
+          src={microsoftLogo}
+          alt='microsoft_image'
+        />
+        {content.microsoft.entities.length > 0 ? 
+        <div className="card--microsoft--text">
+          <div className="card--microsoft--text--cc">
+            Citas actuales {content.microsoft.entities[0].CC} 
+          </div>
+          <div className="card--microsoft--text--ecc">
+            Citas estimadas {content.microsoft.entities[0].ECC} 
+          </div>
+          <br/>
+          <div className="card--microsoft--fos--title">Campos de Estudio</div>
+          <div className="card--microsoft--fos">
+            {content.microsoft.entities[0].F.map((field,index) => 
+              <div className="card--microsoft--fos--badge" key={index}>{field.DFN}</div>   
+            )}
+          </div>
+        </div> : 
+        <div className="card--doaj--text--warning">
+          No hallado en Bing! 
+        </div>
+        }
+        
+      </div>
+
       <div className="card--content">
         <h1 className="card--title">{content.crossref.title}</h1>
         <p><a href={content.crossref.URL}>Click aquí para ir al artículo</a></p>

@@ -15,7 +15,7 @@ export const getContentsCrossref = async (query) => {
     const contents = await res.json();
     console.log(contents);
 
-    return [contents];
+    return contents;
   } catch(e) {
     console.error(e);
   }
@@ -36,7 +36,28 @@ export const getContentsDoaj = async (DOI) => {
     const contents = await res.json();
     console.log(contents);
 
-    return [contents];
+    return contents;
+  } catch(e) {
+    console.error(e);
+  }
+}
+
+export const getContentsMicrosoft = async (DOI) => {
+  try {
+    const res = await fetch(`/api/getContentsMicrosoft`, {
+      method: 'POST',
+      body: new URLSearchParams({
+        'DOI': DOI
+      }),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      }
+    });
+    console.log('Contents de la API en front Microsoft:')
+    const contents = await res.json();
+    console.log(contents);
+
+    return contents;
   } catch(e) {
     console.error(e);
   }
