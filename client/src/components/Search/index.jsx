@@ -8,6 +8,11 @@ export default function Search(){
   //states- input query, movies
   const [query, setQuery] = useState('');
   const [contents, setContents] = useState([]);
+  const [criteria, setCriteria] = useState('');
+
+  const setRadioValue = (e) => {
+    setCriteria(e.target.value);
+  }
 
   const searchPapers = async (e) => {
     e.preventDefault();
@@ -43,13 +48,26 @@ export default function Search(){
   return (
     <>
       <form className="searchForm" onSubmit={searchPapers}>
-        <label className="searchLabel" htmlFor="query">Nombre de artículo, paper, revista
+        {criteria? 
+        <label className="searchLabel" htmlFor="query">Ingrese {criteria} del contenido a analizar
         </label>
+        :
+        <label className="searchLabel" htmlFor="query">Seleccione DOI o ISSN
+        </label>
+        }
           <input className="searchInput" type="text" name="query"
-            placeholder="algun nombre o DOI"
+            placeholder={criteria === "DOI" ? 'e.g.: 10.1000/xyz123' : criteria === "ISSN" ? 'e.g.: 2049-3630' : 'Seleccione criteria primero'}
             value={query} onChange={(e) => setQuery(e.target.value)}
           />
         <button className="searchBtn" type="submit">Buscar</button>
+        <div className="searchCriteria">
+          <label className="searchRadioLabel">DOI
+          <input  className="searchRadioBtn" type="radio" value="DOI" checked={criteria === "DOI"} onChange={setRadioValue}/>
+          </label>
+          <label className="searchRadioLabel">ISSN
+          <input className="searchRadioBtn" type="radio" value="ISSN" checked={criteria === "ISSN"} onChange={setRadioValue}/>
+          </label>
+        </div>
       </form>
       {contents ? 
       <div className="card-list">
