@@ -47,6 +47,18 @@
   margin-top: 4rem;
 }
 
+.searchCriteria {
+  font-size: 2rem;
+}
+
+.searchRadioLabel {
+  float: left;
+  padding: 2rem;
+}
+
+.searchRadioBtn {
+  margin-left: 2.5rem;
+}
 @media (min-width: 786px) {
   .searchLabel {
     font-size: 2.5rem;
@@ -61,5 +73,10 @@
   }
   .searchInput {
     margin-bottom: 0;
+  }
+
+  .searchRadioLabel {
+    padding-top: 0;
+    padding-right: 4rem;
   }
 }
