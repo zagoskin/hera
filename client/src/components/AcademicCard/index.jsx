@@ -54,8 +54,8 @@ export default function AcademicCard({content}){
             Citas estimadas {content.microsoft.entities[0].ECC} 
           </div>
           <br/>
-          <div className="card--microsoft--fos--title">Campos de Estudio</div>
           <div className="card--microsoft--fos">
+            <div className="card--microsoft--fos--title">Campos de Estudio</div>
             {content.microsoft.entities[0].F.map((field,index) => 
               <div className="card--microsoft--fos--badge" key={index}>{field.DFN}</div>   
             )}
