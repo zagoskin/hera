@@ -43,6 +43,13 @@
   box-shadow: 0 5px #666;
   transform: translateY(1.5px);
 }
+
+.searchBtn:disabled {
+  background-color: rgb(182, 175, 175);
+  border: 1px solid rgb(151, 146, 146);
+  color: rgb(182, 175, 175);
+  box-shadow: 0 0;
+}
 .card-list {
   margin-top: 4rem;
 }
