@@ -2,9 +2,9 @@ const path = require('path');
 const express = require("express");
 const fetch = require("node-fetch");
 const e = require('express');
-const urlCrossRef = `https://api.crossref.org/works`;
-const urlDoaj = `https://doaj.org/api/v2/search/articles/`;
-const urlMicrosoft = `https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate`;
+// const urlCrossRef = `https://api.crossref.org/works`;
+// const urlDoaj = `https://doaj.org/api/v2/search/articles/`;
+// const urlMicrosoft = `https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate`;
 const microsoftSusKey = 'e49b412041094951957423bde5ad243a';
 const PORT = process.env.PORT || 3001;
 
@@ -22,49 +22,44 @@ app.get("/api", (req, res) => {
 
 app.post("/api/getContentsCrossref", async (req, res) => {
   //console.log('Reqs desde el front al back:');
-  const data  = await fetch(urlCrossRef + `?query=${req.body.query}&sort=score&rows=1`);
+  // const url = req.body.url;
+  // console.log('Url crossref');
+  // console.log(url);
+  const data  = await fetch(url);
   if (data.ok){
     //console.log('Request successful');
     const jsonData = await data.json();
     //console.log(jsonData.message.items[0]);
-    res.send(jsonData.message.items[0]);;
+    res.send(jsonData);;
   } else {
     console.log('Request failed', res.ok);
     res.send( { error: 'Something went wrong' });
   }
-  //TODO: PARSEAR ESTA RESPUESTA CUANDO NO SEA 503
-  console.log('Data returned');
+  console.log('Data returned from crossref');
 });
 
 app.post("/api/getContentsDoaj", async (req, res) => {
-  //console.log('Reqs desde el front al back:');
-  const data  = await fetch(urlDoaj + `doi:${req.body.DOI}`);
+  const data  = await fetch(url);
   if (data.ok){
-    console.log('Request successful DOAJ');
     const jsonData = await data.json();
-    console.log(jsonData);
     res.send(jsonData);;
   } else {
     console.log('Request failed', res.ok);
     res.send( { error: 'Something went wrong' });
   }
-  //TODO: PARSEAR ESTA RESPUESTA CUANDO NO SEA 503
-  console.log('Data returned');
+  console.log('Data returned from doaj');
 });
 
 app.post("/api/getContentsMicrosoft", async (req, res) => {
-  const doiUP = req.body.DOI.toUpperCase();
-  const data  = await fetch(urlMicrosoft + `?expr=DOI=='${doiUP}'&attributes=DOI,Ti,CC,ECC,AA.AuN,AA.AuId,AA.S,F.DFN&subscription-key=${microsoftSusKey}`);
+  const data  = await fetch(url + `&subscription-key=${microsoftSusKey}`);
   if (data.ok){
-    console.log('Request successful DOAJ');
     const jsonData = await data.json();
-    console.log(jsonData);
     res.send(jsonData);;
   } else {
     console.log('Request failed', res.ok);
     res.send( { error: 'Something went wrong' });
   }
-  console.log('Data returned');
+  console.log('Data returned from microsoft');
 });
 
 app.get('*', (req, res) => {
