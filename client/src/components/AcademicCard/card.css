@@ -155,36 +155,40 @@
   background-color: #fd5a3b;
 }
 
-.card--microsoft--fos--title {
-  text-align: center;
-  margin-right: 20%;
-}
 .card--microsoft--fos {
+  background-color: rgb(159, 202, 243);
+  align-items: center;
+  border: 5px solid rgb(35, 62, 114);
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
   margin-left: 5%;
-  margin-bottom: 25%;
-  width: 90%;
+  margin-bottom: 2%;
+  width: 75%;
   text-align: center;
   white-space: pre-wrap;
 }
+.card--microsoft--fos--title {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2%;
+  font-weight: bolder;
+}
 .card--microsoft--fos--badge {
   color: black;
-  float: left;
+  flex: 1;
+  /* float: left; */
+  padding: 1rem;
   margin: 0.25rem;
-
-  width: 25%;
-  border: 0.5px;
+  border: 0.5px solid rgb(42, 41, 41);
   border-radius: 15px;
   font-size: 1rem;
-  border-style: solid;
-  border-color: rgb(42, 41, 41);
   background-image: linear-gradient(
     to right,
-    rgb(209, 242, 250),
     rgb(212, 241, 253),
-    rgb(167, 229, 255),
-    rgb(144, 212, 243),
-    rgb(122, 199, 235),
-    rgb(67, 143, 179)
+    rgb(197, 224, 255),
+    rgb(162, 197, 236),
+    rgb(81, 163, 231)
   );
 }
 .card--doaj--text .card--desc {
