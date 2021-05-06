@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './search.css';
 import { getContentsCrossref, getContentsDoaj, getContentsMicrosoft } from '../../api-front/search';
 import AcademicCard from '../AcademicCard/index';
+import { getURLCrossref, getURLDoaj, getURLMicrosoft, setURLsByDOI, setURLsByISSN } from '../../api-front/url';
 
 export default function Search(){
 
@@ -10,23 +11,22 @@ export default function Search(){
   const [contents, setContents] = useState([]);
   const [criteria, setCriteria] = useState('');
 
-  const setRadioValue = (e) => {
-    setCriteria(e.target.value);
-  }
-
   const searchPapers = async (e) => {
     e.preventDefault();
 
-    const crossrefData = await getContentsCrossref(query); 
-    var doajData = null;
-    var microsoftData = null;
+    if (criteria === "DOI"){
+      setURLsByDOI(query);
+    }else {
+      if (criteria === "ISSN"){
+        setURLsByISSN(query);
+      }
+    }
+    const crossrefData = await getContentsCrossref(getURLCrossref()); 
+    const doajData = await getContentsDoaj(getURLDoaj());
+    const microsoftData = await getContentsMicrosoft(getURLMicrosoft());
 
     //cuando haya busqueda por DOI esto siempre lo hago independientemente si crossref lo tiene o no
-    if (crossrefData.DOI){
-      doajData = await getContentsDoaj(crossrefData.DOI);
-      microsoftData = await getContentsMicrosoft(crossrefData.DOI);
-    }
-
+    
     var res = [{
       crossref: crossrefData,
       doaj: doajData,
@@ -59,13 +59,13 @@ export default function Search(){
             placeholder={criteria === "DOI" ? 'e.g.: 10.1000/xyz123' : criteria === "ISSN" ? 'e.g.: 2049-3630' : 'Seleccione criteria primero'}
             value={query} onChange={(e) => setQuery(e.target.value)}
           />
-        <button className="searchBtn" type="submit">Buscar</button>
+        <button className="searchBtn" type="submit" disabled={((criteria !== "DOI") && (criteria !== "ISSN"))? true : false}>Buscar</button>
         <div className="searchCriteria">
           <label className="searchRadioLabel">DOI
-          <input  className="searchRadioBtn" type="radio" value="DOI" checked={criteria === "DOI"} onChange={setRadioValue}/>
+          <input  className="searchRadioBtn" type="radio" value="DOI" checked={criteria === "DOI"} onChange={(e) => setCriteria(e.target.value)}/>
           </label>
           <label className="searchRadioLabel">ISSN
-          <input className="searchRadioBtn" type="radio" value="ISSN" checked={criteria === "ISSN"} onChange={setRadioValue}/>
+          <input className="searchRadioBtn" type="radio" value="ISSN" checked={criteria === "ISSN"} onChange={(e) => setCriteria(e.target.value)}/>
           </label>
         </div>
       </form>
