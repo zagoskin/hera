@@ -1,11 +1,11 @@
 import { api } from './url';
 
-export const getContentsCrossref = async (query) => {
+export const getContentsCrossref = async (url) => {
   try {
     const res = await fetch(`/api/getContentsCrossref`, {
       method: 'POST',
       body: new URLSearchParams({
-        'query': query
+        'url': url
       }),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -15,18 +15,18 @@ export const getContentsCrossref = async (query) => {
     const contents = await res.json();
     console.log(contents);
 
-    return contents;
+    return contents.message;
   } catch(e) {
     console.error(e);
   }
 }
 
-export const getContentsDoaj = async (DOI) => {
+export const getContentsDoaj = async (url) => {
   try {
     const res = await fetch(`/api/getContentsDoaj`, {
       method: 'POST',
       body: new URLSearchParams({
-        'DOI': DOI
+        'url': url
       }),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -42,12 +42,12 @@ export const getContentsDoaj = async (DOI) => {
   }
 }
 
-export const getContentsMicrosoft = async (DOI) => {
+export const getContentsMicrosoft = async (url) => {
   try {
     const res = await fetch(`/api/getContentsMicrosoft`, {
       method: 'POST',
       body: new URLSearchParams({
-        'DOI': DOI
+        'url': url
       }),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
