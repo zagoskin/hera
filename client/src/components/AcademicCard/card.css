@@ -125,6 +125,9 @@
   margin-bottom: 1rem;
 }
 .card--doaj--text--warning {
+  margin-left: 25%;
+  margin-right: 20%;
+  padding-left: 1.5rem;
   margin-top: 2rem;
   border: 1px;
   border-radius: 15px;
@@ -243,11 +246,11 @@ a:hover {
   .card--doaj--text--success {
     font-size: 3rem;
     font-weight: bold;
-    padding-left: 3rem;
+    padding-left: 5rem;
     padding-right: 3rem;
     padding-bottom: 1.5rem;
     margin-left: 30%;
-    margin-right: 30%;
+    margin-right: 25%;
     margin-bottom: 0;
   }
   .card--doaj--text--success {
@@ -285,7 +288,7 @@ a:hover {
   }
   .card--doaj--seal {
     font-family: "Source Sans Pro", sans-serif;
-    margin-left: 25%;
+    margin-left: 28%;
     margin-top: 20%;
     color: #282624;
     font-size: 2rem;
