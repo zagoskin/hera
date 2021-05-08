@@ -12,9 +12,11 @@ export const getContentsCrossref = async (url) => {
       }
     });
     console.log('Contents de la API en front Crossref:')
-    const contents = await res.json();
+    var contents = await res.json();
     console.log(contents);
-
+    if (contents.error){
+      contents.message = {...contents.message, error: contents.error}
+    }
     return contents.message;
   } catch(e) {
     console.error(e);
@@ -57,7 +59,7 @@ export const getContentsMicrosoft = async (url) => {
     const contents = await res.json();
     console.log(contents);
 
-    return contents;
+    return contents.entities;
   } catch(e) {
     console.error(e);
   }
