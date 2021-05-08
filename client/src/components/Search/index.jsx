@@ -29,10 +29,16 @@ export default function Search(){
     
     var res = [{
       crossref: crossrefData,
-      doaj: doajData,
-      microsoft: microsoftData,
-      abstract: crossrefData.abstract,
-      DOI: crossrefData.DOI
+      doaj: doajData.total === 0 ? 0 : doajData.results[0],
+      microsoft: microsoftData.length > 0 ? microsoftData[0] : null,
+      abstract: crossrefData.abstract ?? doajData.total > 0 ? doajData.results[0].bibjson.abstract : microsoftData.length > 0 ? microsoftData[0].AW : undefined,
+      title: crossrefData.title ?? doajData.total > 0 ? doajData.results[0].bibjson.title : microsoftData.length > 0 ? microsoftData[0].DN : undefined,
+      URL: criteria === 'DOI' ? `https://dx.doi.org/${query}` : '',
+      authors: crossrefData.author ?? doajData.total > 0 ? doajData.results[0].bibjson.author : microsoftData.length > 0 ? microsoftData[0].AA : undefined,
+      identifier: {
+        type: criteria,
+        value: query
+      },
     }]
     
     console.log('Todos los resultados:');
@@ -58,7 +64,7 @@ export default function Search(){
           <input className="searchInput" type="text" name="query"
             placeholder={criteria === "DOI" ? 'e.g.: 10.1000/xyz123' : criteria === "ISSN" ? 'e.g.: 2049-3630' : 'Seleccione criteria primero'}
             value={query} onChange={(e) => setQuery(e.target.value)}
-          />
+            disabled={((criteria !== "DOI") && (criteria !== "ISSN"))? true : false}/>
         <button className="searchBtn" type="submit" disabled={((criteria !== "DOI") && (criteria !== "ISSN"))? true : false}>Buscar</button>
         <div className="searchCriteria">
           <label className="searchRadioLabel">DOI
@@ -73,7 +79,7 @@ export default function Search(){
       <div className="card-list">
         {/* contents.filter(content => content.algunValor tipo citas o algo > 0).map a esto  */}
         {contents.map(content => ( content.error ? null :
-          <AcademicCard content={content} key={content.DOI}/>
+          <AcademicCard content={content} key={content.identifier.value}/>
         ))}
       </div>
       : null
