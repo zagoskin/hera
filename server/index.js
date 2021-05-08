@@ -22,9 +22,9 @@ app.get("/api", (req, res) => {
 
 app.post("/api/getContentsCrossref", async (req, res) => {
   //console.log('Reqs desde el front al back:');
-  // const url = req.body.url;
   // console.log('Url crossref');
   // console.log(url);
+  const url = req.body.url;
   const data  = await fetch(url);
   if (data.ok){
     //console.log('Request successful');
@@ -39,6 +39,7 @@ app.post("/api/getContentsCrossref", async (req, res) => {
 });
 
 app.post("/api/getContentsDoaj", async (req, res) => {
+  const url = req.body.url;
   const data  = await fetch(url);
   if (data.ok){
     const jsonData = await data.json();
@@ -51,6 +52,7 @@ app.post("/api/getContentsDoaj", async (req, res) => {
 });
 
 app.post("/api/getContentsMicrosoft", async (req, res) => {
+  const url = req.body.url;
   const data  = await fetch(url + `&subscription-key=${microsoftSusKey}`);
   if (data.ok){
     const jsonData = await data.json();
