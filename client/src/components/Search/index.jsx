@@ -33,7 +33,7 @@ export default function Search(){
       microsoft: microsoftData.length > 0 ? microsoftData[0] : null,
       abstract: crossrefData.abstract ?? doajData.total > 0 ? doajData.results[0].bibjson.abstract : microsoftData.length > 0 ? microsoftData[0].AW : undefined,
       title: crossrefData.title ?? doajData.total > 0 ? doajData.results[0].bibjson.title : microsoftData.length > 0 ? microsoftData[0].DN : undefined,
-      URL: criteria === 'DOI' ? `https://dx.doi.org/${query}` : '',
+      URL: criteria === 'DOI' ? `https://dx.doi.org/${query}` : doajData.results[0].bibjson.ref.journal ?? `https://portal.issn.org/resource/ISSN/${query}`,
       authors: crossrefData.author ?? doajData.total > 0 ? doajData.results[0].bibjson.author : microsoftData.length > 0 ? microsoftData[0].AA : undefined,
       identifier: {
         type: criteria,
