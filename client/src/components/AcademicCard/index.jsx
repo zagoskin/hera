@@ -5,31 +5,65 @@ import doajLogo from '../../images/doajLogo.png';
 import microsoftLogo from '../../images/microsoftLogo.png';
 
 export default function AcademicCard({content}){
+  
   return (
     <div className="card">
+
+      {/* Carta de metricas de Crossref */}
       <div className="card--crossref">
-        <img className="card--crossref--image"
-          src={crossrefLogo}
-          alt='crossref_image'
-        />
+        <a href="https://www.crossref.org/">
+          <img className="card--crossref--image"
+            src={crossrefLogo}
+            alt='crossref_image'
+          />
+        </a>
         {content.crossref.error ? <div className="card--doaj--text--warning">
           No hallado en Crossref 
-        </div>: <div className="card--crossref--text">
-          Referencias académicas en {content.crossref["reference-count"]} artículos
+        </div>: 
+        (content.identifier.type === "DOI") ?
+        <div className="card--crossref--text">
+          Referencias académicas en {content.crossref["reference-count"]} artículos 
           <p>Información provista por Crossref</p>
-        </div> }
-        
+        </div> 
+        :(content.identifier.type === "ISSN") ?
+        <div className="card--crossref--text">
+          <div className="card--crossref--info">
+            {content.crossref.counts["current-dois"]} artículos con DOI en este jornal
+          </div>
+          <div className="card--crossref-breakdowns">
+            <div className="card--microsoft--fos--title">DOIs por año</div>
+            {content.crossref.breakdowns["dois-by-issued-year"].sort((a,b) => a[0] - b[0]).map((yearbydoi,index) => 
+              <div className="card--crossref--year--badge" key={index}>
+                {yearbydoi[0]} - {yearbydoi[1]} DOIs
+              </div>   
+            )}
+          </div>
+          <div className="card--crossref--info">
+            {(content.crossref.coverage["award-numbers-current"] * 100).toFixed(1)}% de los artículos en este jornal tienen algún award
+          </div>
+          <div className="card--crossref--info">
+            {(content.crossref.coverage["orcids-current"] * 100).toFixed(1)}% de los artículos tienen un <a href='https://orcid.org/'>ORCID</a>
+          </div>
+          <p>Información provista por Crossref</p>
+        </div> 
+        : null     
+        }
       </div>
 
+      {/* Carta de metricas de DOAJ */}
       <div className="card--doaj">
-        <img className="card--doaj--image"
-          src={doajLogo}
-          alt='doaj_image'
-        />
+        <a href="https://doaj.org/">
+          <img className="card--doaj--image"
+            src={doajLogo}
+            alt='doaj_image'
+          />
+        </a>
         {content.doaj === 0 ? 
         <div className="card--doaj--text--warning">
           No incluido en DOAJ
-        </div> : [
+        </div> 
+        : (content.identifier.type === 'DOI') ? 
+        [
         <div className="card--doaj--text--success" key={content.doaj}>
           Indexado por DOAJ
         </div>,
@@ -41,15 +75,19 @@ export default function AcademicCard({content}){
             </a>
              : null 
           : null
-          )]
+        )]
+        : null
         }
       </div>
 
+      {/* Carta de metricas de microsoft */}
       <div className="card--microsoft">
-        <img className="card--microsoft--image"
-          src={microsoftLogo}
-          alt='microsoft_image'
-        />
+        <a href="https://academic.microsoft.com/home">
+          <img className="card--microsoft--image"
+            src={microsoftLogo}
+            alt='microsoft_image'
+          />
+        </a>
         {content.microsoft ? 
         <div className="card--microsoft--text">
           <div className="card--microsoft--text--cc">
@@ -73,9 +111,11 @@ export default function AcademicCard({content}){
         
       </div>
 
+      {/* Info general de un contenido */}
       <div className="card--content">
         <h1 className="card--title">{content.title}</h1>
-        <p><a href={content.URL}>Click aquí para ir al artículo</a></p>
+        <p><a href={content.URL}>Click aquí para ir al recurso</a></p>
+
         {content.authors ? <p>
           <em>Authors: {content.authors.map((author,index) => 
           (author.name ? 
