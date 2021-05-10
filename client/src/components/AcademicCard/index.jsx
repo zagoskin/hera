@@ -9,6 +9,29 @@ export default function AcademicCard({content}){
   return (
     <div className="card">
 
+      {/* Info general de un contenido */}
+      <div className="card--content">
+        <h1 className="card--title">{content.title}</h1>
+        <p><a href={content.URL}>Click aquí para ir al recurso</a></p>
+
+        {content.authors ? <p>
+          <em>Authors: {content.authors.map((author,index) => 
+          (author.name ? 
+            <span key={index}> {author.name}. </span> :
+          author.family ?
+            <span key={index}> {author.family} {author.given}. </span> :
+          author.AuN ?
+            <span key={index}> {author.AuN} . </span> : null
+          ))}</em> 
+        </p> : null 
+        }
+        {content.abstract ? <div className='card--abstract'><h1>ABSTRACT</h1> 
+        <em><p className="card--abstract--text">
+            {content.abstract.replace(/(<([^>]+)>)/ig, '')}
+          </p></em>
+        </div> : null
+        } 
+      </div>
       {/* Carta de metricas de Crossref */}
       <div className="card--crossref">
         <a href="https://www.crossref.org/">
@@ -76,6 +99,38 @@ export default function AcademicCard({content}){
              : null 
           : null
         )]
+        : (content.identifier.type === 'ISSN') ?
+        <div className="card--doaj--issn--success" key={content.doaj}>
+          <div className="card--doaj--issn--index">
+            Indexado por DOAJ
+          </div> 
+          {content.doaj.bibjson.apc["has_apc"] === true ? 
+          <div className="card--doaj--issn--info">
+            El costo más alto por publicar en este jornal es: 
+            <span className="card--doaj--issn--cost"> {content.doaj.bibjson.apc.max[0].price} {content.doaj.bibjson.apc.max[0].currency}</span>
+          </div> 
+          :
+          <div className="card--doaj--issn--info">
+            No hay costo por publicar en este jornal
+          </div> 
+          }
+          <div className="card--doaj--issn--info">
+            <div className="card--doaj--issn--license--title"><a href="https://creativecommons.org/licenses/">Licencias</a> que utiliza este jornal:</div> 
+            {content.doaj.bibjson.license.map((license,index) => 
+              <div className="card--doaj--issn--license" key={index}>{license.type}</div>  
+            )}
+          </div> 
+          {content.doaj.admin ? 
+            content.doaj.admin.seal ?
+            <div className="card--doaj--issn--info--seal">
+              <a href='https://doaj.org/apply/seal/'>  
+                <span className='card--doaj--seal'>☑ DOAJ Seal</span>
+              </a>
+            </div>
+             : null 
+          : null
+          }
+        </div>       
         : null
         }
       </div>
@@ -103,37 +158,20 @@ export default function AcademicCard({content}){
               <div className="card--microsoft--fos--badge" key={index}>{field.DFN}</div>   
             )}
           </div>
-        </div> : 
+        </div> 
+        : content.identifier.type === "DOI" ?
         <div className="card--doaj--text--warning">
           No hallado en Bing! 
         </div>
+        : content.identifier.type === "ISSN" ?
+        <div className="card--doaj--text--warning">
+          Busqueda por ISSN no soportada
+        </div>
+        : null
         }
         
       </div>
 
-      {/* Info general de un contenido */}
-      <div className="card--content">
-        <h1 className="card--title">{content.title}</h1>
-        <p><a href={content.URL}>Click aquí para ir al recurso</a></p>
-
-        {content.authors ? <p>
-          <em>Authors: {content.authors.map((author,index) => 
-          (author.name ? 
-            <span key={index}> {author.name}. </span> :
-          author.family ?
-            <span key={index}> {author.family} {author.given}. </span> :
-          author.AuN ?
-            <span key={index}> {author.AuN} . </span> : null
-          ))}</em> 
-        </p> : null 
-        }
-        {content.abstract ? <div className='card--abstract'><h1>ABSTRACT</h1> 
-        <em><p className="card--abstract--text">
-            {content.abstract.replace(/(<([^>]+)>)/ig, '')}
-          </p></em>
-        </div> : null
-        } 
-      </div>
     </div>
   )
 }
