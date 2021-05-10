@@ -13,7 +13,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #ffdfdb;
+  background-color: #ffecec;
   color: #000;
 }
 
@@ -27,7 +27,7 @@ small {
 
 .container {
   margin: 0 auto;
-  max-width: 1000px;
+  max-width: 1200px;
   padding: 40px;
 }
 
