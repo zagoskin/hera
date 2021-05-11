@@ -3,9 +3,12 @@ import './card.css';
 import crossrefLogo from '../../images/crossrefLogo.png';
 import doajLogo from '../../images/doajLogo.png';
 import microsoftLogo from '../../images/microsoftLogo.png';
+import useScript from '../../hooks/useScript';
+
 
 export default function AcademicCard({content}){
-  
+  useScript('https://badge.dimensions.ai/badge.js');
+
   return (
     <div className="card">
 
@@ -172,6 +175,11 @@ export default function AcademicCard({content}){
         
       </div>
 
+      {/* Métricas de Dimensions  */}
+      <div className="card--dimensions">
+        <span className="__dimensions_badge_embed__" data-doi={content.identifier.value.toUpperCase()}></span>
+      </div>
+      
     </div>
   )
 }
