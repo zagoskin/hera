@@ -26,15 +26,24 @@ export default function Search(){
     const microsoftData = await getContentsMicrosoft(getURLMicrosoft());
 
     //cuando haya busqueda por DOI esto siempre lo hago independientemente si crossref lo tiene o no
-    
+
     var res = [{
       crossref: crossrefData,
       doaj: doajData.total === 0 ? 0 : doajData.results[0],
       microsoft: microsoftData.length > 0 ? microsoftData[0] : null,
-      abstract: crossrefData.abstract ?? doajData.total > 0 ? doajData.results[0].bibjson.abstract : microsoftData.length > 0 ? microsoftData[0].AW : undefined,
-      title: crossrefData.title ?? doajData.total > 0 ? doajData.results[0].bibjson.title : microsoftData.length > 0 ? microsoftData[0].DN : undefined,
-      URL: criteria === 'DOI' ? `https://dx.doi.org/${query}` : doajData.results[0].bibjson.ref.journal ?? `https://portal.issn.org/resource/ISSN/${query}`,
-      authors: crossrefData.author ?? doajData.total > 0 ? doajData.results[0].bibjson.author : microsoftData.length > 0 ? microsoftData[0].AA : undefined,
+      abstract: 
+        crossrefData.abstract ? 
+          !(Array.isArray(crossrefData.abstract)) ? 
+            crossrefData.abstract 
+          : (doajData.total > 0) ? 
+            doajData.results[0].bibjson.abstract 
+          : microsoftData.length > 0 ? 
+            microsoftData[0].AW 
+          : '' 
+        : '',
+      title: crossrefData.title ? crossrefData.title : doajData.total > 0 ? doajData.results[0].bibjson.title : microsoftData.length > 0 ? microsoftData[0].DN : '',
+      URL: criteria === 'DOI' ? `https://dx.doi.org/${query}` : doajData.total > 0 ? doajData.results[0].bibjson.ref.journal : `https://portal.issn.org/resource/ISSN/${query}`,
+      authors: crossrefData.author ? crossrefData.author : doajData.total > 0 ? doajData.results[0].bibjson.author : microsoftData.length > 0 ? microsoftData[0].AA : undefined,
       identifier: {
         type: criteria,
         value: query
