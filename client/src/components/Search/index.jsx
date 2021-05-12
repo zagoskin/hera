@@ -25,8 +25,6 @@ export default function Search(){
     const doajData = await getContentsDoaj(getURLDoaj());
     const microsoftData = await getContentsMicrosoft(getURLMicrosoft());
 
-    //cuando haya busqueda por DOI esto siempre lo hago independientemente si crossref lo tiene o no
-
     var res = [{
       crossref: crossrefData,
       doaj: doajData.total === 0 ? 0 : doajData.results[0],
