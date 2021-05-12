@@ -8,7 +8,8 @@
 
 .card--crossref,
 .card--doaj,
-.card--microsoft {
+.card--microsoft,
+.card--dimensions {
   display: inline-block;
   border-radius: 15px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.75);
@@ -44,6 +45,46 @@
     rgb(60, 93, 202)
   );
   overflow: hidden;
+}
+
+.card--dimensions {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  background-image: linear-gradient(
+    to right,
+    white,
+    #e7e6ee,
+    #d6d4e6,
+    #bfbbd8,
+    #c9c6e0,
+    #b6b2d6,
+    #57518a,
+    #2b235c
+  );
+}
+
+.card--dimensions--badge {
+  padding: 0.5rem;
+  width: 40%;
+}
+.card--dimensions--text {
+  width: 60%;
+  margin-top: 3%;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.card--dimensions--disclaimer {
+  margin-top: -10%;
+  margin-bottom: 2%;
+  margin-left: 40%;
+  width: 60%;
+}
+.card--dimensions--image {
+  position: relative;
+  width: 0px;
+  height: auto;
 }
 
 .card--content {
@@ -439,5 +480,41 @@ a:hover {
   .card--doaj--issn--info,
   .card--doaj--issn--info--seal {
     margin-bottom: 2%;
+  }
+
+  .card--dimensions {
+    height: 150px;
+    display: inline-block;
+    overflow: hidden;
+  }
+  .card--dimensions--badge {
+    float: left;
+    padding: 1.5rem;
+    width: 150px;
+    padding: 1rem;
+  }
+  .card--dimensions--text {
+    margin-top: 1.5%;
+    float: left;
+    font-size: 2.5rem;
+    font-weight: bold;
+    width: 70%;
+  }
+
+  .card--dimensions--disclaimer {
+    margin-top: 9%;
+    margin-bottom: 0%;
+    margin-left: 10%;
+    width: 70%;
+    font-size: 1.5rem;
+  }
+
+  .card--dimensions--image--container {
+    float: right;
+    margin-right: -10%;
+  }
+  .card--dimensions--image {
+    width: 250px;
+    height: auto;
   }
 }
