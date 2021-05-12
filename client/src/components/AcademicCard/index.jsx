@@ -3,6 +3,7 @@ import './card.css';
 import crossrefLogo from '../../images/crossrefLogo.png';
 import doajLogo from '../../images/doajLogo.png';
 import microsoftLogo from '../../images/microsoftLogo.png';
+import dimensionsLogo from '../../images/dimensionsLogo.png';
 import useScript from '../../hooks/useScript';
 
 
@@ -176,9 +177,26 @@ export default function AcademicCard({content}){
       </div>
 
       {/* Métricas de Dimensions  */}
+      { content.identifier.type === "DOI" ?
       <div className="card--dimensions">
-        <span className="__dimensions_badge_embed__" data-doi={content.identifier.value.toUpperCase()}></span>
+        <div className="card--dimensions--badge">
+          <span className="__dimensions_badge_embed__" data-doi={content.identifier.value.toUpperCase()}></span>
+        </div>
+        <div className="card--dimensions--text">
+          Haga clic en la medalla para ver detalles sobre significado de las métricas
+        </div>
+        <div className="card--dimensions--image--container">
+          <img className="card--dimensions--image"
+            src={dimensionsLogo}
+            alt='microsoft_image'
+            />
+        </div>
+        <div className="card--dimensions--disclaimer">
+        Data sourced from Dimensions, an inter-linked research information system provided by Digital Science (<a href="https://www.dimensions.ai">https://www.dimensions.ai</a>).
+        </div>
       </div>
+      : null      
+      }
       
     </div>
   )
