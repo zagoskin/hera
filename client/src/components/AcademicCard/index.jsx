@@ -183,7 +183,7 @@ export default function AcademicCard({content}){
 
       {/* Métricas de Scopus  */}
       { content.identifier.type === "ISSN" ?
-      <ScopusGraph DOI={content.identifier.value} key={content.identifier.value} />
+      <ScopusGraph data={content.scopus} key={content.identifier.value} />
       : null      
       }
       
