@@ -3,13 +3,11 @@ import './card.css';
 import crossrefLogo from '../../images/crossrefLogo.png';
 import doajLogo from '../../images/doajLogo.png';
 import microsoftLogo from '../../images/microsoftLogo.png';
-import dimensionsLogo from '../../images/dimensionsLogo.png';
-import useScript from '../../hooks/useScript';
-
+import DimensionsBadge from '../DimensionsBadge';
+import ScopusGraph from '../ScopusGraph'
 
 export default function AcademicCard({content}){
-  useScript('https://badge.dimensions.ai/badge.js');
-
+  
   return (
     <div className="card">
 
@@ -36,7 +34,8 @@ export default function AcademicCard({content}){
         </div> : null
         } 
       </div>
-      {/* Carta de metricas de Crossref */}
+
+      {/* Carta de metricas de Crossref que deberia ser otro componente */}
       <div className="card--crossref">
         <a href="https://www.crossref.org/">
           <img className="card--crossref--image"
@@ -77,7 +76,7 @@ export default function AcademicCard({content}){
         }
       </div>
 
-      {/* Carta de metricas de DOAJ */}
+      {/* Carta de metricas de DOAJ que deberia ser otro componente*/}
       <div className="card--doaj">
         <a href="https://doaj.org/">
           <img className="card--doaj--image"
@@ -139,7 +138,7 @@ export default function AcademicCard({content}){
         }
       </div>
 
-      {/* Carta de metricas de microsoft */}
+      {/* Carta de metricas de microsoft que deberia ser otro componente*/}
       <div className="card--microsoft">
         <a href="https://academic.microsoft.com/home">
           <img className="card--microsoft--image"
@@ -178,23 +177,13 @@ export default function AcademicCard({content}){
 
       {/* Métricas de Dimensions  */}
       { content.identifier.type === "DOI" ?
-      <div className="card--dimensions">
-        <div className="card--dimensions--badge">
-          <span className="__dimensions_badge_embed__" data-doi={content.identifier.value.toUpperCase()}></span>
-        </div>
-        <div className="card--dimensions--text">
-          Haga clic en la medalla para ver detalles sobre significado de las métricas
-        </div>
-        <div className="card--dimensions--image--container">
-          <img className="card--dimensions--image"
-            src={dimensionsLogo}
-            alt='microsoft_image'
-            />
-        </div>
-        <div className="card--dimensions--disclaimer">
-        Data sourced from Dimensions, an inter-linked research information system provided by Digital Science (<a href="https://www.dimensions.ai">https://www.dimensions.ai</a>).
-        </div>
-      </div>
+      <DimensionsBadge DOI={content.identifier.value} key={content.identifier.value} />
+      : null      
+      }
+
+      {/* Métricas de Scopus  */}
+      { content.identifier.type === "ISSN" ?
+      <ScopusGraph DOI={content.identifier.value} key={content.identifier.value} />
       : null      
       }
       
