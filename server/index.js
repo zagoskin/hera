@@ -63,6 +63,24 @@ app.post("/api/getContentsMicrosoft", async (req, res) => {
   console.log('Data returned from microsoft');
 });
 
+app.post("/api/getContentsScopus", async (req, res) => {
+  const url = req.body.url;
+  const data  = await fetch(url, {
+    method: 'GET',
+    headers: {
+      "X-ELS-APIKey": constants.SCOPUS_KEY,
+    }
+  });
+  if (data.ok){
+    const jsonData = await data.json();
+    res.send(jsonData);;
+  } else {
+    console.log('Request failed', res.ok);
+    res.send( { error: 'Something went wrong' });
+  }
+  console.log('Data returned from Scopus');
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
