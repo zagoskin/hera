@@ -1,17 +1,20 @@
 import { useEffect } from 'react';
 
-const useScript = url => {
+const useScript = (url) => {
   useEffect(() => {
-    const script = document.createElement('script');
-
-    script.src = url;
+    let script = document.createElement('script');
+    script.setAttribute('id', 'myScript');
+    script.src = 'https://badge.dimensions.ai/badge.js';
     script.async = true;
-    script.charset = "utf-8";
     
-    document.body.appendChild(script);
+    document.getElementsByTagName('body')[0].appendChild(script);
 
+    script.onload = () => {
+      window.__dimensions_embed.addBadges();
+    }
     return () => {
-      document.body.removeChild(script);
+      let myScript = document.getElementById('myScript');
+      myScript.remove();
     }
   }, [url]);
 };
