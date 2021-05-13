@@ -4,6 +4,7 @@ export const api = `http://localhost:3001/api`;
 var urlCrossRef;
 var urlDoaj;
 var urlMicrosoft;
+var urlScopus;
 
 export const setURLsByDOI = (DOI) => {
   urlCrossRef = `https://api.crossref.org/works/${DOI}`;
@@ -16,8 +17,7 @@ export const setURLsByDOI = (DOI) => {
 export const setURLsByISSN = (ISSN) => {
   urlCrossRef = `https://api.crossref.org/journals/${ISSN}`;
   urlDoaj = `https://doaj.org/api/v2/search/journals/issn:${ISSN}`;
-  //Microsoft no busca por ISSN así que esto devuelve un arreglo vacío en el campo entities
-  urlMicrosoft = `https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate?expr=DOI=='${ISSN}'&attributes=DOI,Ti,CC,ECC,AA.AuN,AA.AuId,AA.S,F.DFN,AW,DN`;
+  urlScopus = `https://api.elsevier.com/content/serial/title?issn=${ISSN}&field=SJR,SNIP`
   //otras URLs
 }
 
@@ -31,4 +31,8 @@ export const getURLDoaj = () => {
 
 export const getURLMicrosoft = () => {
   return urlMicrosoft;
+}
+
+export const getURLScopus = () => {
+  return urlScopus;
 }
