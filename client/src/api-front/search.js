@@ -62,3 +62,24 @@ export const getContentsMicrosoft = async (url) => {
     console.error(e);
   }
 }
+
+export const getContentsScopus = async (url) => {
+  try {
+    const res = await fetch(`/api/getContentsScopus`, {
+      method: 'POST',
+      body: new URLSearchParams({
+        'url': url
+      }),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      }
+    });
+    console.log('Contents de la API en front Scopus:')
+    const contents = await res.json();
+    console.log(contents);
+
+    return contents["serial-metadata-response"];
+  } catch(e) {
+    console.error(e);
+  }
+}
