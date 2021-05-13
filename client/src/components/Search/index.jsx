@@ -5,17 +5,17 @@ import AcademicCard from '../AcademicCard/index';
 import { getURLCrossref, getURLDoaj, getURLMicrosoft, setURLsByDOI, setURLsByISSN } from '../../api-front/url';
 
 export default function Search(){
-
   //states- input query, movies
   const [query, setQuery] = useState('');
-  const [contents, setContents] = useState([]);
+  const [content, setContent] = useState(undefined);
   const [criteria, setCriteria] = useState('');
 
   const searchPapers = async (e) => {
     e.preventDefault();
-
+    var microsoftData = [];
     if (criteria === "DOI"){
       setURLsByDOI(query);
+      microsoftData = await getContentsMicrosoft(getURLMicrosoft());
     }else {
       if (criteria === "ISSN"){
         setURLsByISSN(query);
@@ -23,9 +23,8 @@ export default function Search(){
     }
     const crossrefData = await getContentsCrossref(getURLCrossref()); 
     const doajData = await getContentsDoaj(getURLDoaj());
-    const microsoftData = await getContentsMicrosoft(getURLMicrosoft());
 
-    var res = [{
+    var res = {
       crossref: crossrefData,
       doaj: doajData.total === 0 ? 0 : doajData.results[0],
       microsoft: microsoftData.length > 0 ? microsoftData[0] : null,
@@ -46,7 +45,7 @@ export default function Search(){
         type: criteria,
         value: query
       },
-    }]
+    }
     
     console.log('Todos los resultados:');
     console.log(res);
@@ -55,7 +54,7 @@ export default function Search(){
     //   doaj: doajData[0]
     // };
 
-    setContents(res);
+    setContent(res);
   }
 
   return (
@@ -82,15 +81,13 @@ export default function Search(){
           </label>
         </div>
       </form>
-      {contents ? 
+      {content ? 
       <div className="card-list">
         {/* contents.filter(content => content.algunValor tipo citas o algo > 0).map a esto  */}
-        {contents.map(content => ( content.error ? null :
           <AcademicCard content={content} key={content.identifier.value}/>
-        ))}
       </div>
       : null
-        }
+      }
     </>
   )
 }
