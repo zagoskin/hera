@@ -9,7 +9,8 @@
 .card--crossref,
 .card--doaj,
 .card--microsoft,
-.card--dimensions {
+.card--dimensions,
+.card--scopus {
   display: inline-block;
   border-radius: 15px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.75);
@@ -47,6 +48,22 @@
   overflow: hidden;
 }
 
+.card--scopus {
+  display: flex;
+  background-image: linear-gradient(
+    to right,
+    white,
+    #d0f0e3,
+    #bee5d5,
+    #a7e4ca,
+    #8cddbb,
+    #39b682
+  );
+}
+
+.card--scopus--image {
+  width: 85px;
+}
 .card--dimensions {
   display: flex;
   flex-wrap: wrap;
@@ -183,6 +200,26 @@
   background-color: rgb(228, 135, 135);
 }
 
+.card--scopus--text--warning--container {
+  padding: 2rem;
+  width: 70%;
+  font-size: 2rem;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+}
+
+.card--scopus--text--warning {
+  padding: 0.5rem;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: center;
+  border: 1px;
+  border-radius: 15px;
+  border-style: solid;
+  border-color: rgb(199, 44, 44);
+  background-color: rgb(228, 135, 135);
+}
 .card--doaj a {
   text-decoration: none;
 }
@@ -369,6 +406,37 @@ a:hover {
   width: 100%;
   margin-bottom: 5%;
 }
+
+.card--scopus--text {
+  padding: 0.5rem;
+  text-align: center;
+  width: 90%;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-right: 10%;
+}
+
+.card--scopus--disclaimer {
+  display: flex;
+  font-size: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.card--scopus--disclaimer--text {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.card--scopus--powered {
+  width: 35%;
+  height: 35%;
+  margin-bottom: 1rem;
+}
+
+.card--scopus--disclaimer--links {
+  margin-bottom: 1.5rem;
+}
+
 /* NO SMARTPHONE CSS */
 @media (min-width: 786px) {
   .card--crossref,
@@ -424,9 +492,9 @@ a:hover {
   }
 
   .card--doaj--text--warning {
-    margin-top: 2rem;
+    margin-top: 4rem;
     padding-top: 1.5rem;
-    border: 1px;
+    border: 3px;
     border-radius: 15px;
     border-style: solid;
     border-color: rgb(199, 44, 44);
@@ -516,5 +584,67 @@ a:hover {
   .card--dimensions--image {
     width: 250px;
     height: auto;
+  }
+
+  .card--scopus--image {
+    width: 160px;
+  }
+
+  .card--scopus--text--warning--container {
+    padding: 4rem;
+    width: 70%;
+    font-size: 3rem;
+  }
+
+  .card--scopus--text--warning {
+    padding: 0.5rem;
+    margin-left: 20%;
+    margin-right: 20%;
+    border: 3px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: rgb(199, 44, 44);
+    background-color: rgb(228, 135, 135);
+  }
+
+  .card--scopus--info {
+    padding: 2rem;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .card--scopus--text {
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+    font-size: 3rem;
+    margin-right: 20%;
+    margin-bottom: 5%;
+  }
+
+  .card--scopus--chart {
+    margin-left: 1%;
+  }
+
+  .card--scopus--disclaimer {
+    display: flex;
+    font-size: 1.75rem;
+    flex-wrap: wrap;
+  }
+
+  .card--scopus--disclaimer--text {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .card--scopus--powered {
+    width: 15%;
+    height: 15%;
+    margin-bottom: 1rem;
+  }
+
+  .card--scopus--disclaimer--links {
+    margin-bottom: 5%;
   }
 }
