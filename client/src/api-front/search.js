@@ -1,5 +1,3 @@
-import { api } from './url';
-
 export const getContentsCrossref = async (url) => {
   try {
     const res = await fetch(`/api/getContentsCrossref`, {
