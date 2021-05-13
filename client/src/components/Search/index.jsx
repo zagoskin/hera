@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './search.css';
-import { getContentsCrossref, getContentsDoaj, getContentsMicrosoft } from '../../api-front/search';
+import { getContentsCrossref, getContentsDoaj, getContentsMicrosoft, getContentsScopus } from '../../api-front/search';
 import AcademicCard from '../AcademicCard/index';
-import { getURLCrossref, getURLDoaj, getURLMicrosoft, setURLsByDOI, setURLsByISSN } from '../../api-front/url';
+import { getURLCrossref, getURLDoaj, getURLMicrosoft, getURLScopus, setURLsByDOI, setURLsByISSN } from '../../api-front/url';
 
 export default function Search(){
   //states- input query, movies
@@ -13,12 +13,14 @@ export default function Search(){
   const searchPapers = async (e) => {
     e.preventDefault();
     var microsoftData = [];
+    var scopusData = undefined;
     if (criteria === "DOI"){
       setURLsByDOI(query);
       microsoftData = await getContentsMicrosoft(getURLMicrosoft());
     }else {
       if (criteria === "ISSN"){
         setURLsByISSN(query);
+        scopusData = await getContentsScopus(getURLScopus());
       }
     }
     const crossrefData = await getContentsCrossref(getURLCrossref()); 
@@ -28,6 +30,7 @@ export default function Search(){
       crossref: crossrefData,
       doaj: doajData.total === 0 ? 0 : doajData.results[0],
       microsoft: microsoftData.length > 0 ? microsoftData[0] : null,
+      scopus: scopusData ?? null,
       abstract: 
         crossrefData.abstract ? 
           !(Array.isArray(crossrefData.abstract)) ? 
