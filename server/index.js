@@ -2,10 +2,9 @@ const path = require('path');
 const express = require("express");
 const fetch = require("node-fetch");
 const e = require('express');
-// const urlCrossRef = `https://api.crossref.org/works`;
-// const urlDoaj = `https://doaj.org/api/v2/search/articles/`;
-// const urlMicrosoft = `https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate`;
-const microsoftSusKey = 'e49b412041094951957423bde5ad243a';
+
+var constants = require('./constants');
+
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -53,7 +52,7 @@ app.post("/api/getContentsDoaj", async (req, res) => {
 
 app.post("/api/getContentsMicrosoft", async (req, res) => {
   const url = req.body.url;
-  const data  = await fetch(url + `&subscription-key=${microsoftSusKey}`);
+  const data  = await fetch(url + `&subscription-key=${constants.MICROSOFT_KEY}`);
   if (data.ok){
     const jsonData = await data.json();
     res.send(jsonData);;
