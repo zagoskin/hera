@@ -34,7 +34,6 @@ app.post("/api/getContentsCrossref", async (req, res) => {
     console.log('Request failed', res.ok);
     res.send( { error: 'Something went wrong' });
   }
-  console.log('Data returned from crossref');
 });
 
 app.post("/api/getContentsDoaj", async (req, res) => {
@@ -47,7 +46,6 @@ app.post("/api/getContentsDoaj", async (req, res) => {
     console.log('Request failed', res.ok);
     res.send( { error: 'Something went wrong' });
   }
-  console.log('Data returned from doaj');
 });
 
 app.post("/api/getContentsMicrosoft", async (req, res) => {
@@ -60,7 +58,6 @@ app.post("/api/getContentsMicrosoft", async (req, res) => {
     console.log('Request failed', res.ok);
     res.send( { error: 'Something went wrong' });
   }
-  console.log('Data returned from microsoft');
 });
 
 app.post("/api/getContentsScopus", async (req, res) => {
@@ -78,7 +75,6 @@ app.post("/api/getContentsScopus", async (req, res) => {
     console.log('Request failed', res.ok);
     res.send( { error: 'Something went wrong' });
   }
-  console.log('Data returned from Scopus');
 });
 
 app.get('*', (req, res) => {
