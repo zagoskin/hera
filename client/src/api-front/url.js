@@ -5,12 +5,16 @@ var urlCrossRef;
 var urlDoaj;
 var urlMicrosoft;
 var urlScopus;
+var urlDimensions;
+var urlAltmetric;
 
 export const setURLsByDOI = (DOI) => {
   urlCrossRef = `https://api.crossref.org/works/${DOI}`;
   urlDoaj = `https://doaj.org/api/v2/search/articles/doi:${DOI}`;
   const doiUP = DOI.toUpperCase();
   urlMicrosoft = `https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate?expr=DOI=='${doiUP}'&attributes=DOI,Ti,CC,ECC,AA.AuN,AA.AuId,AA.S,F.DFN,AW,DN`;
+  urlDimensions = `https://metrics-api.dimensions.ai/doi/${DOI}`;
+  urlAltmetric = `https://api.altmetric.com/v1/doi/${DOI}`;  
   //otras URLs
 }
 
@@ -35,4 +39,11 @@ export const getURLMicrosoft = () => {
 
 export const getURLScopus = () => {
   return urlScopus;
+}
+
+export const getURLDimensions = () => {
+  return urlDimensions;
+}
+export const getURLAltmetric = () => {
+  return urlAltmetric;
 }
