@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './search.css';
-import { getContentsCrossref, getContentsDoaj, getContentsMicrosoft, getContentsScopus } from '../../api-front/search';
+import { getContentsCrossref, getContentsDoaj, getContentsMicrosoft, getContentsScopus, getContentsDimensions, getContentsAltmetric } from '../../api-front/search';
 import AcademicCard from '../AcademicCard/index';
-import { getURLCrossref, getURLDoaj, getURLMicrosoft, getURLScopus, setURLsByDOI, setURLsByISSN } from '../../api-front/url';
+import { getURLCrossref, getURLDoaj, getURLMicrosoft, getURLScopus, getURLDimensions, getURLAltmetric, setURLsByDOI, setURLsByISSN } from '../../api-front/url';
 
 export default function Search(){
   //states- input query, movies
@@ -14,9 +14,14 @@ export default function Search(){
     e.preventDefault();
     var microsoftData = [];
     var scopusData = undefined;
+    var dimensionsData = undefined;
+    var altmetricData = undefined;
+
     if (criteria === "DOI"){
       setURLsByDOI(query);
       microsoftData = await getContentsMicrosoft(getURLMicrosoft());
+      dimensionsData = await getContentsDimensions(getURLDimensions());
+      altmetricData = await getContentsAltmetric(getURLAltmetric());
     }else {
       if (criteria === "ISSN"){
         setURLsByISSN(query);
@@ -31,6 +36,8 @@ export default function Search(){
       doaj: doajData.total === 0 ? 0 : doajData.results[0],
       microsoft: microsoftData.length > 0 ? microsoftData[0] : null,
       scopus: scopusData ?? null,
+      dimensions: dimensionsData,
+      altmetric: altmetricData,
       abstract: 
         crossrefData.abstract ? 
           !(Array.isArray(crossrefData.abstract)) ? 
