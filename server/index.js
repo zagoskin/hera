@@ -20,15 +20,10 @@ app.get("/api", (req, res) => {
 });
 
 app.post("/api/getContentsCrossref", async (req, res) => {
-  //console.log('Reqs desde el front al back:');
-  // console.log('Url crossref');
-  // console.log(url);
   const url = req.body.url;
   const data  = await fetch(url);
   if (data.ok){
-    //console.log('Request successful');
     const jsonData = await data.json();
-    //console.log(jsonData.message.items[0]);
     res.send(jsonData);;
   } else {
     console.log('Request failed', res.ok);
