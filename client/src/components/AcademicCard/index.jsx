@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './card.css';
-import crossrefLogo from '../../images/crossrefLogo.png';
-import doajLogo from '../../images/doajLogo.png';
-import microsoftLogo from '../../images/microsoftLogo.png';
 import DimensionsBadge from '../DimensionsBadge';
 import ScopusGraph from '../ScopusGraph'
 import AltmetricBadge from '../AltmetricBadge';
+import CrossrefCard from '../CrossrefCard';
+import DOAJCard from '../DOAJCard';
+import MicrosoftCard from '../MicrosoftCard';
+import { Collapse } from 'react-collapse';
 
 export default function AcademicCard({content}){
+
+  const [showMore, setShowMore] = useState(false);
+
+  const handleShowMore = () => {
+    setShowMore(!showMore);
+  }
   
+  useEffect(() => {
+    setShowMore(false);
+  }, [])
+
   return (
     <div className="card">
 
@@ -16,7 +27,6 @@ export default function AcademicCard({content}){
       <div className="card--content">
         <h1 className="card--title">{content.title}</h1>
         <p><a href={content.URL}>Click aquí para ir al recurso</a></p>
-
         {content.authors ? <p>
           <em>Authors: {content.authors.map((author,index) => 
           (author.name ? 
@@ -35,165 +45,30 @@ export default function AcademicCard({content}){
         </div> : null
         } 
       </div>
-
-      {/* Carta de metricas de Crossref que deberia ser otro componente */}
-      <div className="card--crossref">
-        <a href="https://www.crossref.org/">
-          <img className="card--crossref--image"
-            src={crossrefLogo}
-            alt='crossref_image'
-          />
-        </a>
-        {content.crossref.error ? <div className="card--doaj--text--warning">
-          No hallado en Crossref 
-        </div>: 
-        (content.identifier.type === "DOI") ?
-        <div className="card--crossref--text">
-          Referencias académicas en {content.crossref["reference-count"]} artículos 
-          <p>Información provista por Crossref</p>
-        </div> 
-        :(content.identifier.type === "ISSN") ?
-        <div className="card--crossref--text">
-          <div className="card--crossref--info">
-            {content.crossref.counts["current-dois"]} artículos con DOI en este jornal
-          </div>
-          <div className="card--crossref-breakdowns">
-            <div className="card--microsoft--fos--title">DOIs por año</div>
-            {content.crossref.breakdowns["dois-by-issued-year"].sort((a,b) => a[0] - b[0]).map((yearbydoi,index) => 
-              <div className="card--crossref--year--badge" key={index}>
-                {yearbydoi[0]} - {yearbydoi[1]} DOIs
-              </div>   
-            )}
-          </div>
-          <div className="card--crossref--info">
-            {(content.crossref.coverage["award-numbers-current"] * 100).toFixed(1)}% de los artículos en este jornal tienen algún award
-          </div>
-          <div className="card--crossref--info">
-            {(content.crossref.coverage["orcids-current"] * 100).toFixed(1)}% de los artículos tienen un <a href='https://orcid.org/'>ORCID</a>
-          </div>
-          <p>Información provista por Crossref</p>
-        </div> 
-        : null     
-        }
-      </div>
-
-      {/* Carta de metricas de DOAJ que deberia ser otro componente*/}
-      <div className="card--doaj">
-        <a href="https://doaj.org/">
-          <img className="card--doaj--image"
-            src={doajLogo}
-            alt='doaj_image'
-          />
-        </a>
-        {content.doaj === 0 ? 
-        <div className="card--doaj--text--warning">
-          No incluido en DOAJ
-        </div> 
-        : (content.identifier.type === 'DOI') ? 
-        [
-        <div className="card--doaj--text--success" key={content.doaj}>
-          Indexado por DOAJ
-        </div>,
-          (content.doaj.admin ? 
-            content.doaj.admin.seal ?
-            <a href='https://doaj.org/apply/seal/' key={content.doaj.id}>
-              
-              <span className='card--doaj--seal'>☑ DOAJ Seal</span>
-            </a>
-             : null 
-          : null
-        )]
-        : (content.identifier.type === 'ISSN') ?
-        <div className="card--doaj--issn--success" key={content.doaj}>
-          <div className="card--doaj--issn--index">
-            Indexado por DOAJ
-          </div> 
-          {content.doaj.bibjson.apc["has_apc"] === true ? 
-          <div className="card--doaj--issn--info">
-            El costo más alto por publicar en este jornal es: 
-            <span className="card--doaj--issn--cost"> {content.doaj.bibjson.apc.max[0].price} {content.doaj.bibjson.apc.max[0].currency}</span>
-          </div> 
-          :
-          <div className="card--doaj--issn--info">
-            No hay costo por publicar en este jornal
-          </div> 
-          }
-          <div className="card--doaj--issn--info">
-            <div className="card--doaj--issn--license--title"><a href="https://creativecommons.org/licenses/">Licencias</a> que utiliza este jornal:</div> 
-            {content.doaj.bibjson.license.map((license,index) => 
-              <div className="card--doaj--issn--license" key={index}>{license.type}</div>  
-            )}
-          </div> 
-          {content.doaj.admin ? 
-            content.doaj.admin.seal ?
-            <div className="card--doaj--issn--info--seal">
-              <a href='https://doaj.org/apply/seal/'>  
-                <span className='card--doaj--seal'>☑ DOAJ Seal</span>
-              </a>
-            </div>
-             : null 
-          : null
-          }
-        </div>       
-        : null
-        }
-      </div>
-
-      {/* Carta de metricas de microsoft que deberia ser otro componente*/}
-      <div className="card--microsoft">
-        <a href="https://academic.microsoft.com/home">
-          <img className="card--microsoft--image"
-            src={microsoftLogo}
-            alt='microsoft_image'
-          />
-        </a>
-        {content.microsoft ? 
-        <div className="card--microsoft--text">
-          <div className="card--microsoft--text--cc">
-            Citas actuales {content.microsoft.CC} 
-          </div>
-          <div className="card--microsoft--text--ecc">
-            Citas estimadas {content.microsoft.ECC} 
-          </div>
-          <br/>
-          <div className="card--microsoft--fos">
-            <div className="card--microsoft--fos--title">Campos de Estudio</div>
-            {content.microsoft.F.map((field,index) => 
-              <div className="card--microsoft--fos--badge" key={index}>{field.DFN}</div>   
-            )}
-          </div>
-        </div> 
-        : content.identifier.type === "DOI" ?
-        <div className="card--doaj--text--warning">
-          No hallado en Bing! 
-        </div>
-        : content.identifier.type === "ISSN" ?
-        <div className="card--doaj--text--warning">
-          Busqueda por ISSN no soportada
-        </div>
-        : null
-        }
-        
-      </div>
-
-      {/* Métricas de Dimensions  */}
-      { content.identifier.type === "DOI" ?
-      <DimensionsBadge DOI={content.identifier.value} content={content.dimensions} key={'dimensions' + content.identifier.value} />
-      : null      
+      {showMore === false ?
+        <button className="card--collapse--btn" onClick={handleShowMore}>Ver más</button>
+        :
+        <button className="card--collapse--btn" onClick={handleShowMore}>Ver menos</button>
       }
+      <Collapse isOpened={showMore} theme={{collapse: 'ReactCollapse--collapse'}}>
+        <CrossrefCard identifier={content.identifier} content={content.crossref} key={'crossref' + content.identifier.value}></CrossrefCard>
+        <DOAJCard identifier={content.identifier} content={content.doaj} key={'doaj' + content.identifier.value}></DOAJCard>
+        <MicrosoftCard identifier={content.identifier} content={content.microsoft} key={'microsoft' + content.identifier.value}></MicrosoftCard>
+        { content.identifier.type === "DOI" ?
+        <DimensionsBadge DOI={content.identifier.value} content={content.dimensions} key={'dimensions' + content.identifier.value} />
+        : null      
+        }
 
-      {/* Métricas de Altmetric  */}
-      { content.identifier.type === "DOI" ?
-      <AltmetricBadge DOI={content.identifier.value} content={content.altmetric} key={'altmetric' + content.identifier.value}/>
-      : null      
-      }
+        { content.identifier.type === "DOI" ?
+        <AltmetricBadge DOI={content.identifier.value} content={content.altmetric} key={'altmetric' + content.identifier.value}/>
+        : null      
+        }
 
-      {/* Métricas de Scopus  */}
-      { content.identifier.type === "ISSN" ?
-      <ScopusGraph data={content.scopus} key={content.identifier.value} />
-      : null      
-      }
-      
+        { content.identifier.type === "ISSN" ?
+        <ScopusGraph data={content.scopus} key={content.identifier.value} />
+        : null      
+        }
+      </Collapse>
     </div>
   )
 }
