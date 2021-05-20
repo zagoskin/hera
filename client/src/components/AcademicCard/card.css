@@ -1,3 +1,30 @@
+.ReactCollapse--collapse {
+  transition: height 750ms;
+}
+
+.card--collapse--btn {
+  padding: 0.5rem;
+  margin-bottom: 3%;
+  width: 100%;
+  border: none;
+  font-weight: bold;
+  background-color: #b13c3c;
+  color: #fff !important;
+  cursor: pointer;
+  transition: background-color 250ms;
+  box-shadow: 0 4px #999;
+}
+
+.card--collapse--btn:hover {
+  background-color: #860913;
+}
+
+.card--collapse--btn:active {
+  background-color: #860913;
+  box-shadow: 0 5px #666;
+  transform: translateY(1.5px);
+}
+
 .card {
   padding: 2rem 4rem;
   border-radius: 10px;
@@ -701,5 +728,9 @@ a:hover {
 
   .card--altmetric--text {
     padding-bottom: 0.5rem;
+  }
+
+  .card--collapse--btn {
+    margin-bottom: 1%;
   }
 }
