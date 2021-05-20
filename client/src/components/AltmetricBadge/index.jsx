@@ -27,7 +27,6 @@ export default function AltmetricBadge({DOI, content}){
           : 
           null
         }
-        
         <div className="card--altmetric--text">
           <b>Citado en:</b>       
         </div>
