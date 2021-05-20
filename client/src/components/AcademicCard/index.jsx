@@ -5,6 +5,7 @@ import doajLogo from '../../images/doajLogo.png';
 import microsoftLogo from '../../images/microsoftLogo.png';
 import DimensionsBadge from '../DimensionsBadge';
 import ScopusGraph from '../ScopusGraph'
+import AltmetricBadge from '../AltmetricBadge';
 
 export default function AcademicCard({content}){
   
@@ -177,7 +178,13 @@ export default function AcademicCard({content}){
 
       {/* Métricas de Dimensions  */}
       { content.identifier.type === "DOI" ?
-      <DimensionsBadge DOI={content.identifier.value} key={content.identifier.value} />
+      <DimensionsBadge DOI={content.identifier.value} content={content.dimensions} key={'dimensions' + content.identifier.value} />
+      : null      
+      }
+
+      {/* Métricas de Altmetric  */}
+      { content.identifier.type === "DOI" ?
+      <AltmetricBadge DOI={content.identifier.value} content={content.altmetric} key={'altmetric' + content.identifier.value}/>
       : null      
       }
 
