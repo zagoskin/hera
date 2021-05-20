@@ -10,6 +10,7 @@
 .card--doaj,
 .card--microsoft,
 .card--dimensions,
+.card--altmetric,
 .card--scopus {
   display: inline-block;
   border-radius: 15px;
@@ -64,7 +65,8 @@
 .card--scopus--image {
   width: 85px;
 }
-.card--dimensions {
+.card--dimensions,
+.card--altmetric {
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
@@ -81,21 +83,35 @@
   );
 }
 
+.card--altmetric {
+  background-image: linear-gradient(
+    to right,
+    white,
+    #fff4f2,
+    #ffe6e3,
+    #ffddef,
+    #ffb5dc,
+    #ff93cd,
+    #ff73be
+  );
+}
+
 .card--dimensions--badge {
   padding: 0.5rem;
-  width: 40%;
+  width: 30%;
 }
-.card--dimensions--text {
+.card--dimensions--info {
+  float: none;
   width: 60%;
-  margin-top: 3%;
+  margin-top: 0%;
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .card--dimensions--disclaimer {
-  margin-top: -10%;
+  margin-top: -5%;
   margin-bottom: 2%;
-  margin-left: 40%;
+  margin-left: 30%;
   width: 60%;
 }
 .card--dimensions--image {
@@ -437,6 +453,31 @@ a:hover {
   margin-bottom: 1.5rem;
 }
 
+.card--altmetric--info {
+  width: 70%;
+  font-size: 1.5rem;
+}
+
+.card--altmetric--text {
+  margin-top: 2%;
+  width: 100%;
+}
+
+.card--altmetric--logos {
+  display: flex;
+}
+
+.card--altmetric--logo--container {
+  margin-top: -3%;
+  width: 15%;
+  height: auto;
+}
+
+.card--altmetric--logo {
+  width: 30px;
+  height: auto;
+}
+
 /* NO SMARTPHONE CSS */
 @media (min-width: 786px) {
   .card--crossref,
@@ -550,7 +591,8 @@ a:hover {
     margin-bottom: 2%;
   }
 
-  .card--dimensions {
+  .card--dimensions,
+  .card--altmetric {
     height: 150px;
     display: inline-block;
     overflow: hidden;
@@ -561,11 +603,12 @@ a:hover {
     width: 150px;
     padding: 1rem;
   }
-  .card--dimensions--text {
-    margin-top: 1.5%;
+  .card--dimensions--info,
+  .card--altmetric--info {
+    margin-top: 0.5%;
     float: left;
-    font-size: 2.5rem;
-    font-weight: bold;
+    font-size: 1.85rem;
+    font-weight: normal;
     width: 70%;
   }
 
@@ -646,5 +689,17 @@ a:hover {
 
   .card--scopus--disclaimer--links {
     margin-bottom: 5%;
+  }
+
+  .card--altmetric--info {
+    width: 65%;
+  }
+
+  .card--altmetric--logo {
+    width: 50px;
+  }
+
+  .card--altmetric--text {
+    padding-bottom: 0.5rem;
   }
 }
