@@ -9,6 +9,17 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
+const fetchContents = async (url,options) => {
+  const data  = await fetch(url,options);
+  if (data.ok){
+    const jsonData = await data.json();
+    return jsonData;
+  } else {
+    console.log('Request failed');
+    return { error: 'Something went wrong' };
+  }
+}
+
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 // app.use(express.json({
 //   type: "*/*" // optional, only if you want to be sure that everything is parset as JSON. Wouldn't reccomand
@@ -20,56 +31,38 @@ app.get("/api", (req, res) => {
 });
 
 app.post("/api/getContentsCrossref", async (req, res) => {
-  const url = req.body.url;
-  const data  = await fetch(url);
-  if (data.ok){
-    const jsonData = await data.json();
-    res.send(jsonData);;
-  } else {
-    console.log('Request failed', res.ok);
-    res.send( { error: 'Something went wrong' });
-  }
+  const data  = await fetchContents(req.body.url,{});
+  res.send(data);
 });
 
 app.post("/api/getContentsDoaj", async (req, res) => {
-  const url = req.body.url;
-  const data  = await fetch(url);
-  if (data.ok){
-    const jsonData = await data.json();
-    res.send(jsonData);;
-  } else {
-    console.log('Request failed', res.ok);
-    res.send( { error: 'Something went wrong' });
-  }
+  const data  = await fetchContents(req.body.url,{});
+  res.send(data);
 });
 
 app.post("/api/getContentsMicrosoft", async (req, res) => {
-  const url = req.body.url;
-  const data  = await fetch(url + `&subscription-key=${constants.MICROSOFT_KEY}`);
-  if (data.ok){
-    const jsonData = await data.json();
-    res.send(jsonData);;
-  } else {
-    console.log('Request failed', res.ok);
-    res.send( { error: 'Something went wrong' });
-  }
+  const data  = await fetchContents(req.body.url + `&subscription-key=${constants.MICROSOFT_KEY}`,{});
+  res.send(data);
 });
 
 app.post("/api/getContentsScopus", async (req, res) => {
-  const url = req.body.url;
-  const data  = await fetch(url, {
+  const data  = await fetchContents(req.body.url, {
     method: 'GET',
     headers: {
       "X-ELS-APIKey": constants.SCOPUS_KEY,
     }
   });
-  if (data.ok){
-    const jsonData = await data.json();
-    res.send(jsonData);;
-  } else {
-    console.log('Request failed', res.ok);
-    res.send( { error: 'Something went wrong' });
-  }
+  res.send(data);
+});
+
+app.post("/api/getContentsDimensions", async (req, res) => {
+  const data = await fetchContents(req.body.url, {});
+  res.send(data);
+});
+
+app.post("/api/getContentsAltmetric", async (req, res) => {
+  const data = await fetchContents(req.body.url, {});
+  res.send(data);
 });
 
 app.get('*', (req, res) => {
