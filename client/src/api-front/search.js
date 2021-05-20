@@ -1,6 +1,6 @@
-export const getContentsCrossref = async (url) => {
+const getContents = async (url,apiURL) => {
   try {
-    const res = await fetch(`/api/getContentsCrossref`, {
+    const res = await fetch(apiURL, {
       method: 'POST',
       body: new URLSearchParams({
         'url': url
@@ -9,77 +9,54 @@ export const getContentsCrossref = async (url) => {
         "Content-Type": "application/x-www-form-urlencoded",
       }
     });
-    console.log('Contents de la API en front Crossref:')
     var contents = await res.json();
-    console.log(contents);
-    if (contents.error){
-      contents.message = {...contents.message, error: contents.error}
-    }
-    return contents.message;
-  } catch(e) {
+    return contents;
+  } catch (e) {
     console.error(e);
   }
+}
+
+export const getContentsCrossref = async (url) => {
+  const contents = await getContents(url,`/api/getContentsCrossref`);
+  console.log('Contents de la API en front Crossref:');
+  console.log(contents);
+  if (contents.error){
+    contents.message = {...contents.message, error: contents.error}
+  }
+  return contents.message;
 }
 
 export const getContentsDoaj = async (url) => {
-  try {
-    const res = await fetch(`/api/getContentsDoaj`, {
-      method: 'POST',
-      body: new URLSearchParams({
-        'url': url
-      }),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      }
-    });
-    console.log('Contents de la API en front DOAJ:')
-    const contents = await res.json();
-    console.log(contents);
-
-    return contents;
-  } catch(e) {
-    console.error(e);
-  }
+  const contents = await getContents(url,`/api/getContentsDoaj`);
+  console.log('Contents de la API en front DOAJ:');
+  console.log(contents);
+  return contents;
 }
 
 export const getContentsMicrosoft = async (url) => {
-  try {
-    const res = await fetch(`/api/getContentsMicrosoft`, {
-      method: 'POST',
-      body: new URLSearchParams({
-        'url': url
-      }),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      }
-    });
-    console.log('Contents de la API en front Microsoft:')
-    const contents = await res.json();
-    console.log(contents);
-
-    return contents.entities;
-  } catch(e) {
-    console.error(e);
-  }
+  const contents = await getContents(url, `/api/getContentsMicrosoft`);
+  console.log('Contents de la API en front Microsoft:');
+  console.log(contents);
+  return contents.entities;
 }
 
 export const getContentsScopus = async (url) => {
-  try {
-    const res = await fetch(`/api/getContentsScopus`, {
-      method: 'POST',
-      body: new URLSearchParams({
-        'url': url
-      }),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      }
-    });
-    console.log('Contents de la API en front Scopus:')
-    const contents = await res.json();
-    console.log(contents);
+  const contents = await getContents(url, `/api/getContentsScopus`);
+  console.log('Contents de la API en front Scopus:');
+  console.log(contents);
+  return contents["serial-metadata-response"];
+}
 
-    return contents["serial-metadata-response"];
-  } catch(e) {
-    console.error(e);
-  }
+export const getContentsDimensions = async (url) => {
+  const contents = await getContents(url, `/api/getContentsDimensions`);
+  console.log('Contents de la API en front Dimensions:');
+  console.log(contents);
+  return contents;
+}
+
+export const getContentsAltmetric = async (url) => {
+  const contents = await getContents(url, `/api/getContentsAltmetric`);
+  console.log('Contents de la API en front Altmetric:');
+  console.log(contents);
+  return contents;
 }
