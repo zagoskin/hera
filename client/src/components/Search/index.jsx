@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './search.css';
-import { getContentsCrossref, getContentsDoaj, getContentsMicrosoft, getContentsScopus, getContentsDimensions, getContentsAltmetric } from '../../api-front/search';
+import { getContentsCrossref, getContentsDoaj, getContentsMicrosoft, getContentsScopus, getContentsDimensions, getContentsAltmetric, getContentsScimago } from '../../api-front/search';
 import AcademicCard from '../AcademicCard/index';
-import { getURLCrossref, getURLDoaj, getURLMicrosoft, getURLScopus, getURLDimensions, getURLAltmetric, setURLsByDOI, setURLsByISSN } from '../../api-front/url';
+import { getURLCrossref, getURLDoaj, getURLMicrosoft, getURLScopus, getURLDimensions, getURLAltmetric, setURLsByDOI, setURLsByISSN, getURLScimago } from '../../api-front/url';
 
 export default function Search(){
   //states- input query, movies
@@ -16,7 +16,7 @@ export default function Search(){
     var scopusData = undefined;
     var dimensionsData = undefined;
     var altmetricData = undefined;
-
+    var scimagoData = undefined;
     if (criteria === "DOI"){
       setURLsByDOI(query);
       microsoftData = await getContentsMicrosoft(getURLMicrosoft());
@@ -26,6 +26,7 @@ export default function Search(){
       if (criteria === "ISSN"){
         setURLsByISSN(query);
         scopusData = await getContentsScopus(getURLScopus());
+        scimagoData = await getContentsScimago(getURLScimago());
       }
     }
     const crossrefData = await getContentsCrossref(getURLCrossref()); 
