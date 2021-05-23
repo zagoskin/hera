@@ -16,6 +16,24 @@ const getContents = async (url,apiURL) => {
   }
 }
 
+const getHtml = async (url,apiURL) => {
+  try {
+    const htmlObject = await fetch(apiURL, {
+      method: 'POST',
+      body: new URLSearchParams({
+        'url': url
+      }),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      }
+    });
+    var htmlResObj = await htmlObject.json();
+    return htmlResObj;
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 export const getContentsCrossref = async (url) => {
   const contents = await getContents(url,`/api/getContentsCrossref`);
   console.log('Contents de la API en front Crossref:');
@@ -59,4 +77,14 @@ export const getContentsAltmetric = async (url) => {
   console.log('Contents de la API en front Altmetric:');
   console.log(contents);
   return contents;
+}
+
+export const getContentsScimago = async (url) => {
+  const res = await getHtml(url,`/api/getContentsScimago`);
+  const searchHtml = res.html;
+
+  var parser = new DOMParser();
+  var anchorURL = parser.parseFromString(searchHtml, 'text/html').body.querySelector(".search_results").querySelector("a").href;
+  var journalURL = anchorURL.split("http://localhost:3000/")[1];
+  console.log("https://www.scimagojr.com/"+journalURL);
 }
