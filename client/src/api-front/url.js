@@ -7,6 +7,7 @@ var urlMicrosoft;
 var urlScopus;
 var urlDimensions;
 var urlAltmetric;
+var urlScimago;
 
 export const setURLsByDOI = (DOI) => {
   urlCrossRef = `https://api.crossref.org/works/${DOI}`;
@@ -21,7 +22,8 @@ export const setURLsByDOI = (DOI) => {
 export const setURLsByISSN = (ISSN) => {
   urlCrossRef = `https://api.crossref.org/journals/${ISSN}`;
   urlDoaj = `https://doaj.org/api/v2/search/journals/issn:${ISSN}`;
-  urlScopus = `https://api.elsevier.com/content/serial/title?issn=${ISSN}&field=SJR,SNIP`
+  urlScopus = `https://api.elsevier.com/content/serial/title?issn=${ISSN}&field=SJR,SNIP`;
+  urlScimago = `https://www.scimagojr.com/journalsearch.php?q=${ISSN}`;
   //otras URLs
 }
 
@@ -44,6 +46,11 @@ export const getURLScopus = () => {
 export const getURLDimensions = () => {
   return urlDimensions;
 }
+
 export const getURLAltmetric = () => {
   return urlAltmetric;
+}
+
+export const getURLScimago = () => {
+  return urlScimago;
 }
