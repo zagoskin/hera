@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-const fetchContents = async (url,options) => {
+const fetchJsonContents = async (url,options) => {
   const data  = await fetch(url,options);
   if (data.ok){
     const jsonData = await data.json();
@@ -18,6 +18,22 @@ const fetchContents = async (url,options) => {
     console.log('Request failed');
     return { error: 'Something went wrong' };
   }
+}
+
+const fetchHtmlContents = async (url,options) => {
+  return fetch(url,options)
+    .then((response) => {
+      return response.text();
+  }).then((html) => {
+    return html;
+  });
+  // if (data.ok){
+  //   const dataHtml = data.text();
+  //   return HTMLParser.parse(dataHtml);
+  // } else {
+  //   console.log('Request failed');
+  //   return { error: 'Something went wrong' };
+  // }
 }
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
@@ -31,22 +47,22 @@ app.get("/api", (req, res) => {
 });
 
 app.post("/api/getContentsCrossref", async (req, res) => {
-  const data  = await fetchContents(req.body.url,{});
+  const data  = await fetchJsonContents(req.body.url,{});
   res.send(data);
 });
 
 app.post("/api/getContentsDoaj", async (req, res) => {
-  const data  = await fetchContents(req.body.url,{});
+  const data  = await fetchJsonContents(req.body.url,{});
   res.send(data);
 });
 
 app.post("/api/getContentsMicrosoft", async (req, res) => {
-  const data  = await fetchContents(req.body.url + `&subscription-key=${constants.MICROSOFT_KEY}`,{});
+  const data  = await fetchJsonContents(req.body.url + `&subscription-key=${constants.MICROSOFT_KEY}`,{});
   res.send(data);
 });
 
 app.post("/api/getContentsScopus", async (req, res) => {
-  const data  = await fetchContents(req.body.url, {
+  const data  = await fetchJsonContents(req.body.url, {
     method: 'GET',
     headers: {
       "X-ELS-APIKey": constants.SCOPUS_KEY,
@@ -56,13 +72,21 @@ app.post("/api/getContentsScopus", async (req, res) => {
 });
 
 app.post("/api/getContentsDimensions", async (req, res) => {
-  const data = await fetchContents(req.body.url, {});
+  const data = await fetchJsonContents(req.body.url, {});
   res.send(data);
 });
 
 app.post("/api/getContentsAltmetric", async (req, res) => {
-  const data = await fetchContents(req.body.url, {});
+  const data = await fetchJsonContents(req.body.url, {});
   res.send(data);
+});
+
+app.post("/api/getContentsScimago", async (req, res) => {
+  const html = await fetchHtmlContents(req.body.url, {});
+  const response = {
+    'html': html,
+  }
+  res.send(response);
 });
 
 app.get('*', (req, res) => {
