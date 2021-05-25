@@ -189,10 +189,7 @@ export default function ScopusGraph({data}){
               the number of citations received by a journal and the importance or 
               prestige of the journals where such citations come from.
               </div>
-              <img className="card--scopus--powered"
-                src={poweredByScopus}
-                alt='powered_by_scopus'
-              />   
+             
               <div className="card--scopus--disclaimer--text">Source Normalized Impact per Paper (SNIP) measures 
               contextual citation impact by weighting citations 
               based on the total number of citations in a subject field.
