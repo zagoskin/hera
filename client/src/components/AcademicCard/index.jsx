@@ -7,6 +7,7 @@ import CrossrefCard from '../CrossrefCard';
 import DOAJCard from '../DOAJCard';
 import MicrosoftCard from '../MicrosoftCard';
 import { Collapse } from 'react-collapse';
+import ScimagoCard from '../ScimagoCard';
 
 export default function AcademicCard({content}){
 
@@ -24,27 +25,35 @@ export default function AcademicCard({content}){
     <div className="card">
 
       {/* Info general de un contenido */}
-      <div className="card--content">
-        <h1 className="card--title">{content.title}</h1>
-        <p><a href={content.URL}>Click aquí para ir al recurso</a></p>
-        {content.authors ? <p>
-          <em>Authors: {content.authors.map((author,index) => 
-          (author.name ? 
-            <span key={index}> {author.name}. </span> :
-          author.family ?
-            <span key={index}> {author.family} {author.given}. </span> :
-          author.AuN ?
-            <span key={index}> {author.AuN} . </span> : null
-          ))}</em> 
-        </p> : null 
-        }
-        {content.abstract ? <div className='card--abstract'><h1>ABSTRACT</h1> 
-        <em><p className="card--abstract--text">
-            {content.abstract.replace(/(<([^>]+)>)/ig, '')}
-          </p></em>
-        </div> : null
-        } 
-      </div>
+      {content.title ?
+        <div className="card--content">
+          <h1 className="card--title">{content.title}</h1>
+          <p><a href={content.URL}>Click aquí para ir al recurso</a></p>
+          {content.authors ? <p>
+            <em>Authors: {content.authors.map((author,index) => 
+            (author.name ? 
+              <span key={index}> {author.name}. </span> :
+            author.family ?
+              <span key={index}> {author.family} {author.given}. </span> :
+            author.AuN ?
+              <span key={index}> {author.AuN} . </span> : null
+            ))}</em> 
+          </p> : null 
+          }
+          {content.abstract ? <div className='card--abstract'><h1>ABSTRACT</h1> 
+          <em><p className="card--abstract--text">
+              {content.abstract.replace(/(<([^>]+)>)/ig, '')}
+            </p></em>
+          </div> : null
+          } 
+        </div>
+        : 
+        <div className="card--content">
+          <h1 className="card--title">Resultados no encontrados para su búsqueda</h1>
+        </div>
+      
+    
+      }
       {showMore === false ?
         <button className="card--collapse--btn" onClick={handleShowMore}>Ver más</button>
         :
@@ -65,8 +74,13 @@ export default function AcademicCard({content}){
         }
 
         { content.identifier.type === "ISSN" ?
-        <ScopusGraph data={content.scopus} key={content.identifier.value} />
+        <ScopusGraph data={content.scopus} key={'scopus' + content.identifier.value} />
         : null      
+        }
+
+        { content.identifier.type === "ISSN" ?
+        <ScimagoCard content={content.scimago} key={'scimago' + content.identifier.value} />
+        : null  
         }
       </Collapse>
     </div>
