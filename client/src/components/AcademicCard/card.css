@@ -38,7 +38,8 @@
 .card--microsoft,
 .card--dimensions,
 .card--altmetric,
-.card--scopus {
+.card--scopus,
+.card--scimago {
   display: inline-block;
   border-radius: 15px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.75);
@@ -121,6 +122,32 @@
     #ff93cd,
     #ff73be
   );
+}
+
+.card--scimago {
+  display: flex;
+  flex-wrap: wrap;
+  background-image: linear-gradient(
+    to right,
+    white,
+    #ffe7dc,
+    #fad3c1,
+    #f5bfa6,
+    #f19f7a,
+    #e77642,
+    #e0642b
+  );
+}
+
+.card--scimago--logo {
+  overflow: hidden;
+  width: 18%;
+}
+
+.card--scimago--image {
+  padding: 0.5rem;
+  width: 85px;
+  height: auto;
 }
 
 .card--dimensions--badge {
@@ -252,7 +279,8 @@
   justify-content: center;
 }
 
-.card--scopus--text--warning {
+.card--scopus--text--warning,
+.card--scimago--text--warning {
   padding: 0.5rem;
   margin-left: 10%;
   margin-right: 10%;
@@ -425,6 +453,7 @@ a:hover {
 
 .card--doaj--issn--license--title {
   width: 100%;
+  padding: 1rem;
 }
 
 .card--doaj--issn--license--title a {
@@ -442,6 +471,12 @@ a:hover {
 .card--doaj--issn--license {
   font-weight: bolder;
   margin-right: 3%;
+  padding: 1rem;
+}
+
+.card--doaj--issn--license--image {
+  width: 125px;
+  height: auto;
 }
 
 .card--doaj--issn--info--seal {
@@ -503,6 +538,42 @@ a:hover {
 .card--altmetric--logo {
   width: 30px;
   height: auto;
+}
+
+.card--scimago--info--panel {
+  display: flex;
+  flex-wrap: wrap;
+  width: 75%;
+}
+
+.card--scimago--info {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  margin: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  border-radius: 15px;
+  background-color: rgb(251, 233, 226);
+}
+
+.card--scimago--info--title {
+  flex: 1;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.card--scimago--info--data {
+  width: 100%;
+  padding: 1rem;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.card--scimago--info--embed {
+  padding: 0.5rem;
 }
 
 /* NO SMARTPHONE CSS */
@@ -656,6 +727,10 @@ a:hover {
     height: auto;
   }
 
+  .card--doaj--issn--license--image {
+    width: 150px;
+  }
+
   .card--scopus--image {
     width: 160px;
   }
@@ -666,7 +741,8 @@ a:hover {
     font-size: 3rem;
   }
 
-  .card--scopus--text--warning {
+  .card--scopus--text--warning,
+  .card--scimago--text--warning {
     padding: 0.5rem;
     margin-left: 20%;
     margin-right: 20%;
@@ -732,5 +808,25 @@ a:hover {
 
   .card--collapse--btn {
     margin-bottom: 1%;
+  }
+
+  .card--scimago--image {
+    padding: 0.75rem;
+    width: 160px;
+    height: auto;
+  }
+
+  .card--scimago--text--warning {
+    margin-left: 17%;
+    margin-right: 23%;
+  }
+
+  .card--scimago--info--title {
+    font-size: 2.25rem;
+    font-weight: normal;
+  }
+
+  .card--scimago--info--data {
+    font-size: 3rem;
   }
 }
