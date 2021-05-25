@@ -34,3 +34,15 @@ export const useAltmetric = (url) => {
     }
   }, [url]);
 }
+
+export const useEmbed = (htmlString) => {
+  useEffect(() => {
+    let embed = document.createElement('div');
+    embed.setAttribute('class', 'card--scimago--info--embed');
+    embed.setAttribute('id', 'scimagoEmbed')
+    embed.innerHTML = htmlString;
+
+    document.getElementById('embedGraph').appendChild(embed);
+
+  }, [htmlString]);
+}
