@@ -79,12 +79,51 @@ export const getContentsAltmetric = async (url) => {
   return contents;
 }
 
-export const getContentsScimago = async (url) => {
+export const getContentsScimago = async (url,title) => {
   const res = await getHtml(url,`/api/getContentsScimago`);
   const searchHtml = res.html;
 
   var parser = new DOMParser();
-  var anchorURL = parser.parseFromString(searchHtml, 'text/html').body.querySelector(".search_results").querySelector("a").href;
-  var journalURL = anchorURL.split("http://localhost:3000/")[1];
-  console.log("https://www.scimagojr.com/"+journalURL);
+
+  const searchDOM = parser.parseFromString(searchHtml, 'text/html');
+  const errorP = searchDOM.body.querySelector(".journaldescription.colblock").querySelector("h2");
+
+  if (errorP){ //busco si hay un resultado en la busqueda
+    var contents = {
+      error: errorP.innerText
+    }
+  } else {
+    const searchResults = searchDOM.body.querySelector(".search_results");
+    const firstTitle = searchResults.querySelector(".jrnlname").innerText;
+
+    if (firstTitle.split(" ")[0] === title.split(" ")[0]){
+      const anchorURL = searchResults.querySelector("a").href;
+      const journalURL = "https://www.scimagojr.com/"+anchorURL.split("http://localhost:3000/")[1];
+    
+      const searchRes = await getHtml(journalURL,`/api/getContentsScimago`);
+      const journalHtml = searchRes.html;
+    
+      const journalDOM = parser.parseFromString(journalHtml, 'text/html');
+      const hIndex = journalDOM.body.querySelector(".hindexnumber").innerText;
+      const embedString = journalDOM.getElementById("embed_code").value;
+      const journalData = journalDOM.body.querySelector(".journalgrid").querySelectorAll("div");
+      const country = journalData[0].querySelector("p").querySelector("a").innerText;
+      const coverage = journalData[6].querySelector("p").innerText;
+      var contents = {
+        hIndex,
+        country,
+        coverage,
+        embedString
+      }
+    } else {
+      var contents = {
+        error: "Not found in list"
+      }
+    }
+  }
+
+  console.log('Resultados SCIMAGO a devolver:');
+  console.log(contents);
+
+  return contents;
 }
