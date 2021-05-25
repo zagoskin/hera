@@ -26,7 +26,6 @@ export default function Search(){
       if (criteria === "ISSN"){
         setURLsByISSN(query);
         scopusData = await getContentsScopus(getURLScopus());
-        scimagoData = await getContentsScimago(getURLScimago());
       }
     }
     const crossrefData = await getContentsCrossref(getURLCrossref()); 
@@ -57,6 +56,12 @@ export default function Search(){
         value: query
       },
     }
+
+    if (criteria === "ISSN"){
+      scimagoData = await getContentsScimago(getURLScimago(),res.title);
+    }
+
+    res = {...res, scimago: scimagoData}
     
     console.log('Todos los resultados:');
     console.log(res);
