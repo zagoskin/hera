@@ -1,6 +1,11 @@
 import React from 'react';
 import doajLogo from '../../images/doajLogo.png';
-
+import ccBy from '../../images/cc-by.png';
+import ccByNc from '../../images/cc-by-nc.png';
+import ccByNcNd from '../../images/cc-by-nc-nd.png';
+import ccByNcSa from '../../images/cc-by-nc-sa.png';
+import ccByNd from '../../images/cc-by-nd.png';
+import ccBySa from '../../images/cc-by-sa.png';
 
 export default function DOAJCard({identifier, content}){
 
@@ -48,7 +53,43 @@ export default function DOAJCard({identifier, content}){
         <div className="card--doaj--issn--info">
           <div className="card--doaj--issn--license--title"><a href="https://creativecommons.org/licenses/">Licencias</a> que utiliza este jornal:</div> 
           {content.bibjson.license.map((license,index) => 
-            <div className="card--doaj--issn--license" key={index}>{license.type}</div>  
+            license.type === "CC BY" ?
+              <div className="card--doaj--issn--license" key={index}>
+                <a href="https://creativecommons.org/licenses/by/4.0/">
+                  <img className="card--doaj--issn--license--image" src={ccBy} alt="cc-by" />
+                </a>
+              </div> 
+            : license.type === "CC BY-ND" ?
+              <div className="card--doaj--issn--license" key={index}>
+                <a href="https://creativecommons.org/licenses/by-nd/4.0/">
+                  <img className="card--doaj--issn--license--image" src={ccByNd} alt="cc-by-nd" />
+                </a>
+              </div>
+            : license.type === "CC BY-NC" ?
+              <div className="card--doaj--issn--license" key={index}>
+                <a href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <img className="card--doaj--issn--license--image" src={ccByNc} alt="cc-by-nc" />
+                </a>
+              </div> 
+            : license.type === "CC BY-SA" ?
+              <div className="card--doaj--issn--license" key={index}>
+                <a href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <img className="card--doaj--issn--license--image" src={ccBySa} alt="cc-by-sa" />
+                </a>
+              </div>
+            : license.type === "CC BY-NC-ND" ?
+              <div className="card--doaj--issn--license" key={index}>
+                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <img className="card--doaj--issn--license--image" src={ccByNcNd} alt="cc-by-nc-nd" />
+                </a>
+              </div>
+            : license.type === "CC BY-NC-SA" ?
+              <div className="card--doaj--issn--license" key={index}>
+                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <img className="card--doaj--issn--license--image" src={ccByNcSa} alt="cc-by-nc-nd" />
+                </a>
+              </div>
+            : null
           )}
         </div> 
         {content.admin ? 
