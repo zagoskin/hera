@@ -8,6 +8,7 @@ import DOAJCard from '../DOAJCard';
 import MicrosoftCard from '../MicrosoftCard';
 import { Collapse } from 'react-collapse';
 import ScimagoCard from '../ScimagoCard';
+import TinyPanel from '../TinyPanel';
 
 export default function AcademicCard({content}){
 
@@ -51,9 +52,12 @@ export default function AcademicCard({content}){
         <div className="card--content">
           <h1 className="card--title">Resultados no encontrados para su búsqueda</h1>
         </div>
-      
-    
       }
+
+      <Collapse isOpened={!showMore} theme={{collapse: 'ReactCollapse--collapse'}}>
+        <TinyPanel content={content} type={content.identifier.type} DOI={content.identifier.value} key={'tinypanel' + content.identifier.value}></TinyPanel>
+      </Collapse>
+
       {showMore === false ?
         <button className="card--collapse--btn" onClick={handleShowMore}>Ver más</button>
         :
