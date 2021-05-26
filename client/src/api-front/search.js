@@ -88,8 +88,10 @@ export const getContentsScimago = async (url,title) => {
   const searchDOM = parser.parseFromString(searchHtml, 'text/html');
   const errorP = searchDOM.body.querySelector(".journaldescription.colblock").querySelector("h2");
 
+  var contents;
+
   if (errorP){ //busco si hay un resultado en la busqueda
-    var contents = {
+    contents = {
       error: errorP.innerText
     }
   } else {
@@ -109,14 +111,14 @@ export const getContentsScimago = async (url,title) => {
       const journalData = journalDOM.body.querySelector(".journalgrid").querySelectorAll("div");
       const country = journalData[0].querySelector("p").querySelector("a").innerText;
       const coverage = journalData[6].querySelector("p").innerText;
-      var contents = {
+      contents = {
         hIndex,
         country,
         coverage,
         embedString
       }
     } else {
-      var contents = {
+      contents = {
         error: "Not found in list"
       }
     }
