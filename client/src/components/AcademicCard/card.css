@@ -3,6 +3,7 @@
 }
 
 .card--collapse--btn {
+  margin-top: 3%;
   padding: 0.5rem;
   margin-bottom: 3%;
   width: 100%;
@@ -46,6 +47,17 @@
   margin-bottom: 1.5rem;
   width: 100%;
 }
+
+.card--tiny {
+  font-family: "Odibee Sans";
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.75);
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
 .card--crossref {
   background-image: linear-gradient(
     to right,
@@ -55,6 +67,7 @@
     rgb(61, 135, 148)
   );
 }
+
 .card--doaj {
   background-image: linear-gradient(
     to right,
@@ -295,11 +308,13 @@
   text-decoration: none;
 }
 
-.card--doaj--seal:hover {
+.card--doaj--seal:hover,
+.card--tiny--seal:hover {
   background-color: #282624;
   color: #fd5a3b;
 }
-.card--doaj--seal {
+.card--doaj--seal,
+.card--tiny--seal {
   margin-left: 20%;
   margin-top: 40%;
   color: #282624;
@@ -311,6 +326,13 @@
   border-style: solid;
   border-color: rgb(199, 44, 44);
   background-color: #fd5a3b;
+}
+
+.card--tiny--seal {
+  margin-left: 0;
+  margin-top: 0;
+  width: 50px;
+  padding: 0.5rem;
 }
 
 .card--microsoft--fos {
@@ -540,13 +562,51 @@ a:hover {
   height: auto;
 }
 
-.card--scimago--info--panel {
+.card--scimago--info--panel,
+.card--tiny--info--panel {
   display: flex;
   flex-wrap: wrap;
   width: 75%;
 }
 
-.card--scimago--info {
+.card--tiny--image--container {
+  width: 100%;
+}
+
+.card--tiny--image {
+  width: 85px;
+}
+
+.card--tiny--info--data {
+  padding: 0.5rem;
+  font-size: 1.75rem;
+  font-weight: bold;
+  width: 100%;
+}
+
+.card--tiny--license {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.card--tiny--license a {
+  text-decoration: none;
+}
+
+.card--tiny--license--image {
+  width: 85px;
+  height: auto;
+}
+
+.card--tiny--info--panel {
+  width: 100%;
+}
+
+.card--scimago--info,
+.card--tiny--info {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
@@ -555,6 +615,15 @@ a:hover {
   border: 1px solid rgba(0, 0, 0, 0.75);
   border-radius: 15px;
   background-color: rgb(251, 233, 226);
+}
+
+.card--tiny--info {
+  align-items: center;
+  justify-content: center;
+  flex: 1 0 30%;
+  width: 25%;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.75);
+  background-color: rgb(255, 239, 239);
 }
 
 .card--scimago--info--title {
@@ -574,6 +643,10 @@ a:hover {
 
 .card--scimago--info--embed {
   padding: 0.5rem;
+}
+
+.bigger {
+  width: 150px;
 }
 
 /* NO SMARTPHONE CSS */
@@ -821,12 +894,34 @@ a:hover {
     margin-right: 23%;
   }
 
-  .card--scimago--info--title {
+  .card--scimago--info--title,
+  .card--tiny--info--title {
     font-size: 2.25rem;
     font-weight: normal;
   }
 
   .card--scimago--info--data {
     font-size: 3rem;
+  }
+
+  .card--tiny--info--data {
+    font-size: 2.5rem;
+  }
+
+  .card--tiny--image {
+    width: 125px;
+  }
+
+  .hot {
+    margin-top: 5%;
+    width: 100px;
+  }
+
+  .bigger {
+    width: 200px;
+  }
+
+  .card--tiny--license--image {
+    width: 125px;
   }
 }
