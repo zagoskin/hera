@@ -17,7 +17,7 @@ export default function CrossrefCard({identifier, content}){
       </div>: 
       (identifier.type === "DOI") ?
       <div className="card--crossref--text">
-        Referencias académicas en {content["reference-count"]} artículos 
+        Número de referencias académicas {content["is-referenced-by-count"]}
         <p>Información provista por Crossref</p>
       </div> 
       :(identifier.type === "ISSN") ?
