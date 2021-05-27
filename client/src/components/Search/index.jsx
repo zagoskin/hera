@@ -3,15 +3,18 @@ import './search.css';
 import { getContentsCrossref, getContentsDoaj, getContentsMicrosoft, getContentsScopus, getContentsDimensions, getContentsAltmetric, getContentsScimago } from '../../api-front/search';
 import AcademicCard from '../AcademicCard/index';
 import { getURLCrossref, getURLDoaj, getURLMicrosoft, getURLScopus, getURLDimensions, getURLAltmetric, setURLsByDOI, setURLsByISSN, getURLScimago } from '../../api-front/url';
+import Loader from 'react-loader-spinner';
 
 export default function Search(){
   //states- input query, movies
   const [query, setQuery] = useState('');
   const [content, setContent] = useState(undefined);
   const [criteria, setCriteria] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const searchPapers = async (e) => {
     e.preventDefault();
+    setLoading(true);
     var microsoftData = [];
     var scopusData = undefined;
     var dimensionsData = undefined;
@@ -70,6 +73,7 @@ export default function Search(){
     //   doaj: doajData[0]
     // };
 
+    setLoading(false);
     setContent(res);
   }
 
@@ -97,6 +101,20 @@ export default function Search(){
           </label>
         </div>
       </form>
+      {loading  ?
+      <div
+        style={{
+          width: "100%",
+          height: "100",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Loader type="ThreeDots" color="#FF6961" height="100" width="100"/>
+      </div>
+      : null
+      }
       {content ? 
       <div className="card-list">
         {/* contents.filter(content => content.algunValor tipo citas o algo > 0).map a esto  */}
