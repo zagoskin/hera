@@ -7,7 +7,7 @@ export default function ScimagoCard({content}){
   return (
     <div className="card--scimago">
       <div className="card--scimago--logo">
-        <a href="https://academic.microsoft.com/home">
+        <a href="https://www.scimagojr.com/">
           <img className="card--scimago--image"
             src={scimagoLogo}
             alt='scimago'
