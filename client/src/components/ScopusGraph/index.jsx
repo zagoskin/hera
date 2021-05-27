@@ -10,147 +10,149 @@ export default function ScopusGraph({data}){
   const [optionsSNIP, setOptionsSNIP] = useState({});
   const [seriesSNIP, setSeriesSNIP] = useState([]);
   useEffect(()=> {
-    if (data.entry){
-      const sjrCategories = data.entry[0].SJRList.SJR.map((item) => (item["@year"]));
-      const sjrData = data.entry[0].SJRList.SJR.map((item) => (item["$"]));
-      const snipCategories = data.entry[0].SNIPList.SNIP.map((item) => (item["@year"]));
-      const snipData = data.entry[0].SNIPList.SNIP.map((item) => (item["$"]));
-      setOptionsSJR({
-        dataLabels: {
-          enabled: true,
-          enabledOnSeries: true,
-          textAnchor: 'middle',
-          distributed: false,
-          style: {
-              fontSize: '14px',
-              fontFamily: 'Helvetica, Arial, sans-serif',
-              fontWeight: 'bold',
-              colors: ['#000'],
-          }
-        },
-        chart: {
-          id: "sjr-chart",
-          animations: {
+    if (data !== null){
+      if (data.entry){
+        const sjrCategories = data.entry[0].SJRList.SJR.map((item) => (item["@year"]));
+        const sjrData = data.entry[0].SJRList.SJR.map((item) => (item["$"]));
+        const snipCategories = data.entry[0].SNIPList.SNIP.map((item) => (item["@year"]));
+        const snipData = data.entry[0].SNIPList.SNIP.map((item) => (item["$"]));
+        setOptionsSJR({
+          dataLabels: {
             enabled: true,
-            easing: 'easeinout',
-            speed: 800,
-            animateGradually: {
-                enabled: true,
-                delay: 150
+            enabledOnSeries: true,
+            textAnchor: 'middle',
+            distributed: false,
+            style: {
+                fontSize: '14px',
+                fontFamily: 'Helvetica, Arial, sans-serif',
+                fontWeight: 'bold',
+                colors: ['#000'],
+            }
+          },
+          chart: {
+            id: "sjr-chart",
+            animations: {
+              enabled: true,
+              easing: 'easeinout',
+              speed: 800,
+              animateGradually: {
+                  enabled: true,
+                  delay: 150
+              },
+              dynamicAnimation: {
+                  enabled: true,
+                  speed: 350
+              }
             },
-            dynamicAnimation: {
-                enabled: true,
-                speed: 350
+            toolbar: {
+              show: false
             }
           },
-          toolbar: {
-            show: false
-          }
-        },
-        xaxis: {
-          categories: sjrCategories,
-          labels: {
-            show: true,
-            style: {
-              fontWeight: 'bold'
+          xaxis: {
+            categories: sjrCategories,
+            labels: {
+              show: true,
+              style: {
+                fontWeight: 'bold'
+              }
             }
-          }
-        },
-        yaxis: {
-          labels: {
-            show: true,
-            style: {
-              fontWeight: 'bold'
-            }
-          }
-        },
-        colors: ['#edcb5c', '#daed5c', '#b5ed5c', '#5ced68', '#5ced9d', '#5cedd2', '#5cd2ed', '#5ca7ed', '#5c66ed','#805ced','#9d5ced','#c65ced','#e85ced','#ed5cbd','#ed5c83'],
-        title: {
-          text: 'SCImago Journal Rank',
-          align: 'center',
-          margin: 4,
-          offsetY: 15,
-          style: {
-            fontSize: '14px',
-            color: "black",
           },
-        }
-      });
-      setSeriesSJR([
-        {
-          name: "SJR",
-          data: sjrData
-        }
-      ]);
-      setOptionsSNIP({
-        dataLabels: {
-          enabled: true,
-          enabledOnSeries: true,
-          textAnchor: 'middle',
-          distributed: false,
-          style: {
+          yaxis: {
+            labels: {
+              show: true,
+              style: {
+                fontWeight: 'bold'
+              }
+            }
+          },
+          colors: ['#edcb5c', '#daed5c', '#b5ed5c', '#5ced68', '#5ced9d', '#5cedd2', '#5cd2ed', '#5ca7ed', '#5c66ed','#805ced','#9d5ced','#c65ced','#e85ced','#ed5cbd','#ed5c83'],
+          title: {
+            text: 'SCImago Journal Rank',
+            align: 'center',
+            margin: 4,
+            offsetY: 15,
+            style: {
               fontSize: '14px',
-              fontFamily: 'Helvetica, Arial, sans-serif',
-              fontWeight: 'bold',
-              colors: ['#000'],
-          }
-        },
-        chart: {
-          id: "snip-chart",
-          animations: {
-            enabled: true,
-            easing: 'easeinout',
-            speed: 800,
-            animateGradually: {
-                enabled: true,
-                delay: 150
+              color: "black",
             },
-            dynamicAnimation: {
-                enabled: true,
-                speed: 350
+          }
+        });
+        setSeriesSJR([
+          {
+            name: "SJR",
+            data: sjrData
+          }
+        ]);
+        setOptionsSNIP({
+          dataLabels: {
+            enabled: true,
+            enabledOnSeries: true,
+            textAnchor: 'middle',
+            distributed: false,
+            style: {
+                fontSize: '14px',
+                fontFamily: 'Helvetica, Arial, sans-serif',
+                fontWeight: 'bold',
+                colors: ['#000'],
             }
           },
-          toolbar: {
-            show: false
-          }
-        },
-        xaxis: {
-          categories: snipCategories,
-          labels: {
-            show: true,
-            style: {
-              fontWeight: 'bold'
+          chart: {
+            id: "snip-chart",
+            animations: {
+              enabled: true,
+              easing: 'easeinout',
+              speed: 800,
+              animateGradually: {
+                  enabled: true,
+                  delay: 150
+              },
+              dynamicAnimation: {
+                  enabled: true,
+                  speed: 350
+              }
+            },
+            toolbar: {
+              show: false
             }
-          }
-        },
-        yaxis: {
-          labels: {
-            show: true,
-            style: {
-              fontWeight: 'bold'
+          },
+          xaxis: {
+            categories: snipCategories,
+            labels: {
+              show: true,
+              style: {
+                fontWeight: 'bold'
+              }
             }
+          },
+          yaxis: {
+            labels: {
+              show: true,
+              style: {
+                fontWeight: 'bold'
+              }
+            }
+          },
+          colors: ['#edcb5c', '#daed5c', '#b5ed5c', '#5ced68', '#5ced9d', '#5cedd2', '#5cd2ed', '#5ca7ed', '#5c66ed','#805ced','#9d5ced','#c65ced','#e85ced','#ed5cbd','#ed5c83'],
+          title: {
+            text: 'Source Normalized Impact per Paper',
+            align: 'center',
+            margin: 4,
+            offsetY: 15,
+            style: {
+              fontSize: '14px',
+              color: "black",
+            }
+          },
+        });
+        setSeriesSNIP([
+          {
+            name: "SNIP",
+            data: snipData
           }
-        },
-        colors: ['#edcb5c', '#daed5c', '#b5ed5c', '#5ced68', '#5ced9d', '#5cedd2', '#5cd2ed', '#5ca7ed', '#5c66ed','#805ced','#9d5ced','#c65ced','#e85ced','#ed5cbd','#ed5c83'],
-        title: {
-          text: 'Source Normalized Impact per Paper',
-          align: 'center',
-          margin: 4,
-          offsetY: 15,
-          style: {
-            fontSize: '14px',
-            color: "black",
-          }
-        },
-      });
-      setSeriesSNIP([
-        {
-          name: "SNIP",
-          data: snipData
-        }
-      ]);
+        ]);
+      }
     }
-  }, [data.entry]);  
+  }, [data]);  
 
   return (
     <div className="card--scopus">
@@ -160,13 +162,23 @@ export default function ScopusGraph({data}){
             alt='scopus_image'
           />
         </a>
-        {data.error ?
+        {data === null ?
           <div className="card--scopus--text--warning--container">
             <div className="card--scopus--text--warning"> No indexado en Scopus</div>
           </div> 
           : 
           <div className="card--scopus--info">
             <div className="card--scopus--text">Métricas de este Jornal en Scopus</div>
+            <div className="card--scopus--citescore">
+              CiteScore
+              <br />
+              <a href={data.entry[0].link[0]["@href"]}>{data.entry[0].citeScoreYearInfoList.citeScoreCurrentMetric} - {data.entry[0].citeScoreYearInfoList.citeScoreCurrentMetricYear}</a>
+            </div>
+            <div className="card--scopus--citescore">
+              CiteScore Tracker
+              <br />
+              <a href={data.entry[0].link[0]["@href"]}>{data.entry[0].citeScoreYearInfoList.citeScoreTracker} - {data.entry[0].citeScoreYearInfoList.citeScoreTrackerYear}</a>
+            </div>
             <div className="card--scopus--chart">
               <Chart
                 options={optionsSJR}
