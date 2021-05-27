@@ -15,7 +15,11 @@ import hotTopic from '../../images/hotTopic.png';
 import chatLogo from '../../images/chatLogo.png';
 import roleModel from '../../images/roleModel.png';
 import thinking from '../../images/thinking.png';
-import greenCheck from '../../images/greenCheck.png'
+// import greenCheck from '../../images/greenCheck.png';
+import scopusLogo from '../../images/scopusLogo.png';
+import openAccess from '../../images/openAccess.png';
+import padlock from  '../../images/padlock.png';
+import scimagoLogo from '../../images/scimagoLogo.png';
 
 export default function TinyPanel({content, type, DOI}){
 
@@ -25,8 +29,10 @@ export default function TinyPanel({content, type, DOI}){
       {/* Tiny Crossref */}
       {content.crossref.error ? 
       <div className="card--tiny--info">
-        <div className="card--tiny--image--container">
+        <div className="card--tiny--info--data">
           <a href="https://www.crossref.org/"><img className="card--tiny--image" src={crossrefLogo} alt="crossref_logo" /></a>
+          <br />
+          Crossref
         </div>
         <div className="card--tiny--info--data">
           <img className="card--tiny--image" src={redCross} alt="not_found" />
@@ -34,8 +40,10 @@ export default function TinyPanel({content, type, DOI}){
       </div> 
       : type === "DOI" ?
       <div className="card--tiny--info">
-        <div className="card--tiny--image--container">
+        <div className="card--tiny--info--data">
           <a href="https://www.crossref.org/"><img className="card--tiny--image" src={crossrefLogo} alt="crossref_logo" /></a>
+          <br />
+          Crossref
         </div>
         <div className="card--tiny--info--data">
           {content.crossref["is-referenced-by-count"]} menciones 
@@ -92,8 +100,10 @@ export default function TinyPanel({content, type, DOI}){
       </div>
       : type === "ISSN" ?
       <div className="card--tiny--info">
-        <div className="card--tiny--image--container">
+        <div className="card--tiny--info--data">
           <a href="https://www.crossref.org/"><img className="card--tiny--image" src={crossrefLogo} alt="crossref_logo" /></a>
+          <br />
+          Crossref
         </div>
         <div className="card--tiny--info--data">            
           {content.crossref.counts["current-dois"]} artículos se encuentran en este jornal
@@ -205,7 +215,7 @@ export default function TinyPanel({content, type, DOI}){
           <a href="https://academic.microsoft.com/home"><img className="card--tiny--image" src={microsoftLogo} alt="microsoft_logo" /></a>
         </div>
         <div className="card--tiny--info--data">
-          Predicciones de citas
+          Predicciones de citas:
         </div>
         {content.microsoft.CC === 0 ?
         <div className="card--tiny--info--data">
@@ -301,13 +311,81 @@ export default function TinyPanel({content, type, DOI}){
           : null
           )
         }
+        <div className="card--tiny--info--data">
+          Sourced by
+          <br />
+          <a href="https://www.altmetric.com">Altmetric</a>
+        </div>
       </div>
       : null
       }
 
       {/* Tiny Scopus */}
-      { type === "ISSN" ? null : null }
+      { type === "ISSN" ? 
+        content.scopus === null ?
+        <div className="card--tiny--info">
+          <div className="card--tiny--info--data">
+            <a href="https://www.scopus.com/home.uri"><img className="card--tiny--image" src={scopusLogo} alt="scopus_logo" /></a>
+          </div>
+          <div className="card--tiny--info--data">
+            <img className="card--tiny--image" src={redCross} alt="not_found" />
+          </div> 
+        </div>
+        : 
+        <div className="card--tiny--info">
+          <div className="card--tiny--info--data">
+            <a href="https://www.scopus.com/home.uri"><img className="card--tiny--image" src={scopusLogo} alt="scopus_logo" /></a>
+          </div>
+          <div className="card--tiny--info--data">
+            CiteScore
+            <br />
+            <a href={content.scopus.entry[0].link[0]["@href"]}>{content.scopus.entry[0].citeScoreYearInfoList.citeScoreCurrentMetric} - {content.scopus.entry[0].citeScoreYearInfoList.citeScoreCurrentMetricYear}</a>
+          </div>
+          <div className="card--tiny--info--data">
+            CiteScore Tracker
+            <br />
+            <a href={content.scopus.entry[0].link[0]["@href"]}>{content.scopus.entry[0].citeScoreYearInfoList.citeScoreTracker} - {content.scopus.entry[0].citeScoreYearInfoList.citeScoreTrackerYear}</a>
+          </div>  
+          {content.scopus.entry[0].openaccessArticle ?
+          <div className="card--tiny--info--data">
+            <img className="card--tiny--image" src={openAccess} alt="open_access" />
+          </div> 
+          : 
+          <div className="card--tiny--info--data">
+            No es de acceso abierto
+            <img className="card--tiny--image" src={padlock} alt="licensed" />
+          </div>  
+          }
+        </div>
+      : null
+      }
 
+      {/* Tiny Scimago  */}
+      { type === "ISSN" ?
+        content.scimago.error ?
+        <div className="card--tiny--info">
+          <div className="card--tiny--info--data">
+            <a href="https://www.scimagojr.com/"><img className="card--tiny--image" src={scimagoLogo} alt="scimago_logo" /></a>
+            <br />
+            Scimago Journal Rank
+          </div>
+          <div className="card--tiny--info--data">
+            <img className="card--tiny--image" src={redCross} alt="not_found" />
+          </div> 
+        </div>
+        : 
+        <div className="card--tiny--info">
+          <div className="card--tiny--info--data">
+            <a href="https://www.scimagojr.com/"><img className="card--tiny--image" src={scimagoLogo} alt="scimago_logo" /></a>
+            <br />
+            Scimago Journal Rank
+          </div>
+          <div className="card--tiny--info--data">
+            <div className="card--scimago--info--embed" dangerouslySetInnerHTML={{ __html: content.scimago.embedString }}></div>
+          </div> 
+        </div>
+      : null
+      }
     </div>
   )
 }
