@@ -96,10 +96,12 @@ export const getContentsScimago = async (url,title) => {
     }
   } else {
     const searchResults = searchDOM.body.querySelector(".search_results");
+  
     const firstTitle = searchResults.querySelector(".jrnlname").innerText;
 
     if (firstTitle.split(" ")[0] === title.split(" ")[0]){
       const anchorURL = searchResults.querySelector("a").href;
+      alert(anchorURL);
       const journalURL = "https://www.scimagojr.com/"+anchorURL.split("http://localhost:3000/")[1];
     
       const searchRes = await getHtml(journalURL,`/api/getContentsScimago`);
