@@ -103,7 +103,7 @@ export const getContentsScimago = async (url,title) => {
       const anchorURL = searchResults.querySelector("a").href;
       
       const journalURL = "https://www.scimagojr.com/"+anchorURL.replace(/^(?:\/\/|[^/]+)*\//, '');
-      alert(journalURL);
+      //alert(journalURL);
       const searchRes = await getHtml(journalURL,`/api/getContentsScimago`);
       const journalHtml = searchRes.html;
     
