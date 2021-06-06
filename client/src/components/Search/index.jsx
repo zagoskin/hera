@@ -15,11 +15,11 @@ export default function Search(){
   const searchPapers = async (e) => {
     e.preventDefault();
     setLoading(true);
-    var microsoftData = [];
-    var scopusData = undefined;
-    var dimensionsData = undefined;
-    var altmetricData = undefined;
-    var scimagoData = undefined;
+    let microsoftData = [];
+    let scopusData;
+    let dimensionsData;
+    let altmetricData;
+    let scimagoData;
     if (criteria === "DOI"){
       setURLsByDOI(query);
       microsoftData = await getContentsMicrosoft(getURLMicrosoft());
@@ -34,7 +34,7 @@ export default function Search(){
     const crossrefData = await getContentsCrossref(getURLCrossref()); 
     const doajData = await getContentsDoaj(getURLDoaj());
 
-    var res = {
+    let res = {
       crossref: crossrefData,
       doaj: doajData.total === 0 ? 0 : doajData.results[0],
       microsoft: microsoftData.length > 0 ? microsoftData[0] : null,
@@ -111,7 +111,7 @@ export default function Search(){
           alignItems: "center"
         }}
       >
-        <Loader type="ThreeDots" color="#FF6961" height="100" width="100"/>
+        <Loader type="BallTriangle" color="#ba2c25" height="100" width="100"/>
       </div>
       : null
       }
