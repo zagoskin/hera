@@ -9,7 +9,7 @@ const getContents = async (url,apiURL) => {
         "Content-Type": "application/x-www-form-urlencoded",
       }
     });
-    var contents = await res.json();
+    let contents = await res.json();
     return contents;
   } catch (e) {
     console.error(e);
@@ -27,7 +27,7 @@ const getHtml = async (url,apiURL) => {
         "Content-Type": "application/x-www-form-urlencoded",
       }
     });
-    var htmlResObj = await htmlObject.json();
+    let htmlResObj = await htmlObject.json();
     return htmlResObj;
   } catch (e) {
     console.error(e);
@@ -83,12 +83,12 @@ export const getContentsScimago = async (url,title) => {
   const res = await getHtml(url,`/api/getContentsScimago`);
   const searchHtml = res.html;
 
-  var parser = new DOMParser();
+  let parser = new DOMParser();
 
   const searchDOM = parser.parseFromString(searchHtml, 'text/html');
   const errorP = searchDOM.body.querySelector(".journaldescription.colblock").querySelector("h2");
 
-  var contents;
+  let contents;
 
   if (errorP){ //busco si hay un resultado en la busqueda
     contents = {
