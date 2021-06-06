@@ -42,12 +42,12 @@ export default function DOAJCard({identifier, content}){
         </div> 
         {content.bibjson.apc["has_apc"] === true ? 
         <div className="card--doaj--issn--info">
-          El costo más alto por publicar en este jornal es: 
+          El costo más alto por publicar en esta revista es: 
           <span className="card--doaj--issn--cost"> {content.bibjson.apc.max[0].price} {content.bibjson.apc.max[0].currency}</span>
         </div> 
         :
         <div className="card--doaj--issn--info">
-          No hay costo por publicar en este jornal
+          No hay costo por publicar en esta revista
         </div> 
         }
         <div className="card--doaj--issn--info">
