@@ -106,7 +106,7 @@ export default function TinyPanel({content, type, DOI}){
           Crossref
         </div>
         <div className="card--tiny--info--data">            
-          {content.crossref.counts["current-dois"]} artículos se encuentran en este jornal
+          {content.crossref.counts["current-dois"]} artículos se encuentran en esta revista
         </div> 
       </div>
       : null
@@ -152,7 +152,7 @@ export default function TinyPanel({content, type, DOI}){
         </div> 
         :
         <div className="card--tiny--info--data">
-          Publicar en este jornal es gratis
+          Publicar en esta revista es gratis
         </div> 
         }
         {content.doaj.bibjson.license.map((license,index) => 
@@ -215,7 +215,7 @@ export default function TinyPanel({content, type, DOI}){
           <a href="https://academic.microsoft.com/home"><img className="card--tiny--image" src={microsoftLogo} alt="microsoft_logo" /></a>
         </div>
         <div className="card--tiny--info--data">
-          Predicciones de citas:
+            Predicciones de citas:
         </div>
         {content.microsoft.CC === 0 ?
         <div className="card--tiny--info--data">
