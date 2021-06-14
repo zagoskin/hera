@@ -80,7 +80,7 @@ export const getContentsAltmetric = async (url) => {
 }
 
 export const getContentsScimago = async (url,title) => {
-  const res = await getHtml(url,`/api/getContentsScimago`);
+  const res = await getHtml(url,`/api/getContentsHtml`);
   const searchHtml = res.html;
 
   let parser = new DOMParser();

@@ -81,7 +81,7 @@ app.post("/api/getContentsAltmetric", async (req, res) => {
   res.send(data);
 });
 
-app.post("/api/getContentsScimago", async (req, res) => {
+app.post("/api/getContentsHtml", async (req, res) => {
   const html = await fetchHtmlContents(req.body.url, {});
   const response = {
     'html': html,
