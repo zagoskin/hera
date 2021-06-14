@@ -4,6 +4,7 @@ import { getContentsCrossref, getContentsDoaj, getContentsMicrosoft, getContents
 import AcademicCard from '../AcademicCard/index';
 import { getURLCrossref, getURLDoaj, getURLMicrosoft, getURLScopus, getURLDimensions, getURLAltmetric, setURLsByDOI, setURLsByISSN, getURLScimago } from '../../api-front/url';
 import Loader from 'react-loader-spinner';
+import { validDOI, validISSN } from '../../helpers/regex';
 
 export default function Search(){
   //states- input query, movies
@@ -11,6 +12,7 @@ export default function Search(){
   const [content, setContent] = useState(undefined);
   const [criteria, setCriteria] = useState('');
   const [loading, setLoading] = useState(false);
+  const [formatError, setFormatError] = useState(false);
 
   const searchPapers = async (e) => {
     e.preventDefault();
@@ -72,14 +74,32 @@ export default function Search(){
     //   ...res[0], 
     //   doaj: doajData[0]
     // };
-
+    setFormatError(false);
     setLoading(false);
     setContent(res);
   }
 
+  const validateQuery = async (e) => {
+    e.preventDefault();
+    if (criteria === "DOI"){
+      if (validDOI.test(query)){
+        searchPapers(e);
+      } else {
+        setFormatError(true);
+      }
+    }
+    if (criteria === "ISSN"){
+      if (validISSN.test(query)){
+        searchPapers(e);
+      } else {
+        setFormatError(true);
+      }
+    }
+  }
+
   return (
     <>
-      <form className="searchForm" onSubmit={searchPapers}>
+      <form className="searchForm" onSubmit={validateQuery}>
         {criteria? 
         <label className="searchLabel" htmlFor="query">Ingrese {criteria} del contenido a analizar
         </label>
@@ -101,6 +121,13 @@ export default function Search(){
           </label>
         </div>
       </form>
+      { formatError? 
+        <div className="formatError">
+          <div className="formatErrorText">Se ingresaron datos de forma incorrecta (e.g.: {criteria === "DOI" ? '10.1234/texto542' : '1234-4321'})</div> 
+          <div className="formatErrorCross" onClick={() => setFormatError(false)}>X</div>
+        </div>
+        : null
+      }
       {loading  ?
       <div
         style={{
