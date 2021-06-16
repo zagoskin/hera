@@ -1,6 +1,8 @@
 import React from 'react';
 import crossrefLogo from '../../images/crossrefLogo.png';
+import crossrefCrossed from '../../images/crossrefCrossed.png';
 import doajLogo from '../../images/doajLogo.png';
+import doajCrossed from '../../images/doajCrossed.png';
 import ccBy from '../../images/cc-by.png';
 import ccByNc from '../../images/cc-by-nc.png';
 import ccByNcNd from '../../images/cc-by-nc-nd.png';
@@ -9,6 +11,7 @@ import ccByNd from '../../images/cc-by-nd.png';
 import ccBySa from '../../images/cc-by-sa.png';
 import redCross from '../../images/redCross.png';
 import microsoftLogo from '../../images/microsoftLogo.png';
+import microsoftCrossed from '../../images/microsoftCrossed.png';
 import graphIncrease from '../../images/graphIncrease.png';
 import graphDecrease from '../../images/graphDecrease.png';
 import hotTopic from '../../images/hotTopic.png';
@@ -17,9 +20,11 @@ import roleModel from '../../images/roleModel.png';
 import thinking from '../../images/thinking.png';
 // import greenCheck from '../../images/greenCheck.png';
 import scopusLogo from '../../images/scopusLogo.png';
+import scopusCrossed from '../../images/scopusCrossed.png';
 import openAccess from '../../images/openAccess.png';
 import padlock from  '../../images/padlock.png';
 import scimagoLogo from '../../images/scimagoLogo.png';
+import scimagoCrossed from '../../images/scimagoCrossed.png';
 
 export default function TinyPanel({content, type, DOI}){
 
@@ -30,25 +35,16 @@ export default function TinyPanel({content, type, DOI}){
       {content.crossref.error ? 
       <div className="card--tiny--info">
         <div className="card--tiny--info--data">
-          <a href="https://www.crossref.org/"><img className="card--tiny--image" src={crossrefLogo} alt="crossref_logo" /></a>
-          <br />
-          Crossref
+          <a href="https://www.crossref.org/"><img className="card--tiny--image" src={crossrefCrossed} alt="crossref_logo" /></a>        
         </div>
-        <div className="card--tiny--info--data">
-          <img className="card--tiny--image" src={redCross} alt="not_found" />
-        </div>  
       </div> 
       : type === "DOI" ?
       <div className="card--tiny--info">
         <div className="card--tiny--info--data">
           <a href="https://www.crossref.org/"><img className="card--tiny--image" src={crossrefLogo} alt="crossref_logo" /></a>
-          <br />
-          Crossref
         </div>
         <div className="card--tiny--info--data">
           {content.crossref["is-referenced-by-count"]} menciones 
-          <br />
-          en Crossref
         </div>    
         {content.crossref.license ?
           content.crossref.license.map((license,index) =>
@@ -102,8 +98,6 @@ export default function TinyPanel({content, type, DOI}){
       <div className="card--tiny--info">
         <div className="card--tiny--info--data">
           <a href="https://www.crossref.org/"><img className="card--tiny--image" src={crossrefLogo} alt="crossref_logo" /></a>
-          <br />
-          Crossref
         </div>
         <div className="card--tiny--info--data">            
           {content.crossref.counts["current-dois"]} artículos se encuentran en esta revista
@@ -116,20 +110,14 @@ export default function TinyPanel({content, type, DOI}){
       {content.doaj === 0 ? 
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href="https://doaj.org/"><img className="card--tiny--image" src={doajLogo} alt="doaj_logo" /></a>
+          <a href="https://doaj.org/"><img className="card--tiny--image" src={doajCrossed} alt="doaj_logo" /></a>
         </div>
-        <div className="card--tiny--info--data">
-          <img className="card--tiny--image" src={redCross} alt="not_found" />
-        </div>  
       </div> 
       : type === "DOI" ? 
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
           <a href="https://doaj.org/"><img className="card--tiny--image" src={doajLogo} alt="doaj_logo" /></a>
         </div>
-        <div className="card--tiny--info--data">
-          Open Access
-        </div>  
         {content.doaj.admin ? 
           content.doaj.admin.seal ?
           <div className="card--tiny--license">
@@ -157,37 +145,37 @@ export default function TinyPanel({content, type, DOI}){
         }
         {content.doaj.bibjson.license.map((license,index) => 
           license.type === "CC BY" ?
-            <div className="card--tiny--license" key={'doaj' + index}>
+            <div className="card--tiny--license doaj" key={'doaj' + index}>
               <a href="https://creativecommons.org/licenses/by/4.0/">
                 <img className="card--tiny--license--image" src={ccBy} alt="cc-by" />
               </a>
             </div> 
           : license.type === "CC BY-ND" ?
-            <div className="card--tiny--license" key={'doaj' + index}>
+            <div className="card--tiny--license doaj" key={'doaj' + index}>
               <a href="https://creativecommons.org/licenses/by-nd/4.0/">
                 <img className="card--tiny--license--image" src={ccByNd} alt="cc-by-nd" />
               </a>
             </div>
           : license.type === "CC BY-NC" ?
-            <div className="card--tiny--license" key={'doaj' + index}>
+            <div className="card--tiny--license doaj" key={'doaj' + index}>
               <a href="https://creativecommons.org/licenses/by-nc/4.0/">
                 <img className="card--tiny--license--image" src={ccByNc} alt="cc-by-nc" />
               </a>
             </div> 
           : license.type === "CC BY-SA" ?
-            <div className="card--tiny--license" key={'doaj' + index}>
+            <div className="card--tiny--license doaj" key={'doaj' + index}>
               <a href="https://creativecommons.org/licenses/by-sa/4.0/">
                 <img className="card--tiny--license--image" src={ccBySa} alt="cc-by-sa" />
               </a>
             </div>
           : license.type === "CC BY-NC-ND" ?
-            <div className="card--tiny--license" key={'doaj' + index}>
+            <div className="card--tiny--license doaj" key={'doaj' + index}>
               <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
                 <img className="card--tiny--license--image" src={ccByNcNd} alt="cc-by-nc-nd" />
               </a>
             </div>
           : license.type === "CC BY-NC-SA" ?
-            <div className="card--tiny--license" key={'doaj' + index}>
+            <div className="card--tiny--license doaj" key={'doaj' + index}>
               <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
                 <img className="card--tiny--license--image" src={ccByNcSa} alt="cc-by-nc-nd" />
               </a>
@@ -236,22 +224,8 @@ export default function TinyPanel({content, type, DOI}){
       : type === "DOI" ?
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href="https://academic.microsoft.com/home"><img className="card--tiny--image" src={microsoftLogo} alt="microsoft_logo" /></a>
-        </div>
-        <div className="card--tiny--info--data">
-          <img className="card--tiny--image" src={redCross} alt="not_found" />
-        </div>  
-      </div>
-      : type === "ISSN" ?
-      <div className="card--tiny--info">
-        <div className="card--tiny--image--container">
-          <a href="https://academic.microsoft.com/home"><img className="card--tiny--image" src={microsoftLogo} alt="microsoft_logo" /></a>
-        </div>
-        <div className="card--tiny--info--data">
-          <img className="card--tiny--image" src={redCross} alt="not_found" />
-          <br />
-          Busqueda por ISSN no soportada
-        </div>
+          <a href="https://academic.microsoft.com/home"><img className="card--tiny--image" src={microsoftCrossed} alt="microsoft_logo" /></a>
+        </div> 
       </div>
       : null
       }
@@ -265,20 +239,15 @@ export default function TinyPanel({content, type, DOI}){
           <div className="card--tiny--info--data">
             Modelo a seguir
             <br />
-            <img className="card--tiny--image bigger" src={roleModel} alt="role_model" />
+            <a href="https://www.dimensions.ai"><img className="card--tiny--image bigger" src={roleModel} alt="role_model" /></a>
           </div>
           :
           <div className="card--tiny--info--data">
             No muy citado relativo a sus pares
             <br />
-            <img className="card--tiny--image bigger" src={thinking} alt="thinking" />
+            <a href="https://www.dimensions.ai"><img className="card--tiny--image bigger" src={thinking} alt="thinking" /></a>
           </div>
         }
-        <div className="card--tiny--info--data">
-          Sourced by
-          <br />
-          <a href="https://www.dimensions.ai">Dimensions</a>
-        </div>
       </div>
       : null
       }
@@ -287,8 +256,6 @@ export default function TinyPanel({content, type, DOI}){
       { type === "DOI" ?
       <div className="card--tiny--info">
         <div className="card--tiny--info--data">
-          Altmetric
-          <br />
           <div className="altmetric-embed" data-badge-type="medium-donut" data-doi={DOI} data-badge-popover="right"></div>
         </div>
         {content.altmetric.error ?
@@ -300,22 +267,20 @@ export default function TinyPanel({content, type, DOI}){
             <div className="card--tiny--info--data">
               Hot topic en redes sociales!
               <br />
-              <img className="card--tiny--image hot" src={hotTopic} alt="hot_topic" />
+              <a href="https://www.altmetric.com"><img className="card--tiny--image hot" src={hotTopic} alt="hot_topic" /></a>
             </div>   
             : 
-            <div className="card--tiny--info--data">
-              Se habla del tema
-              <br />
-              <img className="card--tiny--image bigger" src={chatLogo} alt="people_chat" />
-            </div>   
+            <div>
+              <div className="card--tiny--info--data">
+                Se habla del tema
+              </div>   
+              <div className="card--tiny--info--data"> 
+                <a href="https://www.altmetric.com"><img className="card--tiny--image" src={chatLogo} alt="people_chat" /></a>
+              </div>
+            </div>
           : null
           )
         }
-        <div className="card--tiny--info--data">
-          Sourced by
-          <br />
-          <a href="https://www.altmetric.com">Altmetric</a>
-        </div>
       </div>
       : null
       }
@@ -325,11 +290,8 @@ export default function TinyPanel({content, type, DOI}){
         content.scopus === null ?
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
-            <a href="https://www.scopus.com/home.uri"><img className="card--tiny--image" src={scopusLogo} alt="scopus_logo" /></a>
+            <a href="https://www.scopus.com/home.uri"><img className="card--tiny--image" src={scopusCrossed} alt="scopus_logo" /></a>
           </div>
-          <div className="card--tiny--info--data">
-            <img className="card--tiny--image" src={redCross} alt="not_found" />
-          </div> 
         </div>
         : 
         <div className="card--tiny--info">
@@ -365,12 +327,7 @@ export default function TinyPanel({content, type, DOI}){
         content.scimago.error ?
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
-            <a href="https://www.scimagojr.com/"><img className="card--tiny--image" src={scimagoLogo} alt="scimago_logo" /></a>
-            <br />
-            Scimago Journal Rank
-          </div>
-          <div className="card--tiny--info--data">
-            <img className="card--tiny--image" src={redCross} alt="not_found" />
+            <a href="https://www.scimagojr.com/"><img className="card--tiny--image" src={scimagoCrossed} alt="scimago_logo" /></a>
           </div> 
         </div>
         : 
