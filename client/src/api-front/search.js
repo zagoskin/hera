@@ -35,7 +35,7 @@ const getHtml = async (url,apiURL) => {
 }
 
 export const getContentsCrossref = async (url) => {
-  const contents = await getContents(url,`/api/getContentsCrossref`);
+  const contents = await getContents(url,`/api/getContentsDefault`);
   console.log('Contents de la API en front Crossref:');
   console.log(contents);
   if (contents.error){
@@ -45,7 +45,7 @@ export const getContentsCrossref = async (url) => {
 }
 
 export const getContentsDoaj = async (url) => {
-  const contents = await getContents(url,`/api/getContentsDoaj`);
+  const contents = await getContents(url,`/api/getContentsDefault`);
   console.log('Contents de la API en front DOAJ:');
   console.log(contents);
   return contents;
@@ -66,14 +66,14 @@ export const getContentsScopus = async (url) => {
 }
 
 export const getContentsDimensions = async (url) => {
-  const contents = await getContents(url, `/api/getContentsDimensions`);
+  const contents = await getContents(url, `/api/getContentsDefault`);
   console.log('Contents de la API en front Dimensions:');
   console.log(contents);
   return contents;
 }
 
 export const getContentsAltmetric = async (url) => {
-  const contents = await getContents(url, `/api/getContentsAltmetric`);
+  const contents = await getContents(url, `/api/getContentsDefault`);
   console.log('Contents de la API en front Altmetric:');
   console.log(contents);
   return contents;
