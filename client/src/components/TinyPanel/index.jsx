@@ -326,7 +326,7 @@ export default function TinyPanel({content, type, DOI}){
       { type === "ISSN" ?
         content.scimago.error ?
         <div className="card--tiny--info">
-          <div className="card--tiny--info--data">
+          <div className="card--tiny--info-- padded">
             <a href="https://www.scimagojr.com/"><img className="card--tiny--image" src={scimagoCrossed} alt="scimago_logo" /></a>
           </div> 
         </div>
@@ -334,8 +334,6 @@ export default function TinyPanel({content, type, DOI}){
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
             <a href="https://www.scimagojr.com/"><img className="card--tiny--image" src={scimagoLogo} alt="scimago_logo" /></a>
-            <br />
-            Scimago Journal Rank
           </div>
           <div className="card--tiny--info--data">
             <div className="card--scimago--info--embed" dangerouslySetInnerHTML={{ __html: content.scimago.embedString }}></div>

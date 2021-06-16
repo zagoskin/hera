@@ -609,6 +609,10 @@ a:hover {
   text-decoration: underline;
 }
 
+.padded {
+  padding: 0.5rem;
+}
+
 .card--tiny--license {
   margin-bottom: 0.5rem;
   display: flex;
