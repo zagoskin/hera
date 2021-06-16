@@ -46,15 +46,11 @@ app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
-app.post("/api/getContentsCrossref", async (req, res) => {
+app.post("/api/getContentsDefault", async (req, res) => {
   const data  = await fetchJsonContents(req.body.url,{});
   res.send(data);
 });
 
-app.post("/api/getContentsDoaj", async (req, res) => {
-  const data  = await fetchJsonContents(req.body.url,{});
-  res.send(data);
-});
 
 app.post("/api/getContentsMicrosoft", async (req, res) => {
   const data  = await fetchJsonContents(req.body.url + `&subscription-key=${constants.MICROSOFT_KEY}`,{});
@@ -71,15 +67,7 @@ app.post("/api/getContentsScopus", async (req, res) => {
   res.send(data);
 });
 
-app.post("/api/getContentsDimensions", async (req, res) => {
-  const data = await fetchJsonContents(req.body.url, {});
-  res.send(data);
-});
 
-app.post("/api/getContentsAltmetric", async (req, res) => {
-  const data = await fetchJsonContents(req.body.url, {});
-  res.send(data);
-});
 
 app.post("/api/getContentsHtml", async (req, res) => {
   const html = await fetchHtmlContents(req.body.url, {});
