@@ -594,7 +594,6 @@ a:hover {
 }
 
 .card--tiny--info--data {
-  padding: 0.5rem;
   font-size: 1.75rem;
   font-weight: bold;
   width: 100%;
@@ -611,12 +610,15 @@ a:hover {
 }
 
 .card--tiny--license {
-  padding: 0.5rem;
   margin-bottom: 0.5rem;
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
+}
+
+.doaj {
+  width: 50%;
 }
 .card--tiny--license a {
   text-decoration: none;
