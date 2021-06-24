@@ -1,13 +1,15 @@
 //la parte de "works" implica buscar por query en este caso, se podria filtar si se conoce issn pero no implementado
 
 export const api = `http://localhost:3001/api`;
-var urlCrossRef;
-var urlDoaj;
-var urlMicrosoft;
-var urlScopus;
-var urlDimensions;
-var urlAltmetric;
-var urlScimago;
+let urlCrossRef;
+let urlDoaj;
+let urlMicrosoft;
+let urlScopus;
+let urlDimensions;
+let urlAltmetric;
+let urlScimago;
+let urlSemantic;
+let urlRedib;
 
 export const setURLsByDOI = (DOI) => {
   urlCrossRef = `https://api.crossref.org/works/${DOI}`;
@@ -15,7 +17,8 @@ export const setURLsByDOI = (DOI) => {
   const doiUP = DOI.toUpperCase();
   urlMicrosoft = `https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate?expr=DOI=='${doiUP}'&attributes=DOI,Ti,CC,ECC,AA.AuN,AA.AuId,AA.S,F.DFN,AW,DN`;
   urlDimensions = `https://metrics-api.dimensions.ai/doi/${DOI}`;
-  urlAltmetric = `https://api.altmetric.com/v1/doi/${DOI}`;  
+  urlAltmetric = `https://api.altmetric.com/v1/doi/${DOI}`;
+  urlSemantic = `https://api.semanticscholar.org/v1/paper/${DOI}`
   //otras URLs
 }
 
@@ -24,6 +27,7 @@ export const setURLsByISSN = (ISSN) => {
   urlDoaj = `https://doaj.org/api/v2/search/journals/issn:${ISSN}`;
   urlScopus = `https://api.elsevier.com/content/serial/title/issn/${ISSN}`;
   urlScimago = `https://www.scimagojr.com/journalsearch.php?q=${ISSN}`;
+  urlRedib = `https://redib.org/Search/Results?type=ISN&lookfor=${ISSN}`;
   //otras URLs
 }
 
@@ -53,4 +57,12 @@ export const getURLAltmetric = () => {
 
 export const getURLScimago = () => {
   return urlScimago;
+}
+
+export const getURLSemantic = () => {
+  return urlSemantic;
+}
+
+export const getURLRedib = () => {
+  return urlRedib;
 }
