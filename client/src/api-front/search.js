@@ -1,4 +1,4 @@
-const getContents = async (url,apiURL) => {
+const getContents = async (url, apiURL) => {
   try {
     const res = await fetch(apiURL, {
       method: 'POST',
@@ -16,7 +16,7 @@ const getContents = async (url,apiURL) => {
   }
 }
 
-const getHtml = async (url,apiURL) => {
+const getHtml = async (url, apiURL) => {
   try {
     const htmlObject = await fetch(apiURL, {
       method: 'POST',
@@ -35,17 +35,17 @@ const getHtml = async (url,apiURL) => {
 }
 
 export const getContentsCrossref = async (url) => {
-  const contents = await getContents(url,`/api/getContentsDefault`);
+  const contents = await getContents(url, `/api/getContentsDefault`);
   console.log('Contents de la API en front Crossref:');
   console.log(contents);
-  if (contents.error){
-    contents.message = {...contents.message, error: contents.error}
+  if (contents.error) {
+    contents.message = { ...contents.message, error: contents.error }
   }
   return contents.message;
 }
 
 export const getContentsDoaj = async (url) => {
-  const contents = await getContents(url,`/api/getContentsDefault`);
+  const contents = await getContents(url, `/api/getContentsDefault`);
   console.log('Contents de la API en front DOAJ:');
   console.log(contents);
   return contents;
@@ -79,8 +79,15 @@ export const getContentsAltmetric = async (url) => {
   return contents;
 }
 
-export const getContentsScimago = async (url,title) => {
-  const res = await getHtml(url,`/api/getContentsHtml`);
+export const getContentsSemantic = async (url) => {
+  const contents = await getContents(url, `/api/getContentsDefault`);
+  console.log('Contents de la API en front Semantic:');
+  console.log(contents);
+  return contents;
+}
+
+export const getContentsScimago = async (url, title) => {
+  const res = await getHtml(url, `/api/getContentsHtml`);
   const searchHtml = res.html;
 
   let parser = new DOMParser();
@@ -90,23 +97,23 @@ export const getContentsScimago = async (url,title) => {
 
   let contents;
 
-  if (errorP){ //busco si hay un resultado en la busqueda
+  if (errorP) { //busco si hay un resultado en la busqueda
     contents = {
       error: errorP.innerText
     }
   } else {
     const searchResults = searchDOM.body.querySelector(".search_results");
-  
+
     const firstTitle = searchResults.querySelector(".jrnlname").innerText;
 
-    if (firstTitle.split(" ")[0] === title.split(" ")[0]){
+    if (firstTitle.split(" ")[0] === title.split(" ")[0]) {
       const anchorURL = searchResults.querySelector("a").href;
-      
-      const journalURL = "https://www.scimagojr.com/"+anchorURL.replace(/^(?:\/\/|[^/]+)*\//, '');
+
+      const journalURL = "https://www.scimagojr.com/" + anchorURL.replace(/^(?:\/\/|[^/]+)*\//, '');
       //alert(journalURL);
-      const searchRes = await getHtml(journalURL,`/api/getContentsScimago`);
+      const searchRes = await getHtml(journalURL, `/api/getContentsScimago`);
       const journalHtml = searchRes.html;
-    
+
       const journalDOM = parser.parseFromString(journalHtml, 'text/html');
       const hIndex = journalDOM.body.querySelector(".hindexnumber").innerText;
       const embedString = journalDOM.getElementById("embed_code").value;
@@ -129,5 +136,32 @@ export const getContentsScimago = async (url,title) => {
   console.log('Resultados SCIMAGO a devolver:');
   console.log(contents);
 
+  return contents;
+}
+
+export const getContentsRedib = async (url) => {
+  const res = await getHtml(url, `/api/getContentsHtml`);
+
+  let parser = new DOMParser();
+
+  const resDOM = parser.parseFromString(res.html, 'text/html');
+  const errorP = resDOM.body.querySelector(".pull-left.help-block");
+  let contents;
+
+  if (errorP) {
+    contents = {
+      error: errorP.innerText,
+    }
+  } else {
+    const journalTitle = resDOM.body.querySelector(".well-text-revista").querySelector("h1").innerText;
+    const journalURL = resDOM.body.querySelector(".table.table-striped").querySelector(".redibLink").href;
+    const redibURL = resDOM.body.querySelector(".dropdown").querySelector(".dropdown-menu").querySelector("a").href.split("?")[0];
+    const rankingDiv = resDOM.getElementById("rankingSerial");
+    contents = {
+      journalTitle,
+      journalURL,
+      redibURL,
+    }
+  }
   return contents;
 }
