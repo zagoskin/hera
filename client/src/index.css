@@ -31,7 +31,19 @@ small {
   padding: 40px;
 }
 
+.container a {
+  text-decoration: none;
+}
+
+.container a:hover {
+  text-decoration: none;
+}
+
 .title {
   font-size: 4.4rem;
   text-align: center;
+  text-decoration: none;
+  color: black;
 }
+
+
