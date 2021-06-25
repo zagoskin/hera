@@ -1,4 +1,5 @@
 import React from 'react';
+import './tinycard.css';
 import crossrefLogo from '../../images/crossrefLogo.png';
 import crossrefCrossed from '../../images/crossrefCrossed.png';
 import doajLogo from '../../images/doajLogo.png';
@@ -21,8 +22,8 @@ import thinking from '../../images/thinking.png';
 // import greenCheck from '../../images/greenCheck.png';
 import scopusLogo from '../../images/scopusLogo.png';
 import scopusCrossed from '../../images/scopusCrossed.png';
-import openAccess from '../../images/openAccess.png';
-import padlock from  '../../images/padlock.png';
+//import openAccess from '../../images/openAccess.png';
+//import padlock from  '../../images/padlock.png';
 import scimagoLogo from '../../images/scimagoLogo.png';
 import scimagoCrossed from '../../images/scimagoCrossed.png';
 
@@ -35,13 +36,13 @@ export default function TinyPanel({content, type, DOI}){
       {content.crossref.error ? 
       <div className="card--tiny--info">
         <div className="card--tiny--info--data">
-          <a href="https://www.crossref.org/"><img className="card--tiny--image" src={crossrefCrossed} alt="crossref_logo" /></a>        
+          <a href="https://www.crossref.org/"><img className="card--tiny--image bigger" src={crossrefCrossed} alt="crossref_logo" /></a>        
         </div>
       </div> 
       : type === "DOI" ?
       <div className="card--tiny--info">
         <div className="card--tiny--info--data">
-          <a href="https://www.crossref.org/"><img className="card--tiny--image" src={crossrefLogo} alt="crossref_logo" /></a>
+          <a href="https://www.crossref.org/"><img className="card--tiny--image big" src={crossrefLogo} alt="crossref_logo" /></a>
         </div>
         <div className="card--tiny--info--data">
           {content.crossref["is-referenced-by-count"]} menciones 
@@ -96,8 +97,8 @@ export default function TinyPanel({content, type, DOI}){
       </div>
       : type === "ISSN" ?
       <div className="card--tiny--info">
-        <div className="card--tiny--info--data">
-          <a href="https://www.crossref.org/"><img className="card--tiny--image" src={crossrefLogo} alt="crossref_logo" /></a>
+        <div className="card--tiny--info--data bigger">
+          <a href="https://www.crossref.org/"><img className="card--tiny--image big" src={crossrefLogo} alt="crossref_logo" /></a>
         </div>
         <div className="card--tiny--info--data">            
           {content.crossref.counts["current-dois"]} artículos se encuentran en esta revista
@@ -110,7 +111,7 @@ export default function TinyPanel({content, type, DOI}){
       {content.doaj === 0 ? 
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href="https://doaj.org/"><img className="card--tiny--image" src={doajCrossed} alt="doaj_logo" /></a>
+          <a href="https://doaj.org/"><img className="card--tiny--image big" src={doajCrossed} alt="doaj_logo" /></a>
         </div>
       </div> 
       : type === "DOI" ? 
@@ -134,15 +135,6 @@ export default function TinyPanel({content, type, DOI}){
         <div className="card--tiny--image--container">
           <a href="https://doaj.org/"><img className="card--tiny--image" src={doajLogo} alt="doaj_logo" /></a>
         </div>
-        {content.doaj.bibjson.apc["has_apc"] === true ? 
-        <div className="card--tiny--info--data">
-          Costos adicionales por publicar
-        </div> 
-        :
-        <div className="card--tiny--info--data">
-          Publicar en esta revista es gratis
-        </div> 
-        }
         {content.doaj.bibjson.license.map((license,index) => 
           license.type === "CC BY" ?
             <div className="card--tiny--license doaj" key={'doaj' + index}>
@@ -224,7 +216,7 @@ export default function TinyPanel({content, type, DOI}){
       : type === "DOI" ?
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href="https://academic.microsoft.com/home"><img className="card--tiny--image" src={microsoftCrossed} alt="microsoft_logo" /></a>
+          <a href="https://academic.microsoft.com/home"><img className="card--tiny--image bigger" src={microsoftCrossed} alt="microsoft_logo" /></a>
         </div> 
       </div>
       : null
@@ -290,7 +282,7 @@ export default function TinyPanel({content, type, DOI}){
         content.scopus === null ?
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
-            <a href="https://www.scopus.com/home.uri"><img className="card--tiny--image" src={scopusCrossed} alt="scopus_logo" /></a>
+            <a href="https://www.scopus.com/home.uri"><img className="card--tiny--image big" src={scopusCrossed} alt="scopus_logo" /></a>
           </div>
         </div>
         : 
@@ -308,16 +300,6 @@ export default function TinyPanel({content, type, DOI}){
             <br />
             <a href={content.scopus.entry[0].link[0]["@href"]}>{content.scopus.entry[0].citeScoreYearInfoList.citeScoreTracker} - {content.scopus.entry[0].citeScoreYearInfoList.citeScoreTrackerYear}</a>
           </div>  
-          {content.scopus.entry[0].openaccessArticle ?
-          <div className="card--tiny--info--data">
-            <img className="card--tiny--image" src={openAccess} alt="open_access" />
-          </div> 
-          : 
-          <div className="card--tiny--info--data">
-            No es de acceso abierto
-            <img className="card--tiny--image" src={padlock} alt="licensed" />
-          </div>  
-          }
         </div>
       : null
       }
@@ -326,15 +308,29 @@ export default function TinyPanel({content, type, DOI}){
       { type === "ISSN" ?
         content.scimago.error ?
         <div className="card--tiny--info">
-          <div className="card--tiny--info-- padded">
+          <div className="card--tiny--info--data padded">
             <a href="https://www.scimagojr.com/"><img className="card--tiny--image" src={scimagoCrossed} alt="scimago_logo" /></a>
           </div> 
         </div>
         : 
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
-            <a href="https://www.scimagojr.com/"><img className="card--tiny--image" src={scimagoLogo} alt="scimago_logo" /></a>
-          </div>
+            <div className="card--scimago--info--embed" dangerouslySetInnerHTML={{ __html: content.scimago.embedString }}></div>
+          </div> 
+        </div>
+      : null
+      }
+
+      {/* Tiny Redib  */}
+      { type === "ISSN" ?
+        content.scimago.error ?
+        <div className="card--tiny--info">
+          <div className="card--tiny--info--data padded">
+            <a href="https://www.scimagojr.com/"><img className="card--tiny--image" src={scimagoCrossed} alt="scimago_logo" /></a>
+          </div> 
+        </div>
+        : 
+        <div className="card--tiny--info">
           <div className="card--tiny--info--data">
             <div className="card--scimago--info--embed" dangerouslySetInnerHTML={{ __html: content.scimago.embedString }}></div>
           </div> 
