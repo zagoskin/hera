@@ -48,17 +48,6 @@
   width: 100%;
 }
 
-.card--tiny {
-  font-family: "Odibee Sans";
-  display: flex;
-  flex-wrap: wrap;
-  border-radius: 15px;
-  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.75);
-  margin-bottom: 1.5rem;
-  width: 100%;
-  background-color: #ff6961;
-}
-
 .card--crossref {
   background-image: linear-gradient(
     to right,
@@ -316,13 +305,11 @@
   text-decoration: none;
 }
 
-.card--doaj--seal:hover,
-.card--tiny--seal:hover {
+.card--doaj--seal:hover {
   background-color: #282624;
   color: #fd5a3b;
 }
-.card--doaj--seal,
-.card--tiny--seal {
+.card--doaj--seal {
   margin-left: 20%;
   margin-top: 40%;
   color: #282624;
@@ -334,13 +321,6 @@
   border-style: solid;
   border-color: rgb(199, 44, 44);
   background-color: #fd5a3b;
-}
-
-.card--tiny--seal {
-  margin-left: 0;
-  margin-top: 0;
-  width: 50px;
-  padding: 0.5rem;
 }
 
 .card--microsoft--fos {
@@ -585,56 +565,15 @@ a:hover {
   width: 75%;
 }
 
-.card--tiny--image--container {
-  width: 100%;
-}
-
-.card--tiny--image {
-  width: 85px;
-}
-
-.card--tiny--info--data {
-  font-size: 1.75rem;
-  font-weight: bold;
-  width: 100%;
-}
-
-.card--tiny--info--data a {
-  color: #860913;
-  text-decoration: none;
-}
-
-.card--tiny--info--data a:hover {
-  font-family: "Arial";
-  text-decoration: underline;
-}
-
 .padded {
   padding: 0.5rem;
-}
-
-.card--tiny--license {
-  margin-bottom: 0.5rem;
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
 }
 
 .doaj {
   width: 50%;
 }
-.card--tiny--license a {
-  text-decoration: none;
-}
 
-.card--tiny--license--image {
-  width: 85px;
-  height: auto;
-}
-
-.card--scimago--info,
-.card--tiny--info {
+.card--scimago--info {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
@@ -643,15 +582,6 @@ a:hover {
   border: 1px solid rgba(0, 0, 0, 0.75);
   border-radius: 15px;
   background-color: rgb(251, 233, 226);
-}
-
-.card--tiny--info {
-  align-items: center;
-  justify-content: center;
-  flex: 1 0 30%;
-  width: 25%;
-  border: 0px;
-  background-color: #f5f5f5;
 }
 
 .card--scimago--info--title {
@@ -926,8 +856,7 @@ a:hover {
     margin-right: 23%;
   }
 
-  .card--scimago--info--title,
-  .card--tiny--info--title {
+  .card--scimago--info--title {
     font-size: 2.25rem;
     font-weight: normal;
   }
@@ -936,24 +865,4 @@ a:hover {
     font-size: 3rem;
   }
 
-  .card--tiny--info--data {
-    font-size: 2.5rem;
-  }
-
-  .card--tiny--image {
-    width: 125px;
-  }
-
-  .hot {
-    margin-top: 5%;
-    width: 100px;
-  }
-
-  .bigger {
-    width: 200px;
-  }
-
-  .card--tiny--license--image {
-    width: 125px;
-  }
 }

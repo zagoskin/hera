@@ -1,0 +1,125 @@
+.card--tiny {
+  font-family: "Odibee Sans";
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 15px;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.75);
+  margin-bottom: 1.5rem;
+  width: 100%;
+  background-color: #ff6961;
+  justify-content: center;
+}
+
+.card--tiny--info {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 32%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  border: 0px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5%;
+  border-radius: 15px;
+  background-color: #f5f5f5;
+}
+
+.card--tiny--seal:hover {
+  background-color: #282624;
+  color: #fd5a3b;
+}
+
+.card--tiny--seal {
+  color: #282624;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: 0.5px;
+  width: 50px;
+  padding: 0.5rem;
+  border-radius: 15px;
+  border-style: solid;
+  border-color: rgb(199, 44, 44);
+  background-color: #fd5a3b;
+}
+
+.card--tiny--image--container {
+  width: 100%;
+}
+
+.card--tiny--image {
+  width: 85px;
+}
+
+.card--tiny--info--data {
+  font-size: 1.75rem;
+  font-weight: bold;
+  width: 100%;
+}
+
+.card--tiny--info--data a {
+  color: #860913;
+  text-decoration: none;
+}
+
+.card--tiny--info--data a:hover {
+  font-family: "Arial";
+  text-decoration: underline;
+}
+
+.card--tiny--license {
+  margin-bottom: 0.75rem;
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+.card--tiny--license a {
+  text-decoration: none;
+}
+
+.card--tiny--license--image {
+  width: 85px;
+  height: auto;
+}
+
+.big {
+  width: 125px;
+}
+
+.bigger {
+  width: 200px;
+}
+
+@media (min-width: 786px) {
+  .card--tiny--info--title {
+    font-size: 2.25rem;
+    font-weight: normal;
+  }
+
+  .card--tiny--info--data {
+    font-size: 2.25rem;
+  }
+
+  .card--tiny--image {
+    width: 125px;
+  }
+
+  .hot {
+    margin-top: 5%;
+    width: 100px;
+  }
+
+  .big {
+    width: 175px;
+  }
+
+  .bigger {
+    width: 250px;
+  }
+
+  .card--tiny--license--image {
+    width: 125px;
+  }
+}
