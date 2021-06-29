@@ -1,21 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
+  Redirect,
   Link
 } from "react-router-dom";
+import history from './history';
 import './index.css';
 import Search from './components/Search/index';
 
 class Main extends React.Component {
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div className="container">
           <nav></nav>
           <Link to="/"><h1 className="title">Filtro Académico</h1></Link>
+
           <Switch>
             <Route path="/about">
               <div>
@@ -25,6 +28,10 @@ class Main extends React.Component {
             <Route path="/">
               <Search />
             </Route>
+
+            <Route>
+              <Redirect push to="/" />  
+            </Route>           
           </Switch>
         </div>
       </Router>
