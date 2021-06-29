@@ -9,6 +9,8 @@ import MicrosoftCard from '../MicrosoftCard';
 import { Collapse } from 'react-collapse';
 import ScimagoCard from '../ScimagoCard';
 import TinyPanel from '../TinyPanel';
+import SemanticCard from '../SemanticCard';
+import RedibCard from '../RedibCard';
 
 export default function AcademicCard({content}){
 
@@ -68,6 +70,12 @@ export default function AcademicCard({content}){
         <DOAJCard identifier={content.identifier} content={content.doaj} key={'doaj' + content.identifier.value}></DOAJCard>
         <MicrosoftCard identifier={content.identifier} content={content.microsoft} key={'microsoft' + content.identifier.value}></MicrosoftCard>
         { content.identifier.type === "DOI" ?
+        <SemanticCard DOI={content.identifier.value} content={content.semantic} key={'semantic' + content.identifier.value} />
+        : null      
+        }
+
+
+        { content.identifier.type === "DOI" ?
         <DimensionsBadge DOI={content.identifier.value} content={content.dimensions} key={'dimensions' + content.identifier.value} />
         : null      
         }
@@ -78,14 +86,20 @@ export default function AcademicCard({content}){
         }
 
         { content.identifier.type === "ISSN" ?
+        <ScimagoCard content={content.scimago} key={'scimago' + content.identifier.value} />
+        : null  
+        }
+        { content.identifier.type === "ISSN" ?
+        <RedibCard content={content.redib} key={'redib' + content.identifier.value} />
+        : null  
+        }
+
+        { content.identifier.type === "ISSN" ?
         <ScopusGraph data={content.scopus} key={'scopus' + content.identifier.value} />
         : null      
         }
 
-        { content.identifier.type === "ISSN" ?
-        <ScimagoCard content={content.scimago} key={'scimago' + content.identifier.value} />
-        : null  
-        }
+        
       </Collapse>
     </div>
   )
