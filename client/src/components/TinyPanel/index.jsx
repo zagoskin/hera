@@ -24,8 +24,13 @@ import scopusLogo from '../../images/scopusLogo.png';
 import scopusCrossed from '../../images/scopusCrossed.png';
 //import openAccess from '../../images/openAccess.png';
 //import padlock from  '../../images/padlock.png';
-import scimagoLogo from '../../images/scimagoLogo.png';
+//import scimagoLogo from '../../images/scimagoLogo.png';
 import scimagoCrossed from '../../images/scimagoCrossed.png';
+import semanticLogo from '../../images/semanticLogo.png';
+import semanticCrossed from '../../images/semanticCrossed.png';
+import redibLogo from '../../images/redibLogo.png';
+import redibCrossed from '../../images/redibCrossed.png';
+import 'typeface-roboto';
 
 export default function TinyPanel({content, type, DOI}){
 
@@ -36,7 +41,7 @@ export default function TinyPanel({content, type, DOI}){
       {content.crossref.error ? 
       <div className="card--tiny--info">
         <div className="card--tiny--info--data">
-          <a href="https://www.crossref.org/"><img className="card--tiny--image bigger" src={crossrefCrossed} alt="crossref_logo" /></a>        
+          <a href="https://www.crossref.org/"><img className="card--tiny--image bigger" src={crossrefCrossed} alt="crossref_crossed" /></a>        
         </div>
       </div> 
       : type === "DOI" ?
@@ -117,7 +122,7 @@ export default function TinyPanel({content, type, DOI}){
       : type === "DOI" ? 
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href="https://doaj.org/"><img className="card--tiny--image" src={doajLogo} alt="doaj_logo" /></a>
+          <a href="https://doaj.org/"><img className="card--tiny--image big" src={doajLogo} alt="doaj_logo" /></a>
         </div>
         {content.doaj.admin ? 
           content.doaj.admin.seal ?
@@ -133,7 +138,7 @@ export default function TinyPanel({content, type, DOI}){
       : type === "ISSN" ?
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href="https://doaj.org/"><img className="card--tiny--image" src={doajLogo} alt="doaj_logo" /></a>
+          <a href="https://doaj.org/"><img className="card--tiny--image big" src={doajLogo} alt="doaj_logo" /></a>
         </div>
         {content.doaj.bibjson.license.map((license,index) => 
           license.type === "CC BY" ?
@@ -222,10 +227,43 @@ export default function TinyPanel({content, type, DOI}){
       : null
       }
 
+      {/* Tiny Semantic */}
+      {type === "DOI" ? 
+        content.semantic.error ? 
+        <div className="card--tiny--info">
+          <div className="card--tiny--info--data">
+            <a href="https://www.semanticscholar.org/?utm_source=api"><img className="card--tiny--image big" src={semanticCrossed} alt="semantic_crossed" /></a>        
+          </div>
+        </div>   
+        :   
+        <div className="card--tiny--info">
+          <div style={{marginTop: "-2.5rem",marginBottom: "1rem"}} className="card--tiny--info--data">
+            <a href="https://www.semanticscholar.org/?utm_source=api"><img className="card--tiny--image big" src={semanticLogo} alt="semantic_logo" /></a>        
+          </div>
+          {content.semantic.influentialCitationCount ?
+            content.semantic.influentialCitationCount > 0 ?
+            <div style={{marginBottom: "5.5rem"}} className="card--tiny--info--data">
+              {content.semantic.numCitedBy} citas
+              <br />
+              <a href={content.semantic.url}>{content.semantic.influentialCitationCount} citas influyentes</a>
+            </div>
+            : <div style={{marginBottom: "5.5rem"}} className="card--tiny--info--data">
+                {content.semantic.numCitedBy} citas
+              </div>
+          : <div style={{marginBottom: "5.5rem"}} className="card--tiny--info--data">
+              {content.semantic.numCitedBy} citas
+            </div>
+          }
+        </div>  
+        
+      : null
+      }
+
       {/* Tiny Dimensions */}
       {type === "DOI" ?
       <div className="card--tiny--info">
-        <span className="__dimensions_badge_embed__" data-doi={DOI}></span>
+        <div style={{padding: "2rem"}}><span className="__dimensions_badge_embed__" data-doi={DOI}></span></div>
+        
         
         {content.dimensions.field_citation_ratio > 1.0 ?
           <div className="card--tiny--info--data">
@@ -262,13 +300,10 @@ export default function TinyPanel({content, type, DOI}){
               <a href="https://www.altmetric.com"><img className="card--tiny--image hot" src={hotTopic} alt="hot_topic" /></a>
             </div>   
             : 
-            <div>
-              <div className="card--tiny--info--data">
-                Se habla del tema
-              </div>   
-              <div className="card--tiny--info--data"> 
-                <a href="https://www.altmetric.com"><img className="card--tiny--image" src={chatLogo} alt="people_chat" /></a>
-              </div>
+            <div className="card--tiny--info--data">
+              Se habla del tema
+              <br /> 
+              <a href="https://www.altmetric.com"><img className="card--tiny--image" src={chatLogo} alt="people_chat" /></a>      
             </div>
           : null
           )
@@ -309,7 +344,7 @@ export default function TinyPanel({content, type, DOI}){
         content.scimago.error ?
         <div className="card--tiny--info">
           <div className="card--tiny--info--data padded">
-            <a href="https://www.scimagojr.com/"><img className="card--tiny--image" src={scimagoCrossed} alt="scimago_logo" /></a>
+            <a href="https://www.scimagojr.com/"><img className="card--tiny--image big" src={scimagoCrossed} alt="scimago_logo" /></a>
           </div> 
         </div>
         : 
@@ -323,17 +358,33 @@ export default function TinyPanel({content, type, DOI}){
 
       {/* Tiny Redib  */}
       { type === "ISSN" ?
-        content.scimago.error ?
+        content.redib.error ?
         <div className="card--tiny--info">
           <div className="card--tiny--info--data padded">
-            <a href="https://www.scimagojr.com/"><img className="card--tiny--image" src={scimagoCrossed} alt="scimago_logo" /></a>
+            <a href="https://redib.org/?lng=es"><img className="card--tiny--image bigger" src={redibCrossed} alt="redib_crossed" /></a>
           </div> 
         </div>
         : 
+        content.redib.widget ? 
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
-            <div className="card--scimago--info--embed" dangerouslySetInnerHTML={{ __html: content.scimago.embedString }}></div>
-          </div> 
+            <a href={content.redib.widget.anchorHref}>
+              <img border="0" width="250px" height="250px" src={content.redib.widget.imgSrc} alt="redib_rank_widget"  />
+            </a>
+          </div>
+        </div>
+        :
+        <div  className="card--tiny--info">
+          <div className="card--tiny--info--data">
+            <a href={content.redib.redibURL}><img className="card--tiny--image big" src={redibLogo} alt="redib_logo" /></a>
+            <br />
+            <span style={{fontFamily: 'Roboto'}}>Indicadores calidad editorial</span>
+          </div>
+          {content.redib.indicadores.map(indicador => 
+          <div key={indicador} style={{fontFamily: 'Roboto'}} className="card--tiny--info--indicator">
+            {indicador}
+          </div>
+          )}
         </div>
       : null
       }
