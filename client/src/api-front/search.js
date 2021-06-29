@@ -183,7 +183,8 @@ export const getContentsRedib = async (url) => {
         imgSrc,
       }
     }
-    const rankingDiv = resDOM.getElementById("rankingSerial");
+    //La mayoría de los resultados no tienen esto
+    //const rankingDiv = resDOM.getElementById("rankingSerial");
     contents = {
       journalTitle,
       journalURL,
