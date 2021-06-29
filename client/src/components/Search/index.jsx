@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './search.css';
+import history from '../../history';
 
 import AcademicCard from '../AcademicCard/index';
 
@@ -14,6 +15,10 @@ export default function Search(){
   const [criteria, setCriteria] = useState('');
   const [loading, setLoading] = useState(false);
   const [formatError, setFormatError] = useState(false);
+
+  useEffect(() => {
+    history.push('/');
+  }, [])
 
   const searchPapers = async (e) => {
     e.preventDefault();
