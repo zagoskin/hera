@@ -92,6 +92,15 @@
   width: 200px;
 }
 
+.card--tiny--info--indicator {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: #d4d4d4;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
 @media (min-width: 786px) {
   .card--tiny--info--title {
     font-size: 2.25rem;

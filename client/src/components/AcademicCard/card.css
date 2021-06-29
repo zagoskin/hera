@@ -40,7 +40,9 @@
 .card--dimensions,
 .card--altmetric,
 .card--scopus,
-.card--scimago {
+.card--scimago,
+.card--semantic,
+.card--redib {
   display: inline-block;
   border-radius: 15px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.75);
@@ -142,6 +144,31 @@
   );
 }
 
+.card--semantic {
+  background-image: linear-gradient(
+    to right,
+    white,
+    rgb(171, 220, 243),
+    rgb(20, 88, 119),
+    rgb(6, 52, 73)
+  );
+}
+
+.card--redib {
+  display: flex;
+  flex-wrap: wrap;
+  background-image: linear-gradient(
+    to right,
+    white,
+    #faf1f1,
+    #faf1f1,
+    #faf1f1,
+    #faf1f1,
+    #d1a5a5,
+    #901212
+  );
+}
+
 .card--scimago--logo {
   overflow: hidden;
   width: 18%;
@@ -218,8 +245,49 @@
   flex-wrap: wrap;
 }
 
-.card--crossref--info {
+.card--crossref--text a:hover {
+  font-weight: bold;
+}
+
+.card--crossref--info,
+.card--semantic--info {
   text-align: left;
+  padding: 0.75rem;
+  max-width: 90%;
+  margin-bottom: 2%;
+  background-image: linear-gradient(
+    to left,
+    white,
+    rgb(224, 252, 253),
+    rgb(176, 234, 236),
+    rgb(238, 161, 161)
+  );
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.75);
+  border-radius: 15px;
+}
+
+.card--semantic--info {
+  min-width: 50%;
+  color: white;
+  background: repeating-linear-gradient(
+    45deg,
+    rgb(6, 52, 73),
+    rgb(6, 52, 73) 20px,
+    rgb(14, 74, 102) 20px,
+    rgb(14, 74, 102) 40px,
+    rgb(20, 88, 119) 40px,
+    rgb(20, 88, 119) 60px,
+    rgb(39, 115, 149) 60px,
+    rgb(39, 115, 149) 80px
+  );
+}
+
+.card--crossref--info a {
+  color: black;
+}
+
+.card--crossref--info a:visited {
+  color: black;
 }
 
 .card--doaj--text p,
@@ -338,28 +406,6 @@
   white-space: pre-wrap;
 }
 
-.card--crossref--info {
-  padding: 0.75rem;
-  max-width: 90%;
-  margin-bottom: 2%;
-  background-image: linear-gradient(
-    to left,
-    white,
-    rgb(224, 252, 253),
-    rgb(176, 234, 236),
-    rgb(238, 161, 161)
-  );
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.75);
-  border-radius: 15px;
-}
-
-.card--crossref--info a {
-  color: black;
-}
-
-.card--crossref--info a:visited {
-  color: black;
-}
 .card--crossref-breakdowns {
   text-align: center;
   display: flex;
@@ -582,6 +628,13 @@ a:hover {
   border: 1px solid rgba(0, 0, 0, 0.75);
   border-radius: 15px;
   background-color: rgb(251, 233, 226);
+}
+
+.redib {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
 }
 
 .card--scimago--info--title {
@@ -864,5 +917,4 @@ a:hover {
   .card--scimago--info--data {
     font-size: 3rem;
   }
-
 }
