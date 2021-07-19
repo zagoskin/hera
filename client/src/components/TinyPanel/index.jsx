@@ -30,9 +30,11 @@ import semanticLogo from '../../images/semanticLogo.png';
 import semanticCrossed from '../../images/semanticCrossed.png';
 import redibLogo from '../../images/redibLogo.png';
 import redibCrossed from '../../images/redibCrossed.png';
+import wosLogo from '../../images/wosLogo.png';
+import wosCrossed from '../../images/wosCrossed.png';
 import 'typeface-roboto';
 
-export default function TinyPanel({content, type, DOI}){
+export default function TinyPanel({content, type, identifier}){
 
   return (
     <div className="card--tiny">
@@ -262,7 +264,7 @@ export default function TinyPanel({content, type, DOI}){
       {/* Tiny Dimensions */}
       {type === "DOI" ?
       <div className="card--tiny--info">
-        <div style={{padding: "2rem"}}><span className="__dimensions_badge_embed__" data-doi={DOI}></span></div>
+        <div style={{padding: "2rem"}}><span className="__dimensions_badge_embed__" data-doi={identifier}></span></div>
         
         
         {content.dimensions.field_citation_ratio > 1.0 ?
@@ -286,7 +288,7 @@ export default function TinyPanel({content, type, DOI}){
       { type === "DOI" ?
       <div className="card--tiny--info">
         <div className="card--tiny--info--data">
-          <div className="altmetric-embed" data-badge-type="medium-donut" data-doi={DOI} data-badge-popover="right"></div>
+          <div className="altmetric-embed" data-badge-type="medium-donut" data-doi={identifier} data-badge-popover="right"></div>
         </div>
         {content.altmetric.error ?
         <div className="card--tiny--info--data">
@@ -335,6 +337,33 @@ export default function TinyPanel({content, type, DOI}){
             <br />
             <a href={content.scopus.entry[0].link[0]["@href"]}>{content.scopus.entry[0].citeScoreYearInfoList.citeScoreTracker} - {content.scopus.entry[0].citeScoreYearInfoList.citeScoreTrackerYear}</a>
           </div>  
+        </div>
+      : null
+      }
+
+      {/* Tiny Wos  */}
+      { type === "ISSN" ?
+        content.wos.error ?
+        <div className="card--tiny--info">
+          <div className="card--tiny--info--data">
+            <a href={`https://mjl.clarivate.com/search-results?issn=${identifier}&hide_exact_match_fl=true`}><img className="card--tiny--image biggerer" src={wosCrossed} alt="wos_logo" /></a>
+          </div> 
+        </div>
+        : 
+        content.wos.totalRecords === 0 ?
+        <div className="card--tiny--info">
+          <div className="card--tiny--info--data">
+            <a href={`https://mjl.clarivate.com/search-results?issn=${identifier}&hide_exact_match_fl=true`}><img className="card--tiny--image biggerer" src={wosCrossed} alt="wos_logo" /></a>
+          </div> 
+        </div>
+        :
+        <div className="card--tiny--info">
+          <div className="card--tiny--info--data">
+            <a href={`https://mjl.clarivate.com/search-results?issn=${identifier}&hide_exact_match_fl=true`}><img className="card--tiny--image bigger" src={wosLogo} alt="wos_logo" /></a>
+          </div> 
+          <div className="card--tiny--info--data">
+            Indexado por Web of Science
+          </div> 
         </div>
       : null
       }
