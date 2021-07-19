@@ -2,15 +2,15 @@ import React from 'react';
 import redibLogo from '../../images/redibLogo.png';
 import '../TinyPanel/tinycard.css';
 
-export default function RedibCard({content}){
+export default function RedibCard({ISSN,content}){
 
   return (
     <div className="card--redib">
       <div className="card--scimago--logo">
-        <a href="https://www.scimagojr.com/">
+        <a href={`https://redib.org/Search/Results?type=ISN&lookfor=${ISSN}`} >
           <img className="card--scimago--image big"
             src={redibLogo}
-            alt='scimago'
+            alt='redib'
           />
         </a>
       </div>
