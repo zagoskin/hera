@@ -10,6 +10,7 @@ let urlAltmetric;
 let urlScimago;
 let urlSemantic;
 let urlRedib;
+let urlWos = `https://mjl.clarivate.com/api/jprof/public/rank-search`;
 
 export const setURLsByDOI = (DOI) => {
   urlCrossRef = `https://api.crossref.org/works/${DOI}`;
@@ -65,4 +66,8 @@ export const getURLSemantic = () => {
 
 export const getURLRedib = () => {
   return urlRedib;
+}
+
+export const getURLWos = () => {
+  return urlWos;
 }

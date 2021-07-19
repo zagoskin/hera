@@ -1,9 +1,11 @@
-const getContents = async (url, apiURL) => {
+const getContents = async (url, apiURL, options) => {
+  console.log(options);
   try {
     const res = await fetch(apiURL, {
       method: 'POST',
       body: new URLSearchParams({
-        'url': url
+        'url': url,
+        'options': options,
       }),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -16,12 +18,13 @@ const getContents = async (url, apiURL) => {
   }
 }
 
-const getHtml = async (url, apiURL) => {
+const getHtml = async (url, apiURL, options) => {
   try {
     const htmlObject = await fetch(apiURL, {
       method: 'POST',
       body: new URLSearchParams({
-        'url': url
+        'url': url,
+        'options': options,
       }),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -35,7 +38,7 @@ const getHtml = async (url, apiURL) => {
 }
 
 export const getContentsCrossref = async (url) => {
-  const contents = await getContents(url, `/api/getContentsDefault`);
+  const contents = await getContents(url, `/api/getContentsDefault`, '');
   console.log('Contents de la API en front Crossref:');
   console.log(contents);
   if (contents.error) {
@@ -45,49 +48,56 @@ export const getContentsCrossref = async (url) => {
 }
 
 export const getContentsDoaj = async (url) => {
-  const contents = await getContents(url, `/api/getContentsDefault`);
+  const contents = await getContents(url, `/api/getContentsDefault`, '');
   console.log('Contents de la API en front DOAJ:');
   console.log(contents);
   return contents;
 }
 
 export const getContentsMicrosoft = async (url) => {
-  const contents = await getContents(url, `/api/getContentsMicrosoft`);
+  const contents = await getContents(url, `/api/getContentsMicrosoft`, '');
   console.log('Contents de la API en front Microsoft:');
   console.log(contents);
   return contents.entities;
 }
 
 export const getContentsScopus = async (url) => {
-  const contents = await getContents(url, `/api/getContentsScopus`);
+  const contents = await getContents(url, `/api/getContentsScopus`, '');
   console.log('Contents de la API en front Scopus:');
   console.log(contents);
   return contents["serial-metadata-response"];
 }
 
 export const getContentsDimensions = async (url) => {
-  const contents = await getContents(url, `/api/getContentsDefault`);
+  const contents = await getContents(url, `/api/getContentsDefault`, '');
   console.log('Contents de la API en front Dimensions:');
   console.log(contents);
   return contents;
 }
 
 export const getContentsAltmetric = async (url) => {
-  const contents = await getContents(url, `/api/getContentsDefault`);
+  const contents = await getContents(url, `/api/getContentsDefault`, '');
   console.log('Contents de la API en front Altmetric:');
   console.log(contents);
   return contents;
 }
 
 export const getContentsSemantic = async (url) => {
-  const contents = await getContents(url, `/api/getContentsDefault`);
+  const contents = await getContents(url, `/api/getContentsDefault`, '');
   console.log('Contents de la API en front Semantic:');
   console.log(contents);
   return contents;
 }
 
+export const getContentsWos = async (url, issn) => {
+  const contents = await getContents(url, `/api/getContentsWos`, issn);
+  console.log('Contents de la API en front Wos:');
+  console.log(contents);
+  return contents;
+}
+
 export const getContentsScimago = async (url, title) => {
-  const res = await getHtml(url, `/api/getContentsHtml`);
+  const res = await getHtml(url, `/api/getContentsHtml`, '');
   const searchHtml = res.html;
 
   let parser = new DOMParser();
@@ -111,7 +121,7 @@ export const getContentsScimago = async (url, title) => {
 
       const journalURL = "https://www.scimagojr.com/" + anchorURL.replace(/^(?:\/\/|[^/]+)*\//, '');
       //alert(journalURL);
-      const searchRes = await getHtml(journalURL, `/api/getContentsHtml`);
+      const searchRes = await getHtml(journalURL, `/api/getContentsHtml`, '');
       const journalHtml = searchRes.html;
 
       const journalDOM = parser.parseFromString(journalHtml, 'text/html');
@@ -140,7 +150,7 @@ export const getContentsScimago = async (url, title) => {
 }
 
 export const getContentsRedib = async (url) => {
-  const res = await getHtml(url, `/api/getContentsHtml`);
+  const res = await getHtml(url, `/api/getContentsHtml`, '');
 
   let parser = new DOMParser();
 

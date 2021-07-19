@@ -1,5 +1,5 @@
-import { getContentsCrossref, getContentsDoaj, getContentsMicrosoft, getContentsScopus, getContentsDimensions, getContentsAltmetric, getContentsScimago, getContentsSemantic, getContentsRedib } from './search'
-import { getURLCrossref, getURLDoaj, getURLMicrosoft, getURLScopus, getURLDimensions, getURLAltmetric, setURLsByDOI, setURLsByISSN, getURLScimago, getURLSemantic, getURLRedib } from './url';
+import { getContentsCrossref, getContentsDoaj, getContentsMicrosoft, getContentsScopus, getContentsDimensions, getContentsAltmetric, getContentsScimago, getContentsSemantic, getContentsRedib, getContentsWos } from './search'
+import { getURLCrossref, getURLDoaj, getURLMicrosoft, getURLScopus, getURLDimensions, getURLAltmetric, setURLsByDOI, setURLsByISSN, getURLScimago, getURLSemantic, getURLRedib, getURLWos } from './url';
 
 export const getDataByQuery = async (query, criteria) => {
 
@@ -10,7 +10,8 @@ export const getDataByQuery = async (query, criteria) => {
   let scimagoData;
   let semanticData;
   let redibData;
-
+  let wosData;
+  
   if (criteria === "DOI") {
     setURLsByDOI(query);
     microsoftData = await getContentsMicrosoft(getURLMicrosoft());
@@ -22,6 +23,7 @@ export const getDataByQuery = async (query, criteria) => {
       setURLsByISSN(query);
       scopusData = await getContentsScopus(getURLScopus());
       redibData = await getContentsRedib(getURLRedib());
+      wosData = await getContentsWos(getURLWos(),query);
     }
   }
   const crossrefData = await getContentsCrossref(getURLCrossref());
@@ -36,6 +38,7 @@ export const getDataByQuery = async (query, criteria) => {
     altmetric: altmetricData,
     semantic: semanticData,
     redib: redibData,
+    wos: wosData,
     abstract:
       crossrefData.abstract ?
         !(Array.isArray(crossrefData.abstract)) ?
@@ -49,6 +52,7 @@ export const getDataByQuery = async (query, criteria) => {
     title: crossrefData.title ? crossrefData.title : doajData.total > 0 ? doajData.results[0].bibjson.title : microsoftData.length > 0 ? microsoftData[0].DN : '',
     URL: criteria === 'DOI' ? `https://dx.doi.org/${query}` : doajData.total > 0 ? doajData.results[0].bibjson.ref.journal : `https://portal.issn.org/resource/ISSN/${query}`,
     authors: crossrefData.author ? crossrefData.author : doajData.total > 0 ? doajData.results[0].bibjson.author : microsoftData.length > 0 ? microsoftData[0].AA : undefined,
+    issn: crossrefData.ISSN ? crossrefData.ISSN[0] : doajData.total > 0 ? doajData.results[0].bibjson.journal ? doajData.results[0].bibjson.journal.issns[0] : null : null,
     identifier: {
       type: criteria,
       value: query
