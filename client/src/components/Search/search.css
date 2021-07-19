@@ -1,3 +1,29 @@
+.footer {
+  display: flex;
+  font-size: 2rem;
+  align-items: center;
+  background-color: greenyellow;
+  border-radius: 15px;
+  padding: 1rem;
+}
+
+.footerSaludo {
+  width: 65%;
+  padding: 1rem;
+  text-align: right;
+}
+
+.footerInstaText {
+  width: 22%;
+  text-align: right;
+  margin-left: 7%;
+}
+
+.footerImg {
+  width: 32px;
+  margin-left: 3%;
+}
+
 .searchForm {
   display: grid;
 }
