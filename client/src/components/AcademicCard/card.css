@@ -42,7 +42,8 @@
 .card--scopus,
 .card--scimago,
 .card--semantic,
-.card--redib {
+.card--redib,
+.card--wos {
   display: inline-block;
   border-radius: 15px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.75);
@@ -166,6 +167,21 @@
     #faf1f1,
     #d1a5a5,
     #901212
+  );
+}
+
+.card--wos {
+  display: flex;
+  flex-wrap: wrap;
+  background-image: linear-gradient(
+    to right,
+    white,
+    #faf1f1,
+    #faf1f1,
+    #faf1f1,
+    #d8cefa,
+    #8670ce,
+    #4429a0
   );
 }
 
@@ -654,10 +670,6 @@ a:hover {
 
 .card--scimago--info--embed {
   padding: 0.5rem;
-}
-
-.bigger {
-  width: 150px;
 }
 
 /* NO SMARTPHONE CSS */
