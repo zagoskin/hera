@@ -92,6 +92,10 @@
   width: 200px;
 }
 
+.biggerer {
+  width: 200px;
+}
+
 .card--tiny--info--indicator {
   font-weight: 700;
   font-size: 1.5rem;
@@ -126,6 +130,10 @@
 
   .bigger {
     width: 250px;
+  }
+
+  .biggerer {
+    width: 300px;
   }
 
   .card--tiny--license--image {
