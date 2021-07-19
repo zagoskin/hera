@@ -27,19 +27,10 @@ const fetchHtmlContents = async (url,options) => {
   }).then((html) => {
     return html;
   });
-  // if (data.ok){
-  //   const dataHtml = data.text();
-  //   return HTMLParser.parse(dataHtml);
-  // } else {
-  //   console.log('Request failed');
-  //   return { error: 'Something went wrong' };
-  // }
 }
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
-// app.use(express.json({
-//   type: "*/*" // optional, only if you want to be sure that everything is parset as JSON. Wouldn't reccomand
-// }));
+
 app.use(express.urlencoded());
 app.get("/api", (req, res) => {
   console.log('En /api');
@@ -67,7 +58,20 @@ app.post("/api/getContentsScopus", async (req, res) => {
   res.send(data);
 });
 
-
+app.post("/api/getContentsWos", async (req, res) => {
+  const data  = await fetchJsonContents(req.body.url, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      "searchValue": req.body.options,
+      "pageNum": 1,
+      "pageSize": 10,
+    })
+  });
+  res.send(data);
+});
 
 app.post("/api/getContentsHtml", async (req, res) => {
   const html = await fetchHtmlContents(req.body.url, {});
