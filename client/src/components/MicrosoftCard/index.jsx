@@ -32,10 +32,6 @@ export default function MicrosoftCard({identifier, content}){
       <div className="card--doaj--text--warning">
         No hallado en Bing! 
       </div>
-      : identifier.type === "ISSN" ?
-      <div className="card--doaj--text--warning">
-        Busqueda por ISSN no soportada
-      </div>
       : null
       }
     </div>
