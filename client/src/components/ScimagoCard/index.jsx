@@ -17,7 +17,7 @@ export default function ScimagoCard({content}){
       {content.error ?
         <div className="card--scopus--text--warning--container">
           <div className="card--scimago--text--warning">
-            No encontrado en Scimagojr
+            No hallado en Scimagojr
           </div>
         </div>
         : 
