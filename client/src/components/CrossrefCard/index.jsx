@@ -23,18 +23,18 @@ export default function CrossrefCard({identifier, content}){
       :(identifier.type === "ISSN") ?
       <div className="card--crossref--text">
         <div className="card--crossref--info">
-          {content.counts["current-dois"]} artículos con DOI en este jornal
+          {content.counts["current-dois"]} artículos publicados en esta revista
         </div>
         <div className="card--crossref-breakdowns">
-          <div className="card--microsoft--fos--title">DOIs por año</div>
+          <div className="card--microsoft--fos--title">Artículos por año</div>
           {content.breakdowns["dois-by-issued-year"].sort((a,b) => a[0] - b[0]).map((yearbydoi,index) => 
             <div className="card--crossref--year--badge" key={index}>
-              {yearbydoi[0]} - {yearbydoi[1]} DOIs
+              {yearbydoi[0]} - {yearbydoi[1]} artículos
             </div>   
           )}
         </div>
         <div className="card--crossref--info">
-          {(content.coverage["award-numbers-current"] * 100).toFixed(1)}% de los artículos en este jornal tienen algún award
+          {(content.coverage["award-numbers-current"] * 100).toFixed(1)}% de los artículos en esta revista tienen algún award
         </div>
         <div className="card--crossref--info">
           {(content.coverage["orcids-current"] * 100).toFixed(1)}% de los artículos tienen un <a href='https://orcid.org/'>ORCID</a>
