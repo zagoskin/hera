@@ -17,7 +17,7 @@ class Main extends React.Component {
       <Router history={history}>
         <div className="container">
           <nav></nav>
-          <Link to="/"><h1 className="title">Filtro Académico</h1></Link>
+          <Link to="/"><h1 className="title">Herramienta para Enriquecimiento de Recursos Académicos</h1></Link>
 
           <Switch>
             <Route path="/about">
