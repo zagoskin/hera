@@ -16,13 +16,24 @@ import WosCard from '../WosCard';
 export default function AcademicCard({content,additionalContent}){
 
   const [showMore, setShowMore] = useState(false);
-
+  const [authors, setAuthors] = useState('');
   const handleShowMore = () => {
     setShowMore(!showMore);
   }
   
   useEffect(() => {
     setShowMore(false);
+    if (content.authors){
+      const normalizedAuthorsArr = content.authors.map(author => 
+        author.name ? `${author.name}`
+        : author.family ? `${author.family} ${author.given}`
+        : author.AuN ? `${author.AuN}` 
+        : null
+        )
+      const joinedAuthors = Array.from(normalizedAuthorsArr).join(", ");
+      setAuthors(joinedAuthors);
+      console.log(joinedAuthors);
+    }
   }, [])
 
   return (
@@ -34,14 +45,7 @@ export default function AcademicCard({content,additionalContent}){
           <h1 className="card--title">{content.title}</h1>
           <p><a href={content.URL}>Click aquí para ir al recurso</a></p>
           {content.authors ? <p>
-            <em>Authors: {content.authors.map((author,index) => 
-            (author.name ? 
-              <span key={index}> {author.name}. </span> :
-            author.family ?
-              <span key={index}> {author.family} {author.given}. </span> :
-            author.AuN ?
-              <span key={index}> {author.AuN} . </span> : null
-            ))}</em> 
+            <em>Autores: {authors}.</em> 
           </p> : null 
           }
           {content.abstract ? <div className='card--abstract'><h1>ABSTRACT</h1> 
@@ -57,7 +61,7 @@ export default function AcademicCard({content,additionalContent}){
         </div>
       }
 
-      <Collapse isOpened={!showMore} theme={{collapse: 'ReactCollapse--collapse'}}>
+      <Collapse isOpened={!showMore} theme={{collapse: 'ReactCollapse--collapse'}} key={'collapse1'}>
         <TinyPanel content={content} type={content.identifier.type} identifier={content.identifier.value} key={'tinypanel' + content.identifier.value}></TinyPanel>
         {additionalContent ?
         <>
@@ -75,7 +79,7 @@ export default function AcademicCard({content,additionalContent}){
         :
         <button className="card--collapse--btn" onClick={handleShowMore}>Ver menos</button>
       }
-      <Collapse isOpened={showMore} theme={{collapse: 'ReactCollapse--collapse'}}>
+      <Collapse isOpened={showMore} theme={{collapse: 'ReactCollapse--collapse'}} key={'collapse2'}>
         <CrossrefCard identifier={content.identifier} content={content.crossref} key={'crossref' + content.identifier.value}/>
         <DOAJCard identifier={content.identifier} content={content.doaj} key={'doaj' + content.identifier.value}/>
         { content.identifier.type === "DOI" ?
