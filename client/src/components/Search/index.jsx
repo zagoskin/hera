@@ -26,7 +26,7 @@ export default function Search(){
   const searchPapers = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+    setAdditionalContent(undefined);
     const res = await getDataByQuery(query,criteria);
     
     console.log('Todos los resultados:');
