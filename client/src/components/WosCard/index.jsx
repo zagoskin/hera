@@ -32,30 +32,33 @@ export default function WosCard({ISSN, content}){
           <div style={{width: '100%'}} className="card--doaj--issn--index">
             Indexado por Web of Science
           </div> 
-          <div style={{flex: '1 auto'}} className="card--scimago--info redib">
+          <div style={{flex: '1 auto', width: '30%'}} className="card--scimago--info redib">
             <div style={{fontWeight: "normal", width: '100%'}} className="card--tiny--info--data">EDITOR<br /><br /></div>
             <div style={{fontSize: "1.75rem",width: '100%'}} className="card--tiny--info--data">{content.journalProfiles[0].journalProfile.publisherName}</div>          
           </div>  
           {content.journalProfiles[0].journalProfile.publicationLanguages ?
-          <div style={{flex: '1 auto'}} className="card--scimago--info redib">
+          <div style={{flex: '1 auto', width: '30%'}} className="card--scimago--info redib">
             <div style={{fontWeight: "normal", width: '100%'}} className="card--tiny--info--data">IDIOMAS<br /><br /></div>  
-            {content.journalProfiles[0].journalProfile.publicationLanguages.map(language => 
-            <div key={language} style={{fontFamily: 'Roboto', backgroundColor: '#004aff', color: 'white'}} className="card--tiny--info--indicator">
+            {content.journalProfiles[0].journalProfile.publicationLanguages.map((language, index) => 
+            <div key={`${language} ${index}`} style={{fontFamily: 'Roboto', backgroundColor: '#004aff', color: 'white'}} className="card--tiny--info--indicator">
               {language}
             </div>                
             )}
           </div>      
           : null 
           }    
-          <div style={{flex: '1 auto'}} className="card--scimago--info redib">
+          {content.journalProfiles[0].journalProfile.country ?
+          <div style={{flex: '1 auto', width: '30%'}} className="card--scimago--info redib">
             <div style={{fontWeight: "normal", padding: "1rem"}} className="card--tiny--info--data">PAÍS<br /><br /></div>
             <div style={{padding: "1rem"}} className="card--tiny--info--data">{content.journalProfiles[0].journalProfile.country}</div>      
           </div>    
+          : null
+          }
           { content.journalProfiles[0].journalProfile.categories.length > 0 ?
           <div style={{flex: '1 auto', flexWrap: 'wrap', alignItems: 'stretch'}} className="card--scimago--info redib">
             <div style={{fontWeight: "normal", padding: "1rem"}} className="card--tiny--info--data">CATEGORÍAS<br /><br /></div>
-            {content.journalProfiles[0].journalProfile.categories.map(category => 
-            <div key={category} style={{fontFamily: 'Roboto', width:'30%', padding: '0.5rem',backgroundColor: '#004aff', color: 'white'}} className="card--tiny--info--indicator">
+            {content.journalProfiles[0].journalProfile.categories.map((category, index) => 
+            <div key={`${category} ${index}`} style={{fontFamily: 'Roboto', width:'30%', padding: '0.5rem',backgroundColor: '#004aff', color: 'white'}} className="card--tiny--info--indicator">
               {category.productDescription}
             </div>
             )}    
