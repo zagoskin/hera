@@ -172,7 +172,6 @@
 
 .card--wos {
   display: flex;
-  flex-wrap: wrap;
   background-image: linear-gradient(
     to right,
     white,
