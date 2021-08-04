@@ -116,7 +116,7 @@ export const getContentsScimago = async (url, title) => {
 
     const firstTitle = searchResults.querySelector(".jrnlname").innerText;
 
-    if (firstTitle.split(" ")[0] === title.split(" ")[0]) {
+    if ((searchResults.children.length === 1) || (firstTitle.split(" ")[0] === title.split(" ")[0])) {
       const anchorURL = searchResults.querySelector("a").href;
 
       const journalURL = "https://www.scimagojr.com/" + anchorURL.replace(/^(?:\/\/|[^/]+)*\//, '');
