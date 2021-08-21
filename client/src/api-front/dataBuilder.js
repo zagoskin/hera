@@ -57,6 +57,14 @@ export const getDataByQuery = async (query, criteria) => {
       type: criteria,
       value: query
     },
+    type: criteria === "ISSN" ? "journal" :
+          crossrefData.type ? crossrefData.type.split('-').join(' ') 
+          :  microsoftData.length > 0 ? 
+              microsoftData[0].BT === 'a' ? `journal article`
+            : microsoftData[0].BT === 'b' ? `book`
+            : microsoftData[0].BT === 'c' ? `book chapter`
+            : microsoftData[0].BT === 'p' ? `bonference paper`
+            : '' : ''
   }
 
   if (criteria === "ISSN") {
