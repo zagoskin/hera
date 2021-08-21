@@ -134,7 +134,8 @@ export const getContentsScimago = async (url, title) => {
         hIndex,
         country,
         coverage,
-        embedString
+        embedString,
+        journalURL
       }
     } else {
       contents = {
