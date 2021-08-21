@@ -32,9 +32,9 @@ export default function AcademicCard({content,additionalContent}){
         )
       const joinedAuthors = Array.from(normalizedAuthorsArr).join(", ");
       setAuthors(joinedAuthors);
-      console.log(joinedAuthors);
+      //console.log(joinedAuthors);
     }
-  }, [])
+  }, [content.authors])
 
   return (
     <div className="card">
@@ -43,6 +43,7 @@ export default function AcademicCard({content,additionalContent}){
       {content.title ?
         <div className="card--content">
           <h1 className="card--title">{content.title}</h1>
+          <h1><u>Tipo de recurso</u>: {content.type.charAt(0).toUpperCase()+content.type.slice(1)}</h1>
           <p><a href={content.URL}>Click aquí para ir al recurso</a></p>
           {content.authors ? <p>
             <em>Autores: {authors}.</em> 
@@ -65,7 +66,8 @@ export default function AcademicCard({content,additionalContent}){
         <TinyPanel content={content} type={content.identifier.type} identifier={content.identifier.value} key={'tinypanel' + content.identifier.value}></TinyPanel>
         {additionalContent ?
         <>
-        <h1 className="card--title">Información de la revista en que se publica</h1>
+        <br />
+        <h1 className="card--title">Datos de la revista: {additionalContent.title}</h1>
         <br />
         <br />
         <TinyPanel content={additionalContent} type={additionalContent.identifier.type} identifier={additionalContent.identifier.value} key={'tinypanel' + additionalContent.identifier.value}></TinyPanel>
@@ -103,7 +105,9 @@ export default function AcademicCard({content,additionalContent}){
 
         {additionalContent ?
         <>
-        <h1 className="card--title">Información de la revista en que se publica</h1>
+        <br />
+        <br />
+        <h1 className="card--title">Datos de la revista: {additionalContent.title}</h1>
         <br />
         <br />
         <CrossrefCard identifier={additionalContent.identifier} content={additionalContent.crossref} key={'crossref' + additionalContent.identifier.value}/>
