@@ -156,7 +156,8 @@ export default function ScopusGraph({data}){
 
   return (
     <div className="card--scopus">
-        <a href="https://www.scopus.com/home.uri">
+        <a href={data === null ? `https://www.scopus.com/home.uri`
+          : data.entry[0].link[0]['@href'] }>
           <img className="card--scopus--image"
             src={scopusLogo}
             alt='scopus_image'

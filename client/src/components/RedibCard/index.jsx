@@ -7,7 +7,9 @@ export default function RedibCard({ISSN,content}){
   return (
     <div className="card--redib">
       <div className="card--scimago--logo">
-        <a href={`https://redib.org/Search/Results?type=ISN&lookfor=${ISSN}`} >
+        <a href={content.error ? `https://redib.org/Search/Results?type=ISN&lookfor=${ISSN}` 
+          : content.redibURL } >
+        {/* <a href={content.redib.redibURL}> */}
           <img className="card--scimago--image big"
             src={redibLogo}
             alt='redib'

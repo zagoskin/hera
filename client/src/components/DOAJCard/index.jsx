@@ -11,7 +11,9 @@ export default function DOAJCard({identifier, content}){
 
   return (
     <div className="card--doaj">
-      <a href="https://doaj.org/">
+      <a href={ content === 0 ? `https://doaj.org/` 
+        : identifier.type === 'ISSN' ? `https://doaj.org/toc/${identifier.value}` 
+        : `https://doaj.org/article/${content.id}`}>
         <img className="card--doaj--image"
           src={doajLogo}
           alt='doaj_image'

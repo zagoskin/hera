@@ -6,7 +6,8 @@ export default function MicrosoftCard({identifier, content}){
 
   return (
     <div className="card--microsoft">
-      <a href="https://academic.microsoft.com/home">
+      <a href={content ? `https://academic.microsoft.com/paper/${content.Id}` 
+        : `https://academic.microsoft.com/home` }>
         <img className="card--microsoft--image"
           src={microsoftLogo}
           alt='microsoft_image'

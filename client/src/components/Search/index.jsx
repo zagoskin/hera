@@ -8,7 +8,7 @@ import Loader from 'react-loader-spinner';
 import { validDOI, validISSN } from '../../helpers/regex';
 import { getDataByQuery } from '../../api-front/dataBuilder';
 
-import instagramLogo from '../../images/insta.png';
+// import instagramLogo from '../../images/insta.png';
 
 export default function Search(){
   //states- input query, movies

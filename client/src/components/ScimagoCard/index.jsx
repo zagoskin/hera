@@ -7,7 +7,8 @@ export default function ScimagoCard({content}){
   return (
     <div className="card--scimago">
       <div className="card--scimago--logo">
-        <a href="https://www.scimagojr.com/">
+        <a href={content.error ? `https://www.scimagojr.com/` 
+          : content.journalURL }>
           <img className="card--scimago--image"
             src={scimagoLogo}
             alt='scimago'

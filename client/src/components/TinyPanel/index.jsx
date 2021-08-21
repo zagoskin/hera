@@ -49,7 +49,7 @@ export default function TinyPanel({content, type, identifier}){
       : type === "DOI" ?
       <div className="card--tiny--info">
         <div className="card--tiny--info--data">
-          <a href="https://www.crossref.org/"><img className="card--tiny--image big" src={crossrefLogo} alt="crossref_logo" /></a>
+          <a href={`https://search.crossref.org/?from_ui=yes&q=${identifier}`}><img className="card--tiny--image big" src={crossrefLogo} alt="crossref_logo" /></a>
         </div>
         <div className="card--tiny--info--data">
           {content.crossref["is-referenced-by-count"]} menciones 
@@ -105,7 +105,7 @@ export default function TinyPanel({content, type, identifier}){
       : type === "ISSN" ?
       <div className="card--tiny--info">
         <div className="card--tiny--info--data bigger">
-          <a href="https://www.crossref.org/"><img className="card--tiny--image big" src={crossrefLogo} alt="crossref_logo" /></a>
+          <a href={`https://search.crossref.org/?from_ui=yes&q=${identifier}`}><img className="card--tiny--image big" src={crossrefLogo} alt="crossref_logo" /></a>
         </div>
         <div className="card--tiny--info--data">            
           {content.crossref.counts["current-dois"]} artículos se encuentran en esta revista
@@ -124,7 +124,7 @@ export default function TinyPanel({content, type, identifier}){
       : type === "DOI" ? 
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href="https://doaj.org/"><img className="card--tiny--image big" src={doajLogo} alt="doaj_logo" /></a>
+          <a href={`https://doaj.org/article/${content.doaj.id}`}><img className="card--tiny--image big" src={doajLogo} alt="doaj_logo" /></a>
         </div>
         {content.doaj.admin ? 
           content.doaj.admin.seal ?
@@ -140,7 +140,7 @@ export default function TinyPanel({content, type, identifier}){
       : type === "ISSN" ?
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href="https://doaj.org/"><img className="card--tiny--image big" src={doajLogo} alt="doaj_logo" /></a>
+          <a href={`https://doaj.org/toc/${identifier}`}><img className="card--tiny--image big" src={doajLogo} alt="doaj_logo" /></a>
         </div>
         {content.doaj.bibjson.license.map((license,index) => 
           license.type === "CC BY" ?
@@ -199,7 +199,7 @@ export default function TinyPanel({content, type, identifier}){
       {content.microsoft ? 
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href="https://academic.microsoft.com/home"><img className="card--tiny--image" src={microsoftLogo} alt="microsoft_logo" /></a>
+          <a href={`https://academic.microsoft.com/paper/${content.microsoft.Id}`}><img className="card--tiny--image" src={microsoftLogo} alt="microsoft_logo" /></a>
         </div>
         <div className="card--tiny--info--data">
             Predicciones de citas:
@@ -240,7 +240,7 @@ export default function TinyPanel({content, type, identifier}){
         :   
         <div className="card--tiny--info">
           <div style={{marginTop: "-2.5rem",marginBottom: "1rem"}} className="card--tiny--info--data">
-            <a href="https://www.semanticscholar.org/?utm_source=api"><img className="card--tiny--image big" src={semanticLogo} alt="semantic_logo" /></a>        
+            <a href={`https://www.semanticscholar.org/paper/${content.semantic.paperId}?utm_source=api`}><img className="card--tiny--image big" src={semanticLogo} alt="semantic_logo" /></a>        
           </div>
           {content.semantic.influentialCitationCount ?
             content.semantic.influentialCitationCount > 0 ?
@@ -325,7 +325,7 @@ export default function TinyPanel({content, type, identifier}){
         : 
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
-            <a href="https://www.scopus.com/home.uri"><img className="card--tiny--image" src={scopusLogo} alt="scopus_logo" /></a>
+            <a href={content.scopus.entry[0].link[0]['@href']}><img className="card--tiny--image" src={scopusLogo} alt="scopus_logo" /></a>
           </div>
           <div className="card--tiny--info--data">
             CiteScore
@@ -390,7 +390,7 @@ export default function TinyPanel({content, type, identifier}){
         content.redib.error ?
         <div className="card--tiny--info">
           <div className="card--tiny--info--data padded">
-            <a href="https://redib.org/?lng=es"><img className="card--tiny--image bigger" src={redibCrossed} alt="redib_crossed" /></a>
+            <a href={`https://redib.org/Search/Results?type=ISN&lookfor=${identifier}`}><img className="card--tiny--image bigger" src={redibCrossed} alt="redib_crossed" /></a>
           </div> 
         </div>
         : 

@@ -6,7 +6,8 @@ export default function CrossrefCard({identifier, content}){
 
   return (
     <div className="card--crossref">
-      <a href="https://www.crossref.org/">
+      <a href={ content.error ? `https://www.crossref.org/` 
+        : `https://search.crossref.org/?from_ui=yes&q=${identifier.value}`}>
         <img className="card--crossref--image"
           src={crossrefLogo}
           alt='crossref_image'

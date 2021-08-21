@@ -6,7 +6,8 @@ export default function SemanticCard({identifier, content}){
 
   return (
     <div className="card--semantic">
-      <a href="https://www.semanticscholar.org/?utm_source=api">
+      <a href={content.error ? `https://www.semanticscholar.org/?utm_source=api` 
+        : `https://www.semanticscholar.org/paper/${content.paperId}?utm_source=api`}>
         <img className="card--crossref--image"
           src={semanticLogo}
           alt='semantic_image'
@@ -18,7 +19,7 @@ export default function SemanticCard({identifier, content}){
       </div>
       : 
       <div className="card--crossref--text">
-        <a style={{width: "60%",color: "#2b2928", fontWeight: "normal", textDecoration: "underline"}} href={content.url}>Ver en Semantic Scholar</a>
+        <a style={{width: "60%",color: "#2b2928", fontWeight: "normal", textDecoration: "underline"}} href={`${content.url}?utm_source=api`}>Ver en Semantic Scholar</a>
         <br />
         <br />
         <div className="card--semantic--info">
@@ -28,7 +29,7 @@ export default function SemanticCard({identifier, content}){
           {content.citationVelocity} citas nuevas en los últimos tres años
         </div>
         <div className="card--semantic--info">
-          {content.influentialCitationCount} citas de autores influyentes
+          {content.influentialCitationCount} citas fueron influyentes en otros trabajos
         </div>
         
       </div>  
