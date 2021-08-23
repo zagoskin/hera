@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './tinycard.css';
 import crossrefLogo from '../../images/crossrefLogo.png';
 import crossrefCrossed from '../../images/crossrefCrossed.png';
@@ -24,7 +24,7 @@ import scopusLogo from '../../images/scopusLogo.png';
 import scopusCrossed from '../../images/scopusCrossed.png';
 //import openAccess from '../../images/openAccess.png';
 //import padlock from  '../../images/padlock.png';
-//import scimagoLogo from '../../images/scimagoLogo.png';
+import scimagoLogo from '../../images/scimagoLogo.png';
 import scimagoCrossed from '../../images/scimagoCrossed.png';
 import semanticLogo from '../../images/semanticLogo.png';
 import semanticCrossed from '../../images/semanticCrossed.png';
@@ -36,6 +36,15 @@ import 'typeface-roboto';
 
 export default function TinyPanel({content, type, identifier}){
 
+  useEffect(() => {
+    const scimagoWidget = document.getElementById("scimagoWidget");
+    if (scimagoWidget){
+      const widgetImg = scimagoWidget.querySelector("img");
+      widgetImg.setAttribute("width", "125px");
+      //console.log(joinedAuthors);
+    }
+  }, [content.scimago])
+
   return (
     <div className="card--tiny">
 
@@ -43,16 +52,16 @@ export default function TinyPanel({content, type, identifier}){
       {content.crossref.error ? 
       <div className="card--tiny--info">
         <div className="card--tiny--info--data">
-          <a href="https://www.crossref.org/"><img className="card--tiny--image bigger" src={crossrefCrossed} alt="crossref_crossed" /></a>        
+          <a href="https://www.crossref.org/"><img className="card--tiny--image" src={crossrefCrossed} alt="crossref_crossed" /></a>        
         </div>
       </div> 
       : type === "DOI" ?
       <div className="card--tiny--info">
         <div className="card--tiny--info--data">
-          <a href={`https://search.crossref.org/?from_ui=yes&q=${identifier}`}><img className="card--tiny--image big" src={crossrefLogo} alt="crossref_logo" /></a>
+          <a href={`https://search.crossref.org/?from_ui=yes&q=${identifier}`}><img className="card--tiny--image " src={crossrefLogo} alt="crossref_logo" /></a>
         </div>
         <div className="card--tiny--info--data">
-          {content.crossref["is-referenced-by-count"]} menciones 
+          {content.crossref["is-referenced-by-count"]} citas 
         </div>    
         {content.crossref.license ?
           content.crossref.license.map((license,index) =>
@@ -104,11 +113,11 @@ export default function TinyPanel({content, type, identifier}){
       </div>
       : type === "ISSN" ?
       <div className="card--tiny--info">
-        <div className="card--tiny--info--data bigger">
-          <a href={`https://search.crossref.org/?from_ui=yes&q=${identifier}`}><img className="card--tiny--image big" src={crossrefLogo} alt="crossref_logo" /></a>
+        <div className="card--tiny--info--data ">
+          <a href={`https://search.crossref.org/?from_ui=yes&q=${identifier}`}><img className="card--tiny--image " src={crossrefLogo} alt="crossref_logo" /></a>
         </div>
         <div className="card--tiny--info--data">            
-          {content.crossref.counts["current-dois"]} artículos se encuentran en esta revista
+          {content.crossref.counts["current-dois"]} artículos publicados
         </div> 
       </div>
       : null
@@ -118,13 +127,13 @@ export default function TinyPanel({content, type, identifier}){
       {content.doaj === 0 ? 
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href="https://doaj.org/"><img className="card--tiny--image big" src={doajCrossed} alt="doaj_logo" /></a>
+          <a href="https://doaj.org/"><img className="card--tiny--image " src={doajCrossed} alt="doaj_logo" /></a>
         </div>
       </div> 
       : type === "DOI" ? 
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href={`https://doaj.org/article/${content.doaj.id}`}><img className="card--tiny--image big" src={doajLogo} alt="doaj_logo" /></a>
+          <a href={`https://doaj.org/article/${content.doaj.id}`}><img className="card--tiny--image " src={doajLogo} alt="doaj_logo" /></a>
         </div>
         {content.doaj.admin ? 
           content.doaj.admin.seal ?
@@ -140,7 +149,7 @@ export default function TinyPanel({content, type, identifier}){
       : type === "ISSN" ?
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href={`https://doaj.org/toc/${identifier}`}><img className="card--tiny--image big" src={doajLogo} alt="doaj_logo" /></a>
+          <a href={`https://doaj.org/toc/${identifier}`}><img className="card--tiny--image " src={doajLogo} alt="doaj_logo" /></a>
         </div>
         {content.doaj.bibjson.license.map((license,index) => 
           license.type === "CC BY" ?
@@ -195,6 +204,39 @@ export default function TinyPanel({content, type, identifier}){
       : null
       }
 
+      {/* Tiny Redib  */}
+      { type === "ISSN" ?
+        content.redib.error ?
+        <div className="card--tiny--info">
+          <div className="card--tiny--info--data padded">
+            <a href={`https://redib.org/Search/Results?type=ISN&lookfor=${identifier}`}><img className="card--tiny--image " src={redibCrossed} alt="redib_crossed" /></a>
+          </div> 
+        </div>
+        : 
+        content.redib.widget ? 
+        <div className="card--tiny--info">
+          <div className="card--tiny--info--data">
+            <a href={content.redib.widget.anchorHref}>
+              <img border="0" width="250px" height="250px" src={content.redib.widget.imgSrc} alt="redib_rank_widget"  />
+            </a>
+          </div>
+        </div>
+        :
+        <div  className="card--tiny--info">
+          <div className="card--tiny--info--data">
+            <a href={content.redib.redibURL}><img className="card--tiny--image big" src={redibLogo} alt="redib_logo" /></a>
+            <br />
+            <span style={{fontFamily: 'Roboto'}}>Indicadores calidad editorial</span>
+          </div>
+          {content.redib.indicadores.map(indicador => 
+          <div key={indicador} style={{fontFamily: 'Roboto'}} className="card--tiny--info--indicator">
+            {indicador}
+          </div>
+          )}
+        </div>
+      : null
+      }
+
       {/* Tiny Microsoft */}
       {content.microsoft ? 
       <div className="card--tiny--info">
@@ -223,7 +265,7 @@ export default function TinyPanel({content, type, identifier}){
       : type === "DOI" ?
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href="https://academic.microsoft.com/home"><img className="card--tiny--image bigger" src={microsoftCrossed} alt="microsoft_logo" /></a>
+          <a href="https://academic.microsoft.com/home"><img className="card--tiny--image" src={microsoftCrossed} alt="microsoft_logo" /></a>
         </div> 
       </div>
       : null
@@ -267,17 +309,24 @@ export default function TinyPanel({content, type, identifier}){
         <div style={{padding: "2rem"}}><span className="__dimensions_badge_embed__" data-doi={identifier}></span></div>
         
         
-        {content.dimensions.field_citation_ratio > 1.0 ?
+        {content.dimensions.field_citation_ratio ?
+          content.dimensions.field_citation_ratio > 1.0 ?
           <div className="card--tiny--info--data">
             Modelo a seguir
             <br />
-            <a href="https://www.dimensions.ai"><img className="card--tiny--image bigger" src={roleModel} alt="role_model" /></a>
+            <a href="https://www.dimensions.ai"><img className="card--tiny--image " src={roleModel} alt="role_model" /></a>
           </div>
           :
           <div className="card--tiny--info--data">
             No muy citado relativo a sus pares
             <br />
-            <a href="https://www.dimensions.ai"><img className="card--tiny--image bigger" src={thinking} alt="thinking" /></a>
+            <a href="https://www.dimensions.ai"><img className="card--tiny--image " src={thinking} alt="thinking" /></a>
+          </div>
+          :
+          <div className="card--tiny--info--data">
+            Recurso no encontrado
+            <br />
+            <a href="https://www.dimensions.ai"><img className="card--tiny--image " src={thinking} alt="thinking" /></a>
           </div>
         }
       </div>
@@ -292,14 +341,16 @@ export default function TinyPanel({content, type, identifier}){
         </div>
         {content.altmetric.error ?
         <div className="card--tiny--info--data">
-          <img className="card--tiny--image" src={redCross} alt="not_found" />
+          Recurso no encontrado
+          <br />
+          <img className="card--tiny--image small" src={redCross} alt="not_found" />
         </div>   
         : (content.altmetric.cited_by_posts_count ?
             content.altmetric.cited_by_posts_count > 100 ?
             <div className="card--tiny--info--data">
               Hot topic en redes sociales!
               <br />
-              <a href="https://www.altmetric.com"><img className="card--tiny--image hot" src={hotTopic} alt="hot_topic" /></a>
+              <a href="https://www.altmetric.com"><img className="card--tiny--image small" src={hotTopic} alt="hot_topic" /></a>
             </div>   
             : 
             <div className="card--tiny--info--data">
@@ -314,12 +365,39 @@ export default function TinyPanel({content, type, identifier}){
       : null
       }
 
+      {/* Tiny Wos  */}
+      { type === "ISSN" ?
+        content.wos.error ?
+        <div className="card--tiny--info">
+          <div className="card--tiny--info--data">
+            <a href={`https://mjl.clarivate.com/search-results?issn=${identifier}&hide_exact_match_fl=true`}><img className="card--tiny--image big" src={wosCrossed} alt="wos_logo" /></a>
+          </div> 
+        </div>
+        : 
+        content.wos.totalRecords === 0 ?
+        <div className="card--tiny--info">
+          <div className="card--tiny--info--data">
+            <a href={`https://mjl.clarivate.com/search-results?issn=${identifier}&hide_exact_match_fl=true`}><img className="card--tiny--image big" src={wosCrossed} alt="wos_logo" /></a>
+          </div> 
+        </div>
+        :
+        <div className="card--tiny--info">
+          <div className="card--tiny--info--data">
+            <a href={`https://mjl.clarivate.com/search-results?issn=${identifier}&hide_exact_match_fl=true`}><img className="card--tiny--image big" src={wosLogo} alt="wos_logo" /></a>
+          </div> 
+          <div className="card--tiny--info--data">
+            Indexado por Web of Science
+          </div> 
+        </div>
+      : null
+      }
+
       {/* Tiny Scopus */}
       { type === "ISSN" ? 
         content.scopus === null ?
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
-            <a href="https://www.scopus.com/home.uri"><img className="card--tiny--image big" src={scopusCrossed} alt="scopus_logo" /></a>
+            <a href="https://www.scopus.com/home.uri"><img className="card--tiny--image " src={scopusCrossed} alt="scopus_logo" /></a>
           </div>
         </div>
         : 
@@ -341,79 +419,22 @@ export default function TinyPanel({content, type, identifier}){
       : null
       }
 
-      {/* Tiny Wos  */}
-      { type === "ISSN" ?
-        content.wos.error ?
-        <div className="card--tiny--info">
-          <div className="card--tiny--info--data">
-            <a href={`https://mjl.clarivate.com/search-results?issn=${identifier}&hide_exact_match_fl=true`}><img className="card--tiny--image biggerer" src={wosCrossed} alt="wos_logo" /></a>
-          </div> 
-        </div>
-        : 
-        content.wos.totalRecords === 0 ?
-        <div className="card--tiny--info">
-          <div className="card--tiny--info--data">
-            <a href={`https://mjl.clarivate.com/search-results?issn=${identifier}&hide_exact_match_fl=true`}><img className="card--tiny--image biggerer" src={wosCrossed} alt="wos_logo" /></a>
-          </div> 
-        </div>
-        :
-        <div className="card--tiny--info">
-          <div className="card--tiny--info--data">
-            <a href={`https://mjl.clarivate.com/search-results?issn=${identifier}&hide_exact_match_fl=true`}><img className="card--tiny--image bigger" src={wosLogo} alt="wos_logo" /></a>
-          </div> 
-          <div className="card--tiny--info--data">
-            Indexado por Web of Science
-          </div> 
-        </div>
-      : null
-      }
-
       {/* Tiny Scimago  */}
       { type === "ISSN" ?
         content.scimago.error ?
         <div className="card--tiny--info">
           <div className="card--tiny--info--data padded">
-            <a href="https://www.scimagojr.com/"><img className="card--tiny--image big" src={scimagoCrossed} alt="scimago_logo" /></a>
+            <a href="https://www.scimagojr.com/"><img className="card--tiny--image " src={scimagoCrossed} alt="scimago_logo" /></a>
           </div> 
         </div>
         : 
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
-            <div className="card--scimago--info--embed" dangerouslySetInnerHTML={{ __html: content.scimago.embedString }}></div>
-          </div> 
-        </div>
-      : null
-      }
-
-      {/* Tiny Redib  */}
-      { type === "ISSN" ?
-        content.redib.error ?
-        <div className="card--tiny--info">
-          <div className="card--tiny--info--data padded">
-            <a href={`https://redib.org/Search/Results?type=ISN&lookfor=${identifier}`}><img className="card--tiny--image bigger" src={redibCrossed} alt="redib_crossed" /></a>
-          </div> 
-        </div>
-        : 
-        content.redib.widget ? 
-        <div className="card--tiny--info">
+            <a href={content.scimago.journalURL}><img className="card--scimago--image" src={scimagoLogo} alt='scimago'/></a>
+          </div>
           <div className="card--tiny--info--data">
-            <a href={content.redib.widget.anchorHref}>
-              <img border="0" width="250px" height="250px" src={content.redib.widget.imgSrc} alt="redib_rank_widget"  />
-            </a>
-          </div>
-        </div>
-        :
-        <div  className="card--tiny--info">
-          <div className="card--tiny--info--data">
-            <a href={content.redib.redibURL}><img className="card--tiny--image big" src={redibLogo} alt="redib_logo" /></a>
-            <br />
-            <span style={{fontFamily: 'Roboto'}}>Indicadores calidad editorial</span>
-          </div>
-          {content.redib.indicadores.map(indicador => 
-          <div key={indicador} style={{fontFamily: 'Roboto'}} className="card--tiny--info--indicator">
-            {indicador}
-          </div>
-          )}
+            <div className="card--scimago--info--embed" id="scimagoWidget" dangerouslySetInnerHTML={{ __html: content.scimago.embedString }}></div>
+          </div> 
         </div>
       : null
       }

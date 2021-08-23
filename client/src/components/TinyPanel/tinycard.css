@@ -13,7 +13,7 @@
 .card--tiny--info {
   display: flex;
   flex-wrap: wrap;
-  flex-basis: 32%;
+  flex-basis: 15%;
   flex-grow: 0;
   flex-shrink: 0;
   border: 0px;
@@ -32,10 +32,10 @@
 
 .card--tiny--seal {
   color: #282624;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
   border: 0.5px;
-  width: 50px;
+  width: 100%;
   padding: 0.5rem;
   border-radius: 15px;
   border-style: solid;
@@ -70,7 +70,7 @@
 .card--tiny--license {
   margin-bottom: 0.75rem;
   display: flex;
-  width: 50%;
+  width: 100%;
   align-items: center;
   justify-content: center;
 }
@@ -94,6 +94,10 @@
 
 .biggerer {
   width: 200px;
+}
+
+.small {
+  width: 80px;
 }
 
 .card--tiny--info--indicator {
@@ -138,5 +142,9 @@
 
   .card--tiny--license--image {
     width: 125px;
+  }
+
+  .small {
+    width: 80px;
   }
 }

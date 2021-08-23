@@ -19,9 +19,7 @@ export default function SemanticCard({identifier, content}){
       </div>
       : 
       <div className="card--crossref--text">
-        <a style={{width: "60%",color: "#2b2928", fontWeight: "normal", textDecoration: "underline"}} href={`${content.url}?utm_source=api`}>Ver en Semantic Scholar</a>
-        <br />
-        <br />
+        
         <div className="card--semantic--info">
           {content.numCitedBy} citas en otros artículos
         </div>
@@ -32,6 +30,7 @@ export default function SemanticCard({identifier, content}){
           {content.influentialCitationCount} citas fueron influyentes en otros trabajos
         </div>
         
+        <a style={{width: "60%", fontSize: "1.6rem", textDecoration: "underline", paddingBottom: "1rem"}} href={`${content.url}?utm_source=api`}>Click para ir al recurso en en Semantic Scholar</a>
       </div>  
       }
     </div>

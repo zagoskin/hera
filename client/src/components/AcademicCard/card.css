@@ -881,6 +881,7 @@ a:hover {
   .card--scopus--disclaimer--text {
     width: 100%;
     margin-bottom: 1rem;
+    font-size: 1.85rem;
   }
 
   .card--scopus--powered {
@@ -891,6 +892,7 @@ a:hover {
 
   .card--scopus--disclaimer--links {
     margin-bottom: 5%;
+    font-size: 1.85rem;
   }
 
   .card--altmetric--info {

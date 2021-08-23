@@ -83,11 +83,11 @@ export default function AcademicCard({content,additionalContent}){
       }
       <Collapse isOpened={showMore} theme={{collapse: 'ReactCollapse--collapse'}} key={'collapse2'}>
         <CrossrefCard identifier={content.identifier} content={content.crossref} key={'crossref' + content.identifier.value}/>
+        <SemanticCard DOI={content.identifier.value} content={content.semantic} key={'semantic' + content.identifier.value} />
         <DOAJCard identifier={content.identifier} content={content.doaj} key={'doaj' + content.identifier.value}/>
         { content.identifier.type === "DOI" ?
         <>
         <MicrosoftCard identifier={content.identifier} content={content.microsoft} key={'microsoft' + content.identifier.value}/>
-        <SemanticCard DOI={content.identifier.value} content={content.semantic} key={'semantic' + content.identifier.value} />
         <DimensionsBadge DOI={content.identifier.value} content={content.dimensions} key={'dimensions' + content.identifier.value} />
         <AltmetricBadge DOI={content.identifier.value} content={content.altmetric} key={'altmetric' + content.identifier.value}/>
         </>
@@ -95,10 +95,10 @@ export default function AcademicCard({content,additionalContent}){
         }
         { content.identifier.type === "ISSN" ?
         <>
-        <WosCard ISSN={content.identifier.value} content={content.wos} key={'wos' + content.identifier.value}/>
-        <ScimagoCard content={content.scimago} key={'scimago' + content.identifier.value} />
         <RedibCard ISSN={content.identifier.value} content={content.redib} key={'redib' + content.identifier.value} />
+        <WosCard ISSN={content.identifier.value} content={content.wos} key={'wos' + content.identifier.value}/>
         <ScopusGraph data={content.scopus} key={'scopus' + content.identifier.value} />
+        <ScimagoCard content={content.scimago} key={'scimago' + content.identifier.value} />
         </>
         : null
         }
@@ -112,10 +112,10 @@ export default function AcademicCard({content,additionalContent}){
         <br />
         <CrossrefCard identifier={additionalContent.identifier} content={additionalContent.crossref} key={'crossref' + additionalContent.identifier.value}/>
         <DOAJCard identifier={additionalContent.identifier} content={additionalContent.doaj} key={'doaj' + additionalContent.identifier.value}/>
-        <WosCard ISSN={additionalContent.identifier.value} content={additionalContent.wos} key={'wos' + additionalContent.identifier.value}/>
-        <ScimagoCard content={additionalContent.scimago} key={'scimago' + additionalContent.identifier.value} />
         <RedibCard ISSN={additionalContent.identifier.value} content={additionalContent.redib} key={'redib' + additionalContent.identifier.value} />
+        <WosCard ISSN={additionalContent.identifier.value} content={additionalContent.wos} key={'wos' + additionalContent.identifier.value}/>
         <ScopusGraph data={additionalContent.scopus} key={'scopus' + additionalContent.identifier.value} />
+        <ScimagoCard content={additionalContent.scimago} key={'scimago' + additionalContent.identifier.value} />
         
         </>
         : null
