@@ -39,6 +39,7 @@ export default function Search(){
     if ((res.issn !== null) && (criteria === "DOI")){
       const journalContent = await getDataByQuery(res.issn,"ISSN");
       setAdditionalContent(journalContent);
+      setContent({ ...res, journalTitle: journalContent.title, publisher: journalContent.publisher });
     }
     setLoading(false);
   }
