@@ -1,5 +1,5 @@
 const getContents = async (url, apiURL, options) => {
-  console.log(options);
+  // console.log(options);
   try {
     const res = await fetch(apiURL, {
       method: 'POST',
@@ -39,8 +39,8 @@ const getHtml = async (url, apiURL, options) => {
 
 export const getContentsCrossref = async (url) => {
   const contents = await getContents(url, `/api/getContentsDefault`, '');
-  console.log('Contents de la API en front Crossref:');
-  console.log(contents);
+  // console.log('Contents de la API en front Crossref:');
+  // console.log(contents);
   if (contents.error) {
     contents.message = { ...contents.message, error: contents.error }
   }
@@ -49,50 +49,50 @@ export const getContentsCrossref = async (url) => {
 
 export const getContentsDoaj = async (url) => {
   const contents = await getContents(url, `/api/getContentsDefault`, '');
-  console.log('Contents de la API en front DOAJ:');
-  console.log(contents);
+  // console.log('Contents de la API en front DOAJ:');
+  // console.log(contents);
   return contents;
 }
 
 export const getContentsMicrosoft = async (url) => {
   const contents = await getContents(url, `/api/getContentsMicrosoft`, '');
-  console.log('Contents de la API en front Microsoft:');
-  console.log(contents);
+  // console.log('Contents de la API en front Microsoft:');
+  // console.log(contents);
   return contents.entities;
 }
 
 export const getContentsScopus = async (url) => {
   const contents = await getContents(url, `/api/getContentsScopus`, '');
-  console.log('Contents de la API en front Scopus:');
-  console.log(contents);
+  // console.log('Contents de la API en front Scopus:');
+  // console.log(contents);
   return contents["serial-metadata-response"];
 }
 
 export const getContentsDimensions = async (url) => {
   const contents = await getContents(url, `/api/getContentsDefault`, '');
-  console.log('Contents de la API en front Dimensions:');
-  console.log(contents);
+  // console.log('Contents de la API en front Dimensions:');
+  // console.log(contents);
   return contents;
 }
 
 export const getContentsAltmetric = async (url) => {
   const contents = await getContents(url, `/api/getContentsDefault`, '');
-  console.log('Contents de la API en front Altmetric:');
-  console.log(contents);
+  // console.log('Contents de la API en front Altmetric:');
+  // console.log(contents);
   return contents;
 }
 
 export const getContentsSemantic = async (url) => {
   const contents = await getContents(url, `/api/getContentsDefault`, '');
-  console.log('Contents de la API en front Semantic:');
-  console.log(contents);
+  // console.log('Contents de la API en front Semantic:');
+  // console.log(contents);
   return contents;
 }
 
 export const getContentsWos = async (url, issn) => {
   const contents = await getContents(url, `/api/getContentsWos`, issn);
-  console.log('Contents de la API en front Wos:');
-  console.log(contents);
+  // console.log('Contents de la API en front Wos:');
+  // console.log(contents);
   return contents;
 }
 
@@ -130,12 +130,14 @@ export const getContentsScimago = async (url, title) => {
       const journalData = journalDOM.body.querySelector(".journalgrid").querySelectorAll("div");
       const country = journalData[0].querySelector("p").querySelector("a").innerText;
       const coverage = journalData[6].querySelector("p").innerText;
+      const publisher = journalDOM.body.querySelector(".journalgrid").querySelectorAll("div")[2].querySelector("p").innerText;
       contents = {
         hIndex,
         country,
         coverage,
         embedString,
-        journalURL
+        journalURL,
+        publisher
       }
     } else {
       contents = {
