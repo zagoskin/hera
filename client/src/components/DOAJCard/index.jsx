@@ -10,8 +10,13 @@ import ccBySa from '../../images/cc-by-sa.png';
 export default function DOAJCard({identifier, content}){
 
   return (
-    <div className="card--doaj">
-      <a href={ content === 0 ? `https://doaj.org/` 
+    <div className="card--doaj" style={identifier.type === "DOI" ? 
+    { width: "48%",
+      marginLeft: "3%" } 
+      : {width: "100%"}
+    }>
+      <div className="card--image--container" style={identifier.type === "ISSN" ? {width: "17%" } : null}>
+      <a href={ content === null ? `https://doaj.org/` 
         : identifier.type === 'ISSN' ? `https://doaj.org/toc/${identifier.value}` 
         : `https://doaj.org/article/${content.id}`}>
         <img className="card--doaj--image"
@@ -19,7 +24,9 @@ export default function DOAJCard({identifier, content}){
           alt='doaj_image'
         />
       </a>
-      {content === 0 ? 
+      </div>
+      <div className="card--data--container" style={identifier.type === "ISSN" ? {width: "83%" } : null}>
+      {content === null ? 
       <div className="card--doaj--text--warning">
         No incluido en DOAJ
       </div> 
@@ -29,11 +36,12 @@ export default function DOAJCard({identifier, content}){
         Indexado por DOAJ
       </div>,
         (content.admin ? 
-          content.admin.seal ?
-          <a href='https://doaj.org/apply/seal/' key={content.id}>
-            
-            <span className='card--doaj--seal'>☑ DOAJ Seal</span>
-          </a>
+          content.admin.seal ?      
+          <div className="card--doaj--seal--container" key={`seal${content.id}`}>    
+            <a href='https://doaj.org/apply/seal/' key={content.id}>
+              <span className='card--doaj--seal'>☑ DOAJ Seal</span>
+            </a>
+          </div>
             : null 
         : null
       )]
@@ -96,9 +104,9 @@ export default function DOAJCard({identifier, content}){
         </div> 
         {content.admin ? 
           content.admin.seal ?
-          <div className="card--doaj--issn--info--seal">
-            <a href='https://doaj.org/apply/seal/'>  
-              <span className='card--doaj--seal'>☑ DOAJ Seal</span>
+          <div className="card--doaj--seal--container"> 
+            <a href='https://doaj.org/apply/seal/' style={{marginRight: "20%"}}>  
+              <span className='card--doaj--seal' >☑ DOAJ Seal</span>
             </a>
           </div>
             : null 
@@ -107,6 +115,7 @@ export default function DOAJCard({identifier, content}){
       </div>       
       : null
       }
+      </div>
     </div>
   )
 
