@@ -49,6 +49,15 @@ export default function AcademicCard({content,additionalContent}){
             <em>Autores: {authors}.</em> 
           </p> : null 
           }
+          
+          {content.journalTitle ? <p>
+            <b>Título de la revista:</b><em> {content.journalTitle}</em>
+          </p> : null          
+          }
+          {content.publisher ? <p>
+            <b>Editorial:</b><em> {content.publisher}</em>
+          </p> : null
+          }
           {content.abstract ? <div className='card--abstract'><h1>ABSTRACT</h1> 
           <em><p className="card--abstract--text">
               {content.abstract.replace(/(<([^>]+)>)/ig, '')}
@@ -82,9 +91,13 @@ export default function AcademicCard({content,additionalContent}){
         <button className="card--collapse--btn" onClick={handleShowMore}>Ver menos</button>
       }
       <Collapse isOpened={showMore} theme={{collapse: 'ReactCollapse--collapse'}} key={'collapse2'}>
+      <div className="card--panel">
         <CrossrefCard identifier={content.identifier} content={content.crossref} key={'crossref' + content.identifier.value}/>
-        <SemanticCard DOI={content.identifier.value} content={content.semantic} key={'semantic' + content.identifier.value} />
         <DOAJCard identifier={content.identifier} content={content.doaj} key={'doaj' + content.identifier.value}/>
+        { content.identifier.type === "DOI" ?
+        <SemanticCard DOI={content.identifier.value} content={content.semantic} key={'semantic' + content.identifier.value} />
+        : null
+        }
         { content.identifier.type === "DOI" ?
         <>
         <MicrosoftCard identifier={content.identifier} content={content.microsoft} key={'microsoft' + content.identifier.value}/>
@@ -120,7 +133,7 @@ export default function AcademicCard({content,additionalContent}){
         </>
         : null
         } 
-        
+      </div>
       </Collapse>
     </div>
   )
