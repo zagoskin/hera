@@ -31,10 +31,10 @@ export const getDataByQuery = async (query, criteria) => {
 
   let res = {
     crossref: crossrefData,
-    doaj: doajData.total === 0 ? 0 : doajData.results[0],
-    microsoft: microsoftData.length > 0 ? microsoftData[0] : null,
+    doaj: doajData.total === 0 ? null : doajData.results[0],
+    microsoft: microsoftData.length > null ? microsoftData[0] : null,
     scopus: scopusData ?? null,
-    dimensions: dimensionsData,
+    dimensions: dimensionsData.error ? null : dimensionsData,
     altmetric: altmetricData,
     semantic: semanticData,
     redib: redibData,
@@ -64,14 +64,24 @@ export const getDataByQuery = async (query, criteria) => {
             : microsoftData[0].BT === 'b' ? `book`
             : microsoftData[0].BT === 'c' ? `book chapter`
             : microsoftData[0].BT === 'p' ? `bonference paper`
-            : '' : ''
+            : '' : '',
+    publisher: criteria === "DOI" ? undefined      
+          : doajData.total > 0 ? doajData.results[0].bibjson.publisher.name
+          : scopusData ? scopusData["dc:publisher"]
+          : wosData.journalProfiles.length > 0 ? wosData.journalProfiles[0].publisherName
+          : crossrefData.publisher ? crossrefData.publisher
+          : undefined
   }
 
   if (criteria === "ISSN") {
     scimagoData = await getContentsScimago(getURLScimago(), res.title);
+    if (res.publisher === undefined){
+      res = { ...res, publisher: scimagoData.publisher}
+    }
   }
-
+  
   res = { ...res, scimago: scimagoData }
+  
 
   return res;
 }
