@@ -2,6 +2,11 @@ const path = require('path');
 const express = require("express");
 const fetch = require("node-fetch");
 const e = require('express');
+const https = require('https');
+
+const httpsAgent = new https.Agent({
+      rejectUnauthorized: false,
+    });
 
 var constants = require('./constants');
 
@@ -74,7 +79,9 @@ app.post("/api/getContentsWos", async (req, res) => {
 });
 
 app.post("/api/getContentsHtml", async (req, res) => {
-  const html = await fetchHtmlContents(req.body.url, {});
+  const html = await fetchHtmlContents(req.body.url, {
+        agent: httpsAgent
+      });
   const response = {
     'html': html,
   }
