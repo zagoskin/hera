@@ -16,28 +16,48 @@ export default function DimensionsBadge({DOI, content}){
         <span className="__dimensions_badge_embed__" data-doi={doi}></span>
       </div>
       <div className="card--dimensions--info">
-        {content.field_citation_ratio > 1.0 ?
-          <div className="card--dimensions--text">
-            Es <b>muy</b> citado en relación a otros del mismo campo con similar antigüedad 
-          </div>
+      {content ? 
+        <>
+          {content.field_citation_ratio ?
+          <>
+            {content.field_citation_ratio > 1.0 ?
+              <div className="card--dimensions--text">
+                Es <b>muy</b> citado en relación a otros del mismo campo con similar antigüedad 
+              </div>
+              :
+              <div className="card--dimensions--text">
+                No es muy citado en relación a otros del mismo campo con similar antigüedad 
+              </div>
+            }
+          </>
           :
           <div className="card--dimensions--text">
-            No es muy citado en relación a otros del mismo campo con similar antigüedad 
+            Sin información estadística sobre citas de artículos con similar antigüedad
           </div>
-        }
-        {content.relative_citation_ratio > 1.0 ?
-          <div className="card--dimensions--text">
-            Es <b>muy</b> citado en relación a otros del mismo campo 
-          </div>
+          }
+          { content.relative_citation_ratio ?
+          <>
+            {content.relative_citation_ratio > 1.0 ?
+              <div className="card--dimensions--text">
+                Es <b>muy</b> citado en relación a otros del mismo campo 
+              </div>
+              :
+              <div className="card--dimensions--text">
+                No es muy citado en relación a otros del mismo campo
+              </div>
+            }
+          </>
           :
           <div className="card--dimensions--text">
-            No es muy citado en relación a otros del mismo campo
+            Sin información estadística sobre citas de artículos del mismo campo
           </div>
-        }
-        {/* <br />
-        <div className="card--dimensions--text">
-          <b>{`<-- Coloque el mouse encima!`}</b>
-        </div> */}
+          }
+        </>
+        :
+        <div className="card--badge--text--warning">
+          No hallado en Dimensions
+        </div>
+      }
       </div>
       <div className="card--dimensions--image--container">
         <img className="card--dimensions--image"
@@ -46,7 +66,7 @@ export default function DimensionsBadge({DOI, content}){
           />
       </div>
       <div className="card--dimensions--disclaimer">
-      Data sourced from Dimensions, an inter-linked research information system provided by Digital Science (<a href="https://www.dimensions.ai">https://www.dimensions.ai</a>).
+      Data sourced from Dimensions, by Digital Science (<a href="https://www.dimensions.ai">https://www.dimensions.ai</a>).
       </div>
     </div>
   )
