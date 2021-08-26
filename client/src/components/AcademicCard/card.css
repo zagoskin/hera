@@ -34,6 +34,11 @@
   background-color: white;
 }
 
+.card--panel {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .card--crossref,
 .card--doaj,
 .card--microsoft,
@@ -59,6 +64,7 @@
     rgb(204, 253, 255),
     rgb(61, 135, 148)
   );
+  display: flex;
 }
 
 .card--doaj {
@@ -69,6 +75,8 @@
     rgb(253, 239, 216),
     rgb(218, 160, 68)
   );
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .card--microsoft {
@@ -80,7 +88,9 @@
     rgb(196, 210, 255),
     rgb(60, 93, 202)
   );
-  overflow: hidden;
+  width: 48%;
+  margin-left: 3%;
+  display: flex;
 }
 
 .card--scopus {
@@ -112,8 +122,7 @@
     #bfbbd8,
     #c9c6e0,
     #b6b2d6,
-    #57518a,
-    #2b235c
+    #57518a
   );
 }
 
@@ -150,9 +159,12 @@
     to right,
     white,
     rgb(171, 220, 243),
-    rgb(20, 88, 119),
-    rgb(6, 52, 73)
+    rgb(56, 143, 184),
+    rgb(52, 90, 107)
   );
+  width: 48%;
+  margin-right: 1%;
+  display: flex;
 }
 
 .card--redib {
@@ -219,6 +231,11 @@
   height: auto;
 }
 
+.card--dimensions--text {
+  margin-right: 5%;
+  margin-bottom: 1%;
+}
+
 .card--content {
   display: inline-block;
   width: 100%;
@@ -229,25 +246,27 @@
   font-size: 2rem;
 }
 
+.card--image--container {
+  width: 35%;
+}
+
+.card--data--container {
+  width: 60%;
+  margin-right: 0;
+  align-items: center;
+}
+
 .card--crossref--image {
-  float: left;
-  margin: 0 auto;
-  width: 15%;
-  height: 15%;
+  width: 100%;
+  flex: 1;
 }
 
 .card--doaj--image {
-  float: left;
-  margin: 0 auto;
-  width: 22%;
-  height: 22%;
+  width: 100%;
 }
 
 .card--microsoft--image {
-  float: left;
-  margin: 0 auto;
-  width: 16%;
-  height: 16%;
+  width: 100%;
 }
 
 .card--crossref--text {
@@ -269,7 +288,7 @@
   text-align: left;
   padding: 0.75rem;
   max-width: 90%;
-  margin-bottom: 2%;
+  margin-bottom: 5%;
   background-image: linear-gradient(
     to left,
     white,
@@ -312,6 +331,7 @@
 }
 
 .card--microsoft--text {
+  text-align: center;
   font-family: Calibri;
   font-size: 1.25rem;
   margin-top: 1.5rem;
@@ -320,9 +340,9 @@
 }
 
 .card--microsoft--text--cc {
-  margin-left: 10%;
-  width: 40%;
-  float: left;
+  font-weight: bold;
+  width: 90%;
+  margin-right: 50%;
 }
 
 .card--doaj--text {
@@ -331,24 +351,12 @@
 }
 
 .card--doaj--text--warning,
-.card--doaj--text--success {
+.card--badge--text--warning {
+  padding: 0.5rem;
   text-align: center;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  margin-left: 30%;
-  margin-right: 20%;
-  margin-top: 0.5rem;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-.card--doaj--text--warning {
-  margin-left: 25%;
-  margin-right: 20%;
-  padding-left: 1.5rem;
   margin-top: 2rem;
+  font-size: 1.75rem;
+  font-weight: bold;
   border: 1px;
   border-radius: 15px;
   border-style: double;
@@ -356,6 +364,29 @@
   background-color: rgb(228, 135, 135);
 }
 
+.card--badge--text--warning {
+  text-align: center;
+  box-sizing: border-box;
+  width: 70%;
+  margin-left: 5%;
+}
+
+.card--doaj--text--success {
+  font-size: 2rem;
+  text-align: center;
+  margin-right: 0%;
+  padding: 1rem;
+  width: 100%;
+}
+
+.card--doaj--seal--container {
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 2rem;
+}
 .card--scopus--text--warning--container {
   padding: 2rem;
   width: 70%;
@@ -393,8 +424,7 @@
   color: #fd5a3b;
 }
 .card--doaj--seal {
-  margin-left: 20%;
-  margin-top: 40%;
+  flex: 1;
   color: #282624;
   font-size: 1.5rem;
   font-weight: bold;
@@ -416,7 +446,7 @@
   padding: 1rem;
   margin-left: 5%;
   margin-bottom: 2%;
-  width: 75%;
+  width: 90%;
   text-align: center;
   white-space: pre-wrap;
 }
@@ -550,12 +580,6 @@ a:hover {
   height: auto;
 }
 
-.card--doaj--issn--info--seal {
-  margin-left: 5%;
-  width: 100%;
-  margin-bottom: 5%;
-}
-
 .card--scopus--text,
 .card--scopus--citescore {
   padding: 0.5rem;
@@ -596,7 +620,7 @@ a:hover {
 }
 
 .card--altmetric--info {
-  width: 70%;
+  width: 60%;
   font-size: 1.5rem;
 }
 
@@ -673,22 +697,25 @@ a:hover {
 
 /* NO SMARTPHONE CSS */
 @media (min-width: 786px) {
-  .card--crossref,
   .card--doaj {
     width: 100%;
   }
+  .card--image--container {
+    width: 20%;
+  }
+
   .card--crossref--image {
-    float: left;
-    margin: 0 auto;
-    width: 15%;
-    height: 15%;
+    width: 100%;
+    flex: 1;
+  }
+
+  .card--data--container {
+    width: 80%;
+    margin-right: 0;
   }
 
   .card--doaj--image {
-    float: left;
-    margin: 0 auto;
-    width: 15%;
-    height: 15%;
+    width: 100%;
   }
 
   .card--crossref--text {
@@ -708,31 +735,35 @@ a:hover {
     font-weight: 500;
     overflow: auto;
   }
-  .card--doaj--text--warning,
-  .card--doaj--text--success {
-    text-align: center;
-    font-size: 3rem;
-    font-weight: bold;
-    padding-left: 5rem;
-    padding-right: 3rem;
-    padding-bottom: 1.5rem;
-    margin-left: 32%;
-    margin-right: 32%;
-    margin-bottom: 0;
-  }
-  .card--doaj--text--success {
-    padding-top: 0.25rem;
-    margin-top: 1rem;
-  }
-
   .card--doaj--text--warning {
-    margin-top: 4rem;
-    padding-top: 1.5rem;
+    width: 60%;
+    margin-left: 10%;
+    font-size: 2.5rem;
+    font-weight: bold;
     border: 3px;
     border-radius: 15px;
     border-style: solid;
     border-color: rgb(199, 44, 44);
-    background-color: rgb(228, 135, 135);
+  }
+
+  .card--badge--text--warning {
+    margin-left: 35%;
+    text-align: center;
+    width: 50%;
+    height: auto;
+    font-size: 2.5rem;
+    font-weight: bold;
+    border: 3px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: rgb(199, 44, 44);
+  }
+
+  .card--doaj--text--success {
+    font-size: 3rem;
+    text-align: center;
+    margin-right: 25%;
+    padding: 2rem;
   }
 
   .card--title {
@@ -758,13 +789,12 @@ a:hover {
   }
   .card--doaj--seal {
     font-family: "Source Sans Pro", sans-serif;
-    margin-left: 28%;
-    margin-top: 20%;
     color: #282624;
     font-size: 2rem;
     font-weight: bold;
     border: 0.5px;
     padding: 0.5rem;
+    margin-bottom: 5%;
     border-radius: 15px;
     border-style: solid;
     border-color: rgb(199, 44, 44);
@@ -779,8 +809,7 @@ a:hover {
     font-size: 4rem;
   }
 
-  .card--doaj--issn--info,
-  .card--doaj--issn--info--seal {
+  .card--doaj--issn--info {
     margin-bottom: 2%;
   }
 
@@ -802,7 +831,7 @@ a:hover {
     float: left;
     font-size: 1.85rem;
     font-weight: normal;
-    width: 70%;
+    width: 60%;
   }
 
   .card--dimensions--disclaimer {
@@ -810,7 +839,7 @@ a:hover {
     margin-bottom: 0%;
     margin-left: 10%;
     width: 70%;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .card--dimensions--image--container {
@@ -893,10 +922,6 @@ a:hover {
   .card--scopus--disclaimer--links {
     margin-bottom: 5%;
     font-size: 1.85rem;
-  }
-
-  .card--altmetric--info {
-    width: 65%;
   }
 
   .card--altmetric--logo {
