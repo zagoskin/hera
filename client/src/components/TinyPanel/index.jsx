@@ -124,7 +124,7 @@ export default function TinyPanel({content, type, identifier}){
       }
 
       {/* Tiny DOAJ */}
-      {content.doaj === 0 ? 
+      {content.doaj === null ? 
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
           <a href="https://doaj.org/"><img className="card--tiny--image " src={doajCrossed} alt="doaj_logo" /></a>
@@ -217,7 +217,7 @@ export default function TinyPanel({content, type, identifier}){
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
             <a href={content.redib.widget.anchorHref}>
-              <img border="0" width="250px" height="250px" src={content.redib.widget.imgSrc} alt="redib_rank_widget"  />
+              <img border="0" width="125px" height="125px" src={content.redib.widget.imgSrc} alt="redib_rank_widget"  />
             </a>
           </div>
         </div>
@@ -308,26 +308,35 @@ export default function TinyPanel({content, type, identifier}){
       <div className="card--tiny--info">
         <div style={{padding: "2rem"}}><span className="__dimensions_badge_embed__" data-doi={identifier}></span></div>
         
-        
-        {content.dimensions.field_citation_ratio ?
-          content.dimensions.field_citation_ratio > 1.0 ?
-          <div className="card--tiny--info--data">
-            Modelo a seguir
-            <br />
-            <a href="https://www.dimensions.ai"><img className="card--tiny--image " src={roleModel} alt="role_model" /></a>
-          </div>
-          :
-          <div className="card--tiny--info--data">
-            No muy citado relativo a sus pares
-            <br />
-            <a href="https://www.dimensions.ai"><img className="card--tiny--image " src={thinking} alt="thinking" /></a>
-          </div>
-          :
-          <div className="card--tiny--info--data">
-            Recurso no encontrado
-            <br />
-            <a href="https://www.dimensions.ai"><img className="card--tiny--image " src={thinking} alt="thinking" /></a>
-          </div>
+        {content.dimensions ?
+        <>
+          {content.dimensions.field_citation_ratio ?
+            content.dimensions.field_citation_ratio > 1.0 ?
+            <div className="card--tiny--info--data">
+              Modelo a seguir
+              <br />
+              <a href="https://www.dimensions.ai"><img className="card--tiny--image " src={roleModel} alt="role_model" /></a>
+            </div>
+            :
+            <div className="card--tiny--info--data">
+              No muy citado relativo a sus pares
+              <br />
+              <a href="https://www.dimensions.ai"><img className="card--tiny--image " src={thinking} alt="thinking" /></a>
+            </div>
+            :
+            <div className="card--tiny--info--data">
+              Sin información de tendencias
+              <br />
+              <a href="https://www.dimensions.ai"><img className="card--tiny--image " src={thinking} alt="thinking" /></a>
+            </div>
+          }
+        </>
+        :
+        <div className="card--tiny--info--data">
+          Recurso no encontrado
+          <br />
+          <a href="https://www.dimensions.ai"><img className="card--tiny--image " src={thinking} alt="thinking" /></a>
+        </div>
         }
       </div>
       : null
