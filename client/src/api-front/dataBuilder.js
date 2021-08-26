@@ -34,7 +34,7 @@ export const getDataByQuery = async (query, criteria) => {
     doaj: doajData.total === 0 ? null : doajData.results[0],
     microsoft: microsoftData.length > null ? microsoftData[0] : null,
     scopus: scopusData ?? null,
-    dimensions: dimensionsData.error ? null : dimensionsData,
+    dimensions: dimensionsData ? dimensionsData.error ? null : dimensionsData : null,
     altmetric: altmetricData,
     semantic: semanticData,
     redib: redibData,
