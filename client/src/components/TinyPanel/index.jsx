@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react';
 import './tinycard.css';
+import { renderLicense } from '../DOAJCard';
+import { renderLicenseByURL } from '../CrossrefCard';
 import crossrefLogo from '../../images/crossrefLogo.png';
 import crossrefCrossed from '../../images/crossrefCrossed.png';
 import doajLogo from '../../images/doajLogo.png';
 import doajCrossed from '../../images/doajCrossed.png';
-import ccBy from '../../images/cc-by.png';
-import ccByNc from '../../images/cc-by-nc.png';
-import ccByNcNd from '../../images/cc-by-nc-nd.png';
-import ccByNcSa from '../../images/cc-by-nc-sa.png';
-import ccByNd from '../../images/cc-by-nd.png';
-import ccBySa from '../../images/cc-by-sa.png';
 import redCross from '../../images/redCross.png';
 import microsoftLogo from '../../images/microsoftLogo.png';
 import microsoftCrossed from '../../images/microsoftCrossed.png';
@@ -65,48 +61,7 @@ export default function TinyPanel({content, type, identifier}){
         </div>    
         {content.crossref.license ?
           content.crossref.license.map((license,index) =>
-            license.URL === "https://creativecommons.org/licenses/by/4.0/" ?
-            <div className="card--tiny--license" key={index}>
-              <a href="https://creativecommons.org/licenses/by/4.0/">
-                <img className="card--tiny--license--image" src={ccBy} alt="cc-by-nd" />
-              </a>
-            </div>
-            :
-            license.URL === "https://creativecommons.org/licenses/by-nd/4.0/" ?
-            <div className="card--tiny--license" key={index}>
-              <a href="https://creativecommons.org/licenses-nd/by/4.0/">
-                <img className="card--tiny--license--image" src={ccByNd} alt="cc-by-nd" />
-              </a>
-            </div>
-            :
-            license.URL === "https://creativecommons.org/licenses/by-nc/4.0/" ?
-            <div className="card--tiny--license" key={index}>
-              <a href="https://creativecommons.org/licenses/by-nc/4.0/">
-                <img className="card--tiny--license--image" src={ccByNc} alt="cc-by-nd" />
-              </a>
-            </div>
-            :
-            license.URL === "https://creativecommons.org/licenses/by-sa/4.0/" ?
-            <div className="card--tiny--license" key={index}>
-              <a href="https://creativecommons.org/licenses/by-sa/4.0/">
-                <img className="card--tiny--license--image" src={ccBySa} alt="cc-by-nd" />
-              </a>
-            </div>
-            :
-            license.URL === "https://creativecommons.org/licenses/by-nc-nd/4.0/" ?
-            <div className="card--tiny--license" key={index}>
-              <a href="https://creativecommons.org/licenses/by/4.0/">
-                <img className="card--tiny--license--image" src={ccByNcNd} alt="cc-by-nd" />
-              </a>
-            </div>
-            :
-            license.URL === "https://creativecommons.org/licenses/by-nc-sa/4.0/" ?
-            <div className="card--tiny--license" key={index}>
-              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-                <img className="card--tiny--license--image" src={ccByNcSa} alt="cc-by-nd" />
-              </a>
-            </div>
-            : null
+            renderLicenseByURL(index,license.URL,"card--tiny--license","card--tiny--license--image")
           )
           : null 
         }
@@ -152,45 +107,9 @@ export default function TinyPanel({content, type, identifier}){
           <a href={`https://doaj.org/toc/${identifier}`}><img className="card--tiny--image " src={doajLogo} alt="doaj_logo" /></a>
         </div>
         {content.doaj.bibjson.license.map((license,index) => 
-          license.type === "CC BY" ?
-            <div className="card--tiny--license doaj" key={'doaj' + index}>
-              <a href="https://creativecommons.org/licenses/by/4.0/">
-                <img className="card--tiny--license--image" src={ccBy} alt="cc-by" />
-              </a>
-            </div> 
-          : license.type === "CC BY-ND" ?
-            <div className="card--tiny--license doaj" key={'doaj' + index}>
-              <a href="https://creativecommons.org/licenses/by-nd/4.0/">
-                <img className="card--tiny--license--image" src={ccByNd} alt="cc-by-nd" />
-              </a>
-            </div>
-          : license.type === "CC BY-NC" ?
-            <div className="card--tiny--license doaj" key={'doaj' + index}>
-              <a href="https://creativecommons.org/licenses/by-nc/4.0/">
-                <img className="card--tiny--license--image" src={ccByNc} alt="cc-by-nc" />
-              </a>
-            </div> 
-          : license.type === "CC BY-SA" ?
-            <div className="card--tiny--license doaj" key={'doaj' + index}>
-              <a href="https://creativecommons.org/licenses/by-sa/4.0/">
-                <img className="card--tiny--license--image" src={ccBySa} alt="cc-by-sa" />
-              </a>
-            </div>
-          : license.type === "CC BY-NC-ND" ?
-            <div className="card--tiny--license doaj" key={'doaj' + index}>
-              <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
-                <img className="card--tiny--license--image" src={ccByNcNd} alt="cc-by-nc-nd" />
-              </a>
-            </div>
-          : license.type === "CC BY-NC-SA" ?
-            <div className="card--tiny--license doaj" key={'doaj' + index}>
-              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-                <img className="card--tiny--license--image" src={ccByNcSa} alt="cc-by-nc-nd" />
-              </a>
-            </div>
-          : null
-          )}
-          {content.doaj.admin ? 
+          renderLicense(index,license.type,"card--tiny--license doaj","card--tiny--license--image")
+        )}  
+        {content.doaj.admin ? 
           content.doaj.admin.seal ?
           <div className="card--tiny--license">
             <a href='https://doaj.org/apply/seal/' key={content.id}>    

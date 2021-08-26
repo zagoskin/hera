@@ -196,14 +196,9 @@
   );
 }
 
-.card--scimago--logo {
-  overflow: hidden;
-  width: 18%;
-}
-
 .card--scimago--image {
   padding: 0.5rem;
-  width: 85px;
+  width: 50%;
   height: auto;
 }
 
@@ -705,7 +700,7 @@ a:hover {
   }
 
   .card--crossref--image {
-    width: 100%;
+    width: 80%;
     flex: 1;
   }
 
@@ -715,7 +710,7 @@ a:hover {
   }
 
   .card--doaj--image {
-    width: 100%;
+    width: 80%;
   }
 
   .card--crossref--text {
@@ -738,7 +733,7 @@ a:hover {
   .card--doaj--text--warning {
     width: 60%;
     margin-left: 10%;
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: bold;
     border: 3px;
     border-radius: 15px;
@@ -856,7 +851,7 @@ a:hover {
   }
 
   .card--scopus--image {
-    width: 160px;
+    width: 80%;
   }
 
   .card--scopus--text--warning--container {
@@ -938,7 +933,7 @@ a:hover {
 
   .card--scimago--image {
     padding: 0.75rem;
-    width: 160px;
+    width: 80%;
     height: auto;
   }
 

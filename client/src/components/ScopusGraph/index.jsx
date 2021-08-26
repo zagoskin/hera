@@ -156,17 +156,19 @@ export default function ScopusGraph({data}){
 
   return (
     <div className="card--scopus">
-        <a href={data === null ? `https://www.scopus.com/home.uri`
-          : data.entry[0].link[0]['@href'] }>
-          <img className="card--scopus--image"
-            src={scopusLogo}
-            alt='scopus_image'
-          />
-        </a>
+        <div className="card--image--container">
+          <a href={data === null ? `https://www.scopus.com/home.uri`
+            : data.entry[0].link[0]['@href'] }>
+            <img className="card--scopus--image"
+              src={scopusLogo}
+              alt='scopus_image'
+            />
+          </a>
+        </div>
+        <div className="card--data--container">
         {data === null ?
-          <div className="card--scopus--text--warning--container">
-            <div className="card--scopus--text--warning"> No indexado en Scopus</div>
-          </div> 
+            <div className="card--doaj--text--warning"> No indexado en Scopus</div>
+         
           : 
           <div className="card--scopus--info">
             <div className="card--scopus--text">Métricas de este Jornal en Scopus</div>
@@ -223,7 +225,8 @@ export default function ScopusGraph({data}){
               </div>
             </div>
           </div>
-        }       
+        }
+        </div>       
     </div>
   )
 }

@@ -38,7 +38,7 @@ export default function WosCard({ISSN, content}){
 
   return (
     <div className="card--wos">
-      <div className="card--scimago--logo">
+      <div className="card--image--container">
         <a href={`https://mjl.clarivate.com/search-results?issn=${ISSN}&hide_exact_match_fl=true`}>
           <img className="card--scimago--image big"
             src={wosLogo}
@@ -46,19 +46,16 @@ export default function WosCard({ISSN, content}){
           />
         </a>
       </div>
+      <div className="card--data--container">
       {content.error ?
-        <div className="card--scopus--text--warning--container">
-          <div className="card--scimago--text--warning">
-            No encontrado en Web of Science
+          <div className="card--doaj--text--warning">
+            No hallado en Web of Science
           </div>
-        </div>
         : 
         content.totalRecords === 0 ?
-        <div className="card--scopus--text--warning--container">
-          <div className="card--scimago--text--warning">
-            No encontrado en Web of Science
+          <div className="card--doaj--text--warning">
+            No hallado en Web of Science
           </div>
-        </div>
         :
         <div className="card--scimago--info--panel">
           <div style={{width: '100%'}} className="card--doaj--issn--index">
@@ -112,6 +109,7 @@ export default function WosCard({ISSN, content}){
           }
         </div>
       }
+      </div>
     </div>
   )
 }

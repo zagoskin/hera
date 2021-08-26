@@ -6,22 +6,22 @@ export default function RedibCard({ISSN,content}){
 
   return (
     <div className="card--redib">
-      <div className="card--scimago--logo">
+      <div className="card--image--container">
         <a href={content.error ? `https://redib.org/Search/Results?type=ISN&lookfor=${ISSN}` 
           : content.redibURL } >
         {/* <a href={content.redib.redibURL}> */}
-          <img className="card--scimago--image big"
+          <img className="card--scimago--image"
             src={redibLogo}
             alt='redib'
           />
         </a>
       </div>
+      <div className="card--data--container">
       {content.error ?
-        <div className="card--scopus--text--warning--container">
-          <div className="card--scimago--text--warning">
-            No encontrado en Redib
+          <div className="card--doaj--text--warning">
+            No hallado en Redib
           </div>
-        </div>
+       
         : 
         <div className="card--scimago--info--panel">
           {content.widget ? 
@@ -75,7 +75,7 @@ export default function RedibCard({ISSN,content}){
           }
         </div>
       }
-
+      </div>
 
     </div>
   )

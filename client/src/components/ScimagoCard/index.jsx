@@ -6,7 +6,7 @@ export default function ScimagoCard({content}){
 
   return (
     <div className="card--scimago">
-      <div className="card--scimago--logo">
+      <div className="card--image--container">
         <a href={content.error ? `https://www.scimagojr.com/` 
           : content.journalURL }>
           <img className="card--scimago--image"
@@ -15,12 +15,12 @@ export default function ScimagoCard({content}){
           />
         </a>
       </div>
+      <div className="card--data--container">
       {content.error ?
-        <div className="card--scopus--text--warning--container">
-          <div className="card--scimago--text--warning">
+          <div className="card--doaj--text--warning">
             No hallado en Scimagojr
           </div>
-        </div>
+       
         : 
         <div className="card--scimago--info--panel">
           <div id="embedGraph" className="card--scimago--info" >
@@ -41,7 +41,7 @@ export default function ScimagoCard({content}){
           </div>
         </div>
       }
-
+      </div>
 
     </div>
   )

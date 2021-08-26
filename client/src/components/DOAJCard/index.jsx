@@ -7,6 +7,49 @@ import ccByNcSa from '../../images/cc-by-nc-sa.png';
 import ccByNd from '../../images/cc-by-nd.png';
 import ccBySa from '../../images/cc-by-sa.png';
 
+export const renderLicense = (index,licenseType,containerClass,imageClass) => {
+  switch(licenseType) {
+    case 'CC BY':
+      return  <div className={containerClass} key={index}>
+                <a href="https://creativecommons.org/licenses/by/4.0/">
+                  <img className={imageClass} src={ccBy} alt="cc-by" />
+                </a>
+              </div>;
+    case 'CC BY-ND':
+      return  <div className={containerClass} key={index}>
+                <a href="https://creativecommons.org/licenses/by-nd/4.0/">
+                  <img className={imageClass} src={ccByNd} alt="cc-by-nd" />
+                </a>
+              </div>;
+    case 'CC BY-NC':
+      return  <div className={containerClass} key={index}>
+                <a href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <img className={imageClass} src={ccByNc} alt="cc-by-nc" />
+                </a>
+              </div> ;
+    case 'CC BY-SA':
+      return  <div className={containerClass} key={index}>
+                <a href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <img className={imageClass} src={ccBySa} alt="cc-by-sa" />
+                </a>
+              </div>;
+    case 'CC BY-NC-ND':
+      return  <div className={containerClass} key={index}>
+                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <img className={imageClass} src={ccByNcNd} alt="cc-by-nc-nd" />
+                </a>
+              </div>;
+    case 'CC BY-NC-SA':
+      return  <div className={containerClass} key={index}>
+                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <img className={imageClass} src={ccByNcSa} alt="cc-by-nc-nd" />
+                </a>
+              </div>;
+    default:
+      return null;
+  }
+}
+
 export default function DOAJCard({identifier, content}){
 
   return (
@@ -15,7 +58,7 @@ export default function DOAJCard({identifier, content}){
       marginLeft: "3%" } 
       : {width: "100%"}
     }>
-      <div className="card--image--container" style={identifier.type === "ISSN" ? {width: "17%" } : null}>
+      <div className="card--image--container" style={identifier.type === "ISSN" ? {width: "20%" } : null}>
       <a href={ content === null ? `https://doaj.org/` 
         : identifier.type === 'ISSN' ? `https://doaj.org/toc/${identifier.value}` 
         : `https://doaj.org/article/${content.id}`}>
@@ -25,10 +68,10 @@ export default function DOAJCard({identifier, content}){
         />
       </a>
       </div>
-      <div className="card--data--container" style={identifier.type === "ISSN" ? {width: "83%" } : null}>
+      <div className="card--data--container" style={identifier.type === "ISSN" ? {width: "80%" } : null}>
       {content === null ? 
       <div className="card--doaj--text--warning">
-        No incluido en DOAJ
+        No hallado en DOAJ
       </div> 
       : (identifier.type === 'DOI') ? 
       [
@@ -63,43 +106,7 @@ export default function DOAJCard({identifier, content}){
         <div className="card--doaj--issn--info">
           <div className="card--doaj--issn--license--title"><a href="https://creativecommons.org/licenses/">Licencias</a> que utiliza este jornal:</div> 
           {content.bibjson.license.map((license,index) => 
-            license.type === "CC BY" ?
-              <div className="card--doaj--issn--license" key={index}>
-                <a href="https://creativecommons.org/licenses/by/4.0/">
-                  <img className="card--doaj--issn--license--image" src={ccBy} alt="cc-by" />
-                </a>
-              </div> 
-            : license.type === "CC BY-ND" ?
-              <div className="card--doaj--issn--license" key={index}>
-                <a href="https://creativecommons.org/licenses/by-nd/4.0/">
-                  <img className="card--doaj--issn--license--image" src={ccByNd} alt="cc-by-nd" />
-                </a>
-              </div>
-            : license.type === "CC BY-NC" ?
-              <div className="card--doaj--issn--license" key={index}>
-                <a href="https://creativecommons.org/licenses/by-nc/4.0/">
-                  <img className="card--doaj--issn--license--image" src={ccByNc} alt="cc-by-nc" />
-                </a>
-              </div> 
-            : license.type === "CC BY-SA" ?
-              <div className="card--doaj--issn--license" key={index}>
-                <a href="https://creativecommons.org/licenses/by-sa/4.0/">
-                  <img className="card--doaj--issn--license--image" src={ccBySa} alt="cc-by-sa" />
-                </a>
-              </div>
-            : license.type === "CC BY-NC-ND" ?
-              <div className="card--doaj--issn--license" key={index}>
-                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
-                  <img className="card--doaj--issn--license--image" src={ccByNcNd} alt="cc-by-nc-nd" />
-                </a>
-              </div>
-            : license.type === "CC BY-NC-SA" ?
-              <div className="card--doaj--issn--license" key={index}>
-                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-                  <img className="card--doaj--issn--license--image" src={ccByNcSa} alt="cc-by-nc-nd" />
-                </a>
-              </div>
-            : null
+            renderLicense(index,license.type,"card--doaj--issn--license","card--doaj--issn--license--image")
           )}
         </div> 
         {content.admin ? 

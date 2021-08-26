@@ -1,6 +1,54 @@
 import React from 'react';
 import crossrefLogo from '../../images/crossrefLogo.png';
+import ccBy from '../../images/cc-by.png';
+import ccByNc from '../../images/cc-by-nc.png';
+import ccByNcNd from '../../images/cc-by-nc-nd.png';
+import ccByNcSa from '../../images/cc-by-nc-sa.png';
+import ccByNd from '../../images/cc-by-nd.png';
+import ccBySa from '../../images/cc-by-sa.png';
 
+export const renderLicenseByURL = (index,licenseURL,containerClass,imageClass) => {
+  switch(licenseURL) {
+    case 'https://creativecommons.org/licenses/by/4.0/':
+      return  <div className={containerClass} key={index}>
+                <a href="https://creativecommons.org/licenses/by/4.0/">
+                  <img className={imageClass} src={ccBy} alt="cc-by" />
+                </a>
+              </div>;
+    case 'https://creativecommons.org/licenses/by-nd/4.0/':
+      return  <div className={containerClass} key={index}>
+                <a href="https://creativecommons.org/licenses/by-nd/4.0/">
+                  <img className={imageClass}  src={ccByNd} alt="cc-by-nd" />
+                </a>
+              </div>;
+    case 'https://creativecommons.org/licenses/by-nc/4.0/':
+      return  <div className={containerClass} key={index}>
+                <a href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <img className={imageClass}  src={ccByNc} alt="cc-by-nc" />
+                </a>
+              </div> ;
+    case 'https://creativecommons.org/licenses/by-sa/4.0/':
+      return  <div className={containerClass} key={index}>
+                <a href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <img className={imageClass}  src={ccBySa} alt="cc-by-sa" />
+                </a>
+              </div>;
+    case 'https://creativecommons.org/licenses/by-nc-nd/4.0/':
+      return  <div className={containerClass} key={index}>
+                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <img className={imageClass}  src={ccByNcNd} alt="cc-by-nc-nd" />
+                </a>
+              </div>;
+    case 'CC BY-NC-SA':
+      return  <div className={containerClass} key={index}>
+                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <img className={imageClass}  src={ccByNcSa} alt="cc-by-nc-nd" />
+                </a>
+              </div>;
+    default:
+      return null;
+  }
+}
 
 export default function CrossrefCard({identifier, content}){
 
@@ -10,7 +58,7 @@ export default function CrossrefCard({identifier, content}){
         marginRight: "1%" } 
         : {width: "100%"}
       } >
-      <div className="card--image--container" style={identifier.type === "ISSN" ? {width: "17%" } : null}>
+      <div className="card--image--container" style={identifier.type === "ISSN" ? {width: "20%" } : null}>
       <a href={ content.error ? `https://www.crossref.org/` 
         : `https://search.crossref.org/?from_ui=yes&q=${identifier.value}`}>
         <img className="card--crossref--image"
