@@ -350,6 +350,7 @@
   padding: 0.5rem;
   text-align: center;
   margin-top: 2rem;
+  margin-bottom: 2rem;
   font-size: 1.75rem;
   font-weight: bold;
   border: 1px;
@@ -363,7 +364,7 @@
   text-align: center;
   box-sizing: border-box;
   width: 70%;
-  margin-left: 5%;
+  margin-left: 0%;
 }
 
 .card--doaj--text--success {
@@ -691,7 +692,7 @@ a:hover {
 }
 
 /* NO SMARTPHONE CSS */
-@media (min-width: 786px) {
+@media (min-width: 833px) {
   .card--doaj {
     width: 100%;
   }
@@ -733,7 +734,7 @@ a:hover {
   .card--doaj--text--warning {
     width: 60%;
     margin-left: 10%;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
     border: 3px;
     border-radius: 15px;
