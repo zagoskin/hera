@@ -642,7 +642,7 @@ a:hover {
 .card--scimago--info--panel {
   display: flex;
   flex-wrap: wrap;
-  width: 75%;
+  width: 90%;
 }
 
 .padded {
