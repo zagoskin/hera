@@ -9,7 +9,7 @@ export default function SemanticCard({identifier, content}){
       <div className="card--image--container">
       <a href={content.error ? `https://www.semanticscholar.org/?utm_source=api` 
         : `https://www.semanticscholar.org/paper/${content.paperId}?utm_source=api`}>
-        <img className="card--crossref--image"
+        <img className="card--semantic--image"
           src={semanticLogo}
           alt='semantic_image'
         />

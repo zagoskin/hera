@@ -95,12 +95,12 @@ export default function AcademicCard({content,additionalContent}){
         <CrossrefCard identifier={content.identifier} content={content.crossref} key={'crossref' + content.identifier.value}/>
         <DOAJCard identifier={content.identifier} content={content.doaj} key={'doaj' + content.identifier.value}/>
         { content.identifier.type === "DOI" ?
-        <SemanticCard DOI={content.identifier.value} content={content.semantic} key={'semantic' + content.identifier.value} />
+        <SemanticCard DOI={content.identifier.value} identifier={content.identifier} content={content.semantic} key={'semantic' + content.identifier.value} />
         : null
         }
         { content.identifier.type === "DOI" ?
         <>
-        <MicrosoftCard identifier={content.identifier} content={content.microsoft} key={'microsoft' + content.identifier.value}/>
+        <MicrosoftCard identifier={content.identifier} identifier={content.identifier} content={content.microsoft} key={'microsoft' + content.identifier.value}/>
         <DimensionsBadge DOI={content.identifier.value} content={content.dimensions} key={'dimensions' + content.identifier.value} />
         <AltmetricBadge DOI={content.identifier.value} content={content.altmetric} key={'altmetric' + content.identifier.value}/>
         </>

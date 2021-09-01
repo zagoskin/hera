@@ -107,7 +107,7 @@
 }
 
 .card--scopus--image {
-  width: 85px;
+  width: 105px;
 }
 .card--dimensions,
 .card--altmetric {
@@ -253,7 +253,10 @@
 
 .card--crossref--image {
   width: 100%;
-  flex: 1;
+}
+
+.card--semantic--image {
+  width: 100%;
 }
 
 .card--doaj--image {
@@ -692,7 +695,7 @@ a:hover {
 }
 
 /* NO SMARTPHONE CSS */
-@media (min-width: 833px) {
+@media (min-width: 832px) {
   .card--doaj {
     width: 100%;
   }
@@ -734,7 +737,7 @@ a:hover {
   .card--doaj--text--warning {
     width: 60%;
     margin-left: 10%;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bold;
     border: 3px;
     border-radius: 15px;

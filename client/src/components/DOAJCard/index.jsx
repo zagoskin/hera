@@ -59,14 +59,15 @@ export default function DOAJCard({identifier, content}){
       : {width: "100%"}
     }>
       <div className="card--image--container" style={identifier.type === "ISSN" ? {width: "20%" } : null}>
-      <a href={ content === null ? `https://doaj.org/` 
-        : identifier.type === 'ISSN' ? `https://doaj.org/toc/${identifier.value}` 
-        : `https://doaj.org/article/${content.id}`}>
-        <img className="card--doaj--image"
-          src={doajLogo}
-          alt='doaj_image'
-        />
-      </a>
+        <a href={ content === null ? `https://doaj.org/` 
+          : identifier.type === 'ISSN' ? `https://doaj.org/toc/${identifier.value}` 
+          : `https://doaj.org/article/${content.id}`}>
+          <img className="card--doaj--image"
+            src={doajLogo}
+            alt='doaj_image'
+            style={identifier.type === "DOI" ? {width: "100%" } : null}
+          />
+        </a>
       </div>
       <div className="card--data--container" style={identifier.type === "ISSN" ? {width: "80%" } : null}>
       {content === null ? 

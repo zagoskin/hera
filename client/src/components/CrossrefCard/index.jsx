@@ -64,6 +64,7 @@ export default function CrossrefCard({identifier, content}){
         <img className="card--crossref--image"
           src={crossrefLogo}
           alt='crossref_image'
+          style={identifier.type === "DOI" ? {width: "100%" } : null}
         />
       </a>
       </div>
