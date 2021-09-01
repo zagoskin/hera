@@ -146,8 +146,8 @@ export const getContentsScimago = async (url, title) => {
     }
   }
 
-  console.log('Resultados SCIMAGO a devolver:');
-  console.log(contents);
+  // console.log('Resultados SCIMAGO a devolver:');
+  // console.log(contents);
 
   return contents;
 }
