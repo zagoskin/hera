@@ -32,7 +32,7 @@ export const getDataByQuery = async (query, criteria) => {
   let res = {
     crossref: crossrefData,
     doaj: doajData.total === 0 ? null : doajData.results[0],
-    microsoft: microsoftData.length > null ? microsoftData[0] : null,
+    microsoft: microsoftData.length > 0 ? microsoftData[0] : null,
     scopus: scopusData ?? null,
     dimensions: dimensionsData ? dimensionsData.error ? null : dimensionsData : null,
     altmetric: altmetricData,
