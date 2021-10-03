@@ -58,7 +58,7 @@ export const getContentsMicrosoft = async (url) => {
   const contents = await getContents(url, `/api/getContentsMicrosoft`, '');
   // console.log('Contents de la API en front Microsoft:');
   // console.log(contents);
-  return contents.entities;
+  return contents;
 }
 
 export const getContentsScopus = async (url) => {

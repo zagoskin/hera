@@ -1,5 +1,5 @@
-import { getContentsCrossref, getContentsDoaj, getContentsMicrosoft, getContentsScopus, getContentsDimensions, getContentsAltmetric, getContentsScimago, getContentsSemantic, getContentsRedib, getContentsWos } from './search'
-import { getURLCrossref, getURLDoaj, getURLMicrosoft, getURLScopus, getURLDimensions, getURLAltmetric, setURLsByDOI, setURLsByISSN, getURLScimago, getURLSemantic, getURLRedib, getURLWos } from './url';
+import { getContentsCrossref, getContentsDoaj, getContentsMicrosoft, getContentsScopus, getContentsDimensions, getContentsAltmetric, getContentsScimago, getContentsSemantic, getContentsRedib, getContentsWos } from './searcher'
+import { getURLCrossref, getURLDoaj, getURLMicrosoft, getURLScopus, getURLDimensions, getURLAltmetric, setURLsByDOI, setURLsByISSN, getURLScimago, getURLSemantic, getURLRedib, getURLWos } from './urlBuilder';
 
 export const getDataByQuery = async (query, criteria) => {
 
@@ -32,7 +32,7 @@ export const getDataByQuery = async (query, criteria) => {
   let res = {
     crossref: crossrefData,
     doaj: doajData.total === 0 ? null : doajData.results[0],
-    microsoft: microsoftData.length > 0 ? microsoftData[0] : null,
+    microsoft: microsoftData.error ? new Array(0) : microsoftData.length > 0 ? microsoftData.entities[0] : null,
     scopus: scopusData ?? null,
     dimensions: dimensionsData ? dimensionsData.error ? null : dimensionsData : null,
     altmetric: altmetricData,
