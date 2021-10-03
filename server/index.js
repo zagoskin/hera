@@ -3,6 +3,7 @@ const express = require("express");
 const fetch = require("node-fetch");
 const e = require('express');
 const https = require('https');
+const { AbortController } = require('node-abort-controller');
 
 const httpsAgent = new https.Agent({
       rejectUnauthorized: false,
@@ -13,6 +14,19 @@ var constants = require('./constants');
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+
+const fetchWithTimeout = async (url, options, timeout) => {
+  
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+
+  const response = await fetch(url, {
+    ...options,
+    signal: controller.signal  
+  });
+  clearTimeout(id);
+  return response;
+}
 
 const fetchJsonContents = async (url,options) => {
   const data  = await fetch(url,options);
@@ -26,12 +40,24 @@ const fetchJsonContents = async (url,options) => {
 }
 
 const fetchHtmlContents = async (url,options) => {
-  return fetch(url,options)
-    .then((response) => {
-      return response.text();
-  }).then((html) => {
-    return html;
-  });
+  try {
+    const data = await fetchWithTimeout(url,options,10000);
+    if (data.ok){
+      return data.text();
+    } else {
+      console.log('Request failed');
+      return { error: 'Something went wrong' };
+    }
+  } catch (error) {
+    console.log('Request failed');
+    return { error: 'Timed out' };
+  }
+  // return fetch(url,options)
+  //   .then((response) => {
+  //     return response.text();
+  // }).then((html) => {
+  //   return html;
+  // });
 }
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
