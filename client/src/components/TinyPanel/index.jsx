@@ -201,7 +201,7 @@ export default function TinyPanel({content, type, identifier}){
         :   
         <div className="card--tiny--info">
           <div style={{marginTop: "-2.5rem",marginBottom: "1rem"}} className="card--tiny--info--data">
-            <a href={`https://www.semanticscholar.org/paper/${content.semantic.paperId}?utm_source=api`}><img className="card--tiny--image big" src={semanticLogo} alt="semantic_logo" /></a>        
+            <a href={`https://www.semanticscholar.org/paper/${content.semantic.paperId}?utm_source=api`}><img className="card--tiny--image" src={semanticLogo} alt="semantic_logo" /></a>        
           </div>
           {content.semantic.influentialCitationCount ?
             content.semantic.influentialCitationCount > 0 ?
@@ -225,7 +225,7 @@ export default function TinyPanel({content, type, identifier}){
       {/* Tiny Dimensions */}
       {type === "DOI" ?
       <div className="card--tiny--info">
-        <div style={{padding: "2rem"}}><span className="__dimensions_badge_embed__" data-doi={identifier}></span></div>
+        <div><span className="__dimensions_badge_embed__" data-doi={identifier}></span></div>
         
         {content.dimensions ?
         <>
@@ -264,7 +264,7 @@ export default function TinyPanel({content, type, identifier}){
       {/* Tiny Altmetric */}
       { type === "DOI" ?
       <div className="card--tiny--info">
-        <div className="card--tiny--info--data">
+        <div className="card--tiny--info--data" style={{padding: "0.5rem"}}>
           <div className="altmetric-embed" data-badge-type="medium-donut" data-doi={identifier} data-badge-popover="right"></div>
         </div>
         {content.altmetric.error ?

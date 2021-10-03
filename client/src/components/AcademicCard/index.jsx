@@ -100,7 +100,7 @@ export default function AcademicCard({content,additionalContent}){
         }
         { content.identifier.type === "DOI" ?
         <>
-        <MicrosoftCard identifier={content.identifier} identifier={content.identifier} content={content.microsoft} key={'microsoft' + content.identifier.value}/>
+        <MicrosoftCard identifier={content.identifier} content={content.microsoft} key={'microsoft' + content.identifier.value}/>
         <DimensionsBadge DOI={content.identifier.value} content={content.dimensions} key={'dimensions' + content.identifier.value} />
         <AltmetricBadge DOI={content.identifier.value} content={content.altmetric} key={'altmetric' + content.identifier.value}/>
         </>
