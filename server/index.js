@@ -4,6 +4,7 @@ const fetch = require("node-fetch");
 const e = require('express');
 const https = require('https');
 const { AbortController } = require('node-abort-controller');
+const cors = require('cors');
 
 const httpsAgent = new https.Agent({
       rejectUnauthorized: false,
@@ -61,8 +62,9 @@ const fetchHtmlContents = async (url,options) => {
 }
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
-
 app.use(express.urlencoded());
+app.use(cors());
+
 app.get("/api", (req, res) => {
   console.log('En /api');
   res.json({ message: "Hello from server!" });
