@@ -19,7 +19,7 @@ export default function RedibCard({ISSN,content}){
       <div className="card--data--container">
       {content.error ?
           <div className="card--doaj--text--warning">
-            No hallado en Redib
+            No hallado en REDIB
           </div>
        
         : 

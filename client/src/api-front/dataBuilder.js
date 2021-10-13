@@ -70,7 +70,8 @@ export const getDataByQuery = async (query, criteria) => {
           : scopusData ? scopusData["dc:publisher"]
           : wosData.journalProfiles.length > 0 ? wosData.journalProfiles[0].publisherName
           : crossrefData.publisher ? crossrefData.publisher
-          : undefined
+          : undefined,
+    yearPublished: crossrefData.issued ? crossrefData.issued["date-parts"][0][0] : null
   }
 
   if (criteria === "ISSN") {

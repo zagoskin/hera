@@ -43,10 +43,9 @@ export default function AcademicCard({content,additionalContent}){
       {content.title ?
         <div className="card--content">
           <h1 className="card--title">{content.title}</h1>
-          <h1><u>Tipo de recurso</u>: {content.type.charAt(0).toUpperCase()+content.type.slice(1)}</h1>
-          <p><a href={content.URL}>Click aquí para ir al recurso</a></p>
+          <p><b>Tipo de recurso:</b><em> {content.type.charAt(0).toUpperCase()+content.type.slice(1)}</em></p>
           {content.authors ? <p>
-            <em>Autores: {authors}.</em> 
+            <b>Autores:</b><em> {authors}.</em> 
           </p> : null 
           }
           
@@ -54,16 +53,23 @@ export default function AcademicCard({content,additionalContent}){
             <b>Título de la revista:</b><em> {content.journalTitle}</em>
           </p> : null          
           }
+
           {content.publisher ? <p>
             <b>Editorial:</b><em> {content.publisher}</em>
           </p> : null
           }
-          {content.abstract ? <div className='card--abstract'><h1>ABSTRACT</h1> 
-          <em><p className="card--abstract--text">
+
+          {content.yearPublished ? <p>
+            <b>Año de publicación:</b><em> {content.yearPublished}</em>
+          </p> : null
+          }
+          {content.abstract ? <div className='card--abstract'><p><b>ABSTRACT: </b>
+          <em><span className="card--abstract--text">
               {content.abstract.replace(/(<([^>]+)>)/ig, '')}
-            </p></em>
+            </span></em></p>
           </div> : null
           } 
+          <p><a href={content.URL}>Click aquí para ir al recurso</a></p>
         </div>
         : 
         <div className="card--content">
@@ -76,7 +82,7 @@ export default function AcademicCard({content,additionalContent}){
         {additionalContent ?
         <>
         <br />
-        <h1 className="card--title">Datos de la revista: {additionalContent.title}</h1>
+        <h1 className="card--title">Publicado en: {additionalContent.title}</h1>
         <br />
         <br />
         <TinyPanel content={additionalContent} type={additionalContent.identifier.type} identifier={additionalContent.identifier.value} key={'tinypanel' + additionalContent.identifier.value}></TinyPanel>
