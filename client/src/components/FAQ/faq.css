@@ -1,0 +1,19 @@
+.faqQuestion {
+  font-size: 2rem;
+}
+
+.faqP {
+  font-size: 1.75rem;
+  text-align: justify;
+}
+
+@media (min-width: 832px) {
+  .faqQuestion {
+    font-size: 2.5rem;
+  }
+
+  .faqP {
+    font-size: 2rem;
+    margin-top: 0.5rem;
+  }
+}

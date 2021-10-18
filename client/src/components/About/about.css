@@ -1,0 +1,10 @@
+.aboutP {
+  font-size: 1.75rem;
+  text-align: justify;
+}
+
+@media (min-width: 832px) {
+  .aboutP {
+    font-size: 2rem;
+  }
+}
