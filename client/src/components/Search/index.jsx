@@ -77,15 +77,7 @@ export default function Search(){
             placeholder={criteria === "DOI" ? 'e.g.: 10.1000/xyz123' : criteria === "ISSN" ? 'e.g.: 2049-3630' : 'Seleccione criteria primero'}
             value={query} onChange={(e) => setQuery(e.target.value)}
             disabled={((criteria !== "DOI") && (criteria !== "ISSN"))? true : false}/>
-        <button className="searchBtn" 
-          style={criteria === "DOI" ? 
-            {backgroundColor: "#ad1f1f"}
-            : 
-            criteria === "ISSN" ?
-            {backgroundColor: "#3b84d9"} 
-            : null
-          }
-          type="submit" disabled={((criteria !== "DOI") && (criteria !== "ISSN"))? true : false}>Buscar</button>
+        <button className="searchBtn" type="submit" disabled={((criteria !== "DOI") && (criteria !== "ISSN"))? true : false}>Buscar</button>
         
         <div className="searchCriteria">
           <label className="searchRadioLabel">DOI

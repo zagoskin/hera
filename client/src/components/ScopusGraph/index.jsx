@@ -171,7 +171,7 @@ export default function ScopusGraph({data}){
          
           : 
           <div className="card--scopus--info">
-            <div className="card--scopus--text">Métricas de este Jornal en Scopus</div>
+            {/* <div className="card--scopus--text">Métricas de este Jornal en Scopus</div> */}
             <div className="card--scopus--citescore">
               CiteScore
               <br />

@@ -58,9 +58,9 @@ export default function WosCard({ISSN, content}){
           </div>
         :
         <div className="card--scimago--info--panel">
-          <div style={{width: '100%'}} className="card--doaj--issn--index">
+          {/* <div style={{width: '100%'}} className="card--doaj--issn--index">
             Indexado por Web of Science
-          </div> 
+          </div>  */}
           <div style={{flex: '1 auto', width: '30%'}} className="card--scimago--info redib">
             <div style={{fontWeight: "normal", width: '100%'}} className="card--tiny--info--data">EDITOR<br /><br /></div>
             <div style={{fontSize: "1.75rem",width: '100%'}} className="card--tiny--info--data">{content.journalProfiles[0].journalProfile.publisherName}</div>          
