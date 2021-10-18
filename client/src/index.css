@@ -11,9 +11,10 @@ html {
 }
 
 body {
+  position: relative;
   margin: 0;
   padding: 0;
-  background-color: #ffecec;
+  background-color: #fae3ed;
   color: #000;
 }
 
@@ -26,9 +27,12 @@ small {
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  min-height: 82vh;
   margin: 0 auto;
   max-width: 1200px;
-  padding: 40px;
+  padding: 2rem;
 }
 
 .container a {
@@ -39,11 +43,112 @@ small {
   text-decoration: none;
 }
 
-.title {
-  font-size: 4.4rem;
-  text-align: center;
-  text-decoration: none;
-  color: black;
+.titleContainer {
+  display: flex;
+  width: 100%;
+  margin-bottom: 5%;
+  /* background-color: greenyellow; */
 }
 
+.titleText {
+  text-decoration: none;
+  text-align: center;
+  font-size: 2.75rem;
+  font-weight: bold;
+  color: black;
+  width: 70%;
+}
 
+.titleImgContainer {
+  width: 30%;
+  overflow: hidden;
+}
+
+.titleImg {
+  width: 100%;
+}
+
+.navBar {
+  display: flex;
+  width: 100%;
+  background-color: #da4880;
+  text-align: center;
+  align-items: center;
+  box-shadow: 0 2px 2px rgb(54, 54, 54);
+}
+
+.navLink {
+  color: #1d1c1a !important;
+  font-weight: bold;
+  text-decoration: none;
+  width: 30%;
+  padding: 1rem;
+  margin-left: 1.5%;
+  font-size: 2rem;
+  font-family: Roboto;
+}
+
+.footBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1vh;
+  min-height: 10vh;
+  background-color: #fff1f7;
+  width: 100%;
+  border-top: solid 1px black;
+}
+
+.footerImgContainer {
+  width: 30%;
+  text-align: center;
+}
+
+.footerImg {
+  width: 100%;
+}
+
+@media (min-width: 832px) {
+  .titleContainer {
+    margin-top: 2%;
+    margin-bottom: 4%;
+  }
+
+  .titleText {
+    font-size: 4rem;
+    text-decoration: none;
+    line-height: 7rem;
+  }
+
+  .titleImgContainer {
+    width: 20%;
+    overflow: hidden;
+  }
+
+  .titleImg {
+    width: 100%;
+  }
+
+  .navLink {
+    color: #1d1c1a !important;
+    font-weight: bold;
+    text-decoration: none;
+    width: 30%;
+    padding: 1rem;
+    margin-left: 2%;
+    font-size: 2.75rem;
+    font-family: Roboto;
+  }
+
+  .footerImgContainer {
+    width: 20%;
+  }
+
+  .footerImg {
+    width: 55%;
+  }
+
+  .wider {
+    width: 60%;
+  }
+}
