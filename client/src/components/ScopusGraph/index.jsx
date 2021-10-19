@@ -198,7 +198,6 @@ export default function ScopusGraph({data}){
                   width="300"
                />
             </div>
-            <div className="card--scopus--disclaimer">
               <div className="card--scopus--disclaimer--text">SCImago Journal Rank (SJR) is a measure of scientific 
               influence of scholarly journals that accounts for both 
               the number of citations received by a journal and the importance or 
@@ -224,7 +223,6 @@ export default function ScopusGraph({data}){
                 <a href="https://api.elsevier.com/content/serial/title/issn/2442-6571"> https://api.elsevier.com/content/serial/title/issn/2442-6571 </a> 
               </div>
             </div>
-          </div>
         }
         </div>       
     </div>

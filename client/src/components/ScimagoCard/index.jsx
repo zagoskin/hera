@@ -1,6 +1,6 @@
 import React from 'react';
 import scimagoLogo from '../../images/scimagoLogo.png';
-
+import poweredByScopus from '../../images/PoweredbyScopus.png'
 
 export default function ScimagoCard({content}){
 
@@ -38,6 +38,17 @@ export default function ScimagoCard({content}){
           <div className="card--scimago--info">
             <div className="card--scimago--info--title">PAÍS</div>
             <div className="card--scimago--info--data">{content.country}</div>      
+          </div>
+          <div style={{padding: "20px"}}className="card--scopus--disclaimer--text">SCImago Journal Rank (SJR) is a measure of scientific 
+              influence of scholarly journals that accounts for both 
+              the number of citations received by a journal and the importance or 
+              prestige of the journals where such citations come from.
+              <br />
+              <br />
+          <img className="card--scopus--powered"
+                src={poweredByScopus}
+                alt='powered_by_scopus'
+              />  
           </div>
         </div>
       }
