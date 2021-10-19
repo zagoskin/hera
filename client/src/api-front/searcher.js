@@ -160,8 +160,8 @@ export const getContentsScimago = async (url, title) => {
 
 export const getContentsRedib = async (url) => {
   const res = await getHtml(url, `${process.env.REACT_APP_SERVER_BASE_URL}/api/getContentsHtml`, '');
-  console.log("Respuesta de getHtml redib");
-  console.log(res);
+  // console.log("Respuesta de getHtml redib");
+  // console.log(res);
   if (res.html.error) {
     return { error: res.html.error };
   } else {

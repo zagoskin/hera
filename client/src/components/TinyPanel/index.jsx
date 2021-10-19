@@ -3,31 +3,20 @@ import './tinycard.css';
 import { renderLicense } from '../DOAJCard';
 import { renderLicenseByURL } from '../CrossrefCard';
 import crossrefLogo from '../../images/crossrefLogo.png';
-import crossrefCrossed from '../../images/crossrefCrossed.png';
 import doajLogo from '../../images/doajLogo.png';
-import doajCrossed from '../../images/doajCrossed.png';
 import redCross from '../../images/redCross.png';
 import microsoftLogo from '../../images/microsoftLogo.png';
-import microsoftCrossed from '../../images/microsoftCrossed.png';
 import graphIncrease from '../../images/graphIncrease.png';
 import graphDecrease from '../../images/graphDecrease.png';
 import hotTopic from '../../images/hotTopic.png';
 import chatLogo from '../../images/chatLogo.png';
 import roleModel from '../../images/roleModel.png';
 import thinking from '../../images/thinking.png';
-// import greenCheck from '../../images/greenCheck.png';
 import scopusLogo from '../../images/scopusLogo.png';
-import scopusCrossed from '../../images/scopusCrossed.png';
-//import openAccess from '../../images/openAccess.png';
-//import padlock from  '../../images/padlock.png';
 import scimagoLogo from '../../images/scimagoLogo.png';
-import scimagoCrossed from '../../images/scimagoCrossed.png';
 import semanticLogo from '../../images/semanticLogo.png';
-import semanticCrossed from '../../images/semanticCrossed.png';
 import redibLogo from '../../images/redibLogo.png';
-import redibCrossed from '../../images/redibCrossed.png';
 import wosLogo from '../../images/wosLogo.png';
-import wosCrossed from '../../images/wosCrossed.png';
 import 'typeface-roboto';
 
 export default function TinyPanel({content, type, identifier}){
@@ -48,8 +37,11 @@ export default function TinyPanel({content, type, identifier}){
       {content.crossref.error ? 
       <div className="card--tiny--info">
         <div className="card--tiny--info--data">
-          <a href="https://www.crossref.org/"><img className="card--tiny--image" src={crossrefCrossed} alt="crossref_crossed" /></a>        
+          <a href="https://www.crossref.org/"><img className="card--tiny--image transparent" src={crossrefLogo} alt="crossref_crossed" /></a>        
         </div>
+        <div className="card--tiny--info--data">
+          Recurso no encontrado
+        </div> 
       </div> 
       : type === "DOI" ?
       <div className="card--tiny--info">
@@ -82,8 +74,11 @@ export default function TinyPanel({content, type, identifier}){
       {content.doaj === null ? 
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href="https://doaj.org/"><img className="card--tiny--image " src={doajCrossed} alt="doaj_logo" /></a>
+          <a href="https://doaj.org/"><img className="card--tiny--image transparent" src={doajLogo} alt="doaj_logo" /></a>
         </div>
+        <div className="card--tiny--info--data">
+          Recurso no encontrado
+        </div>  
       </div> 
       : type === "DOI" ? 
       <div className="card--tiny--info">
@@ -128,7 +123,10 @@ export default function TinyPanel({content, type, identifier}){
         content.redib.error ?
         <div className="card--tiny--info">
           <div className="card--tiny--info--data padded">
-            <a href={`https://redib.org/Search/Results?type=ISN&lookfor=${identifier}`}><img className="card--tiny--image " src={redibCrossed} alt="redib_crossed" /></a>
+            <a href={`https://redib.org/Search/Results?type=ISN&lookfor=${identifier}`}><img className="card--tiny--image transparent" src={redibLogo} alt="redib_crossed" /></a>
+          </div> 
+          <div className="card--tiny--info--data">
+            Recurso no encontrado
           </div> 
         </div>
         : 
@@ -184,7 +182,10 @@ export default function TinyPanel({content, type, identifier}){
       : type === "DOI" ?
       <div className="card--tiny--info">
         <div className="card--tiny--image--container">
-          <a href="https://academic.microsoft.com/home"><img className="card--tiny--image" src={microsoftCrossed} alt="microsoft_logo" /></a>
+          <a href="https://academic.microsoft.com/home"><img className="card--tiny--image transparent" src={microsoftLogo} alt="microsoft_logo" /></a>
+        </div> 
+        <div className="card--tiny--info--data">
+          Recurso no encontrado
         </div> 
       </div>
       : null
@@ -194,13 +195,16 @@ export default function TinyPanel({content, type, identifier}){
       {type === "DOI" ? 
         content.semantic.error ? 
         <div className="card--tiny--info">
-          <div className="card--tiny--info--data">
-            <a href="https://www.semanticscholar.org/?utm_source=api"><img className="card--tiny--image big" src={semanticCrossed} alt="semantic_crossed" /></a>        
+          <div className="card--tiny--image--container">
+            <a href="https://www.semanticscholar.org/?utm_source=api"><img className="card--tiny--image transparent" src={semanticLogo} alt="semantic_crossed" /></a>        
           </div>
+          <div className="card--tiny--info--data">
+            Recurso no encontrado
+          </div> 
         </div>   
         :   
         <div className="card--tiny--info">
-          <div style={{marginTop: "-2.5rem",marginBottom: "1rem"}} className="card--tiny--info--data">
+          <div className="card--tiny--image--container">
             <a href={`https://www.semanticscholar.org/paper/${content.semantic.paperId}?utm_source=api`}><img className="card--tiny--image" src={semanticLogo} alt="semantic_logo" /></a>        
           </div>
           {content.semantic.influentialCitationCount ?
@@ -298,14 +302,20 @@ export default function TinyPanel({content, type, identifier}){
         content.wos.error ?
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
-            <a href={`https://mjl.clarivate.com/search-results?issn=${identifier}&hide_exact_match_fl=true`}><img className="card--tiny--image big" src={wosCrossed} alt="wos_logo" /></a>
+            <a href={`https://mjl.clarivate.com/search-results?issn=${identifier}&hide_exact_match_fl=true`}><img className="card--tiny--image big transparent" src={wosLogo} alt="wos_logo" /></a>
+          </div> 
+          <div className="card--tiny--info--data">
+            Recurso no encontrado
           </div> 
         </div>
         : 
         content.wos.totalRecords === 0 ?
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
-            <a href={`https://mjl.clarivate.com/search-results?issn=${identifier}&hide_exact_match_fl=true`}><img className="card--tiny--image big" src={wosCrossed} alt="wos_logo" /></a>
+            <a href={`https://mjl.clarivate.com/search-results?issn=${identifier}&hide_exact_match_fl=true`}><img className="card--tiny--image big transparent" src={wosLogo} alt="wos_logo" /></a>
+          </div> 
+          <div className="card--tiny--info--data">
+            Recurso no encontrado
           </div> 
         </div>
         :
@@ -325,13 +335,16 @@ export default function TinyPanel({content, type, identifier}){
         content.scopus === null ?
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
-            <a href="https://www.scopus.com/home.uri"><img className="card--tiny--image " src={scopusCrossed} alt="scopus_logo" /></a>
+            <a href="https://www.scopus.com/home.uri"><img className="card--tiny--image transparent" src={scopusLogo} alt="view on Scopus" /></a>
           </div>
+          <div className="card--tiny--info--data">
+            Recurso no encontrado
+          </div> 
         </div>
         : 
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
-            <a href={content.scopus.entry[0].link[0]['@href']}><img className="card--tiny--image" src={scopusLogo} alt="scopus_logo" /></a>
+            <a href={content.scopus.entry[0].link[0]['@href']}><img className="card--tiny--image" src={scopusLogo} alt="view on Scopus" /></a>
           </div>
           <div className="card--tiny--info--data">
             CiteScore
@@ -352,13 +365,16 @@ export default function TinyPanel({content, type, identifier}){
         content.scimago.error ?
         <div className="card--tiny--info">
           <div className="card--tiny--info--data padded">
-            <a href="https://www.scimagojr.com/"><img className="card--tiny--image " src={scimagoCrossed} alt="scimago_logo" /></a>
+            <a href="https://www.scimagojr.com/"><img className="card--tiny--image transparent" src={scimagoLogo} alt="scimago_logo" /></a>
+          </div> 
+          <div className="card--tiny--info--data">
+            Recurso no encontrado
           </div> 
         </div>
         : 
         <div className="card--tiny--info">
           <div className="card--tiny--info--data">
-            <a href={content.scimago.journalURL}><img className="card--scimago--image" src={scimagoLogo} alt='scimago'/></a>
+            <a href={content.scimago.journalURL}><img className="card--scimago--image" src={scimagoLogo} alt='scimago_logo'/></a>
           </div>
           <div className="card--tiny--info--data">
             <div className="card--scimago--info--embed" id="scimagoWidget" dangerouslySetInnerHTML={{ __html: content.scimago.embedString }}></div>

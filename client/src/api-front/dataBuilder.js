@@ -3,7 +3,7 @@ import { getURLCrossref, getURLDoaj, getURLMicrosoft, getURLScopus, getURLDimens
 
 export const getDataByQuery = async (query, criteria) => {
 
-  let microsoftData = [];
+  let microsoftData;
   let scopusData;
   let dimensionsData;
   let altmetricData;
@@ -32,7 +32,7 @@ export const getDataByQuery = async (query, criteria) => {
   let res = {
     crossref: crossrefData,
     doaj: doajData.total === 0 ? null : doajData.results[0],
-    microsoft: microsoftData.error ? new Array(0) : microsoftData.length > 0 ? microsoftData.entities[0] : null,
+    microsoft: microsoftData ? microsoftData.error ? new Array(0) : microsoftData.entities.length > 0 ? microsoftData.entities[0] : null : null,
     scopus: scopusData ?? null,
     dimensions: dimensionsData ? dimensionsData.error ? null : dimensionsData : null,
     altmetric: altmetricData,
@@ -43,15 +43,19 @@ export const getDataByQuery = async (query, criteria) => {
       crossrefData.abstract ?
         !(Array.isArray(crossrefData.abstract)) ?
           crossrefData.abstract
+          : semanticData ? semanticData.abstract
           : (doajData.total > 0) ?
             doajData.results[0].bibjson.abstract
-            : microsoftData.length > 0 ?
-              microsoftData[0].AW
+            : semanticData ? semanticData.abstract            
               : ''
-        : '',
+        : semanticData ? semanticData.abstract
+        : (doajData.total > 0) ?
+          doajData.results[0].bibjson.abstract
+          : semanticData ? semanticData.abstract            
+            : '',
     title: crossrefData.title ? crossrefData.title : doajData.total > 0 ? doajData.results[0].bibjson.title : microsoftData.length > 0 ? microsoftData[0].DN : '',
     URL: criteria === 'DOI' ? `https://dx.doi.org/${query}` : doajData.total > 0 ? doajData.results[0].bibjson.ref.journal : `https://portal.issn.org/resource/ISSN/${query}`,
-    authors: crossrefData.author ? crossrefData.author : doajData.total > 0 ? doajData.results[0].bibjson.author : microsoftData.length > 0 ? microsoftData[0].AA : undefined,
+    authors: crossrefData.author ? crossrefData.author : doajData.total > 0 ? doajData.results[0].bibjson.author : microsoftData ? microsoftData.entities.length > 0 ? microsoftData.entities[0].AA : undefined : undefined,
     issn: crossrefData.ISSN ? crossrefData.ISSN[0] : doajData.total > 0 ? doajData.results[0].bibjson.journal ? doajData.results[0].bibjson.journal.issns[0] : null : null,
     identifier: {
       type: criteria,

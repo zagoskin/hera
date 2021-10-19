@@ -161,7 +161,7 @@ export default function ScopusGraph({data}){
             : data.entry[0].link[0]['@href'] }>
             <img className="card--scopus--image"
               src={scopusLogo}
-              alt='scopus_image'
+              alt='view on Scopus'
             />
           </a>
         </div>

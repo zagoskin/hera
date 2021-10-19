@@ -109,6 +109,10 @@
   margin: 0.5rem;
 }
 
+.transparent {
+  opacity: 0.4;
+}
+
 @media (min-width: 786px) {
   .card--tiny--info--title {
     font-size: 2.25rem;
