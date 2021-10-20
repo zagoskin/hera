@@ -108,6 +108,10 @@
   padding: 0.5rem;
   margin: 0.5rem;
 }
+.logoArea {
+  min-height: 90px;
+  max-height: 100px;
+}
 
 .transparent {
   opacity: 0.4;
@@ -150,5 +154,10 @@
 
   .small {
     width: 80px;
+  }
+
+  .logoArea {
+    min-height: 125px;
+    max-height: 130px;
   }
 }
