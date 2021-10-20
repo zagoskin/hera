@@ -53,7 +53,7 @@ export const getDataByQuery = async (query, criteria) => {
           doajData.results[0].bibjson.abstract
           : semanticData ? semanticData.abstract            
             : '',
-    title: crossrefData.title ? crossrefData.title : doajData.total > 0 ? doajData.results[0].bibjson.title : microsoftData.length > 0 ? microsoftData[0].DN : '',
+    title: crossrefData.title ? crossrefData.subtitle ? crossrefData.subtitle.length > 0 ? `${crossrefData.title}: ${crossrefData.subtitle}` : crossrefData.title : crossrefData.title : doajData.total > 0 ? doajData.results[0].bibjson.title : microsoftData ? microsoftData.entities.length > 0 ? microsoftData.entities[0].DN : '' : '',
     URL: criteria === 'DOI' ? `https://dx.doi.org/${query}` : doajData.total > 0 ? doajData.results[0].bibjson.ref.journal : `https://portal.issn.org/resource/ISSN/${query}`,
     authors: crossrefData.author ? crossrefData.author : doajData.total > 0 ? doajData.results[0].bibjson.author : microsoftData ? microsoftData.entities.length > 0 ? microsoftData.entities[0].AA : undefined : undefined,
     issn: crossrefData.ISSN ? crossrefData.ISSN[0] : doajData.total > 0 ? doajData.results[0].bibjson.journal ? doajData.results[0].bibjson.journal.issns[0] : null : null,
@@ -63,11 +63,11 @@ export const getDataByQuery = async (query, criteria) => {
     },
     type: criteria === "ISSN" ? "journal" :
           crossrefData.type ? crossrefData.type.split('-').join(' ') 
-          :  microsoftData.length > 0 ? 
-              microsoftData[0].BT === 'a' ? `journal article`
-            : microsoftData[0].BT === 'b' ? `book`
-            : microsoftData[0].BT === 'c' ? `book chapter`
-            : microsoftData[0].BT === 'p' ? `bonference paper`
+          :  microsoftData.entities.length > 0 ? 
+              microsoftData.entities[0].BT === 'a' ? `journal article`
+            : microsoftData.entities[0].BT === 'b' ? `book`
+            : microsoftData.entities[0].BT === 'c' ? `book chapter`
+            : microsoftData.entities[0].BT === 'p' ? `bonference paper`
             : '' : '',
     publisher: criteria === "DOI" ? undefined      
           : doajData.total > 0 ? doajData.results[0].bibjson.publisher.name
