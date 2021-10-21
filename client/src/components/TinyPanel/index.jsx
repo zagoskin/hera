@@ -63,7 +63,7 @@ export default function TinyPanel({content, type, identifier}){
       : type === "ISSN" ?
       <div className="card--tiny--info">
         <div className="card--tiny--info--data logoArea">
-          <a href={`https://search.crossref.org/?from_ui=yes&q=${identifier}`}>
+          <a href={`https://search.crossref.org/?q=${identifier}&from_ui=yes&type-name=Journal+Issue`}>
             <img className="card--tiny--image " src={crossrefLogo} alt="crossref_logo" /></a>
         </div>
         <div className="card--tiny--info--data">            
@@ -149,9 +149,10 @@ export default function TinyPanel({content, type, identifier}){
         <div  className="card--tiny--info">
           <div className="card--tiny--info--data logoArea">
             <a href={content.redib.redibURL}><img className="card--tiny--image big" src={redibLogo} alt="redib_logo" /></a>
-            <br />
-            <span style={{fontFamily: 'Roboto'}}>Indicadores calidad editorial</span>
+            
           </div>
+          
+          <div style={{fontFamily: 'Roboto', padding: "1.5rem"}} className="card--tiny--info--data">Indicadores de calidad editorial</div>
           {content.redib.indicadores.map(indicador => 
           <div key={indicador} style={{fontFamily: 'Roboto'}} className="card--tiny--info--indicator">
             {indicador}

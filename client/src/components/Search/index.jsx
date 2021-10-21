@@ -42,6 +42,10 @@ export default function Search(){
       setContent({ ...res, journalTitle: journalContent.title, publisher: journalContent.publisher });
     }
     setLoading(false);
+    history.push({
+      pathname: '/search',
+      search: `?type=${criteria}&value=${query}`
+    })
   }
 
   const validateQuery = async (e) => {
