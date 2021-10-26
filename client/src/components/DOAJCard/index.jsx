@@ -53,11 +53,7 @@ export const renderLicense = (index,licenseType,containerClass,imageClass) => {
 export default function DOAJCard({identifier, content}){
 
   return (
-    <div className="card--doaj" style={identifier.type === "DOI" ? 
-    { width: "48%",
-      marginLeft: "3%" } 
-      : {width: "100%"}
-    }>
+    <div className={identifier.type === "DOI" ? "card--doaj dDOI" : "card--doaj cISSN"} >
       <div className="card--image--container" style={identifier.type === "ISSN" ? {width: "20%" } : null}>
         <a href={ content === null ? `https://doaj.org/` 
           : identifier.type === 'ISSN' ? `https://doaj.org/toc/${identifier.value}` 

@@ -5,7 +5,7 @@ import semanticLogo from '../../images/semanticLogo.png';
 export default function SemanticCard({identifier, content}){
 
   return (
-    <div className="card--semantic">
+    <div className="card--semantic cDOI">
       <div className="card--image--container">
       <a href={content.error ? `https://www.semanticscholar.org/?utm_source=api` 
         : `https://www.semanticscholar.org/paper/${content.paperId}?utm_source=api`}>

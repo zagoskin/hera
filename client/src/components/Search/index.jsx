@@ -17,6 +17,7 @@ export default function Search(){
   const [additionalContent, setAdditionalContent] = useState(undefined);
   const [criteria, setCriteria] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loadStage, setLoadStage] = useState(0);
   const [formatError, setFormatError] = useState(false);
 
   useEffect(() => {
@@ -26,6 +27,11 @@ export default function Search(){
   const searchPapers = async (e) => {
     e.preventDefault();
     setLoading(true);
+    if (criteria === "DOI"){
+      setLoadStage(1);
+    } else {
+      setLoadStage(2);
+    }
     setAdditionalContent(undefined);
     const res = await getDataByQuery(query,criteria);
     
@@ -37,11 +43,13 @@ export default function Search(){
     setContent(res);
 
     if ((res.issn !== null) && (criteria === "DOI")){
+      setLoadStage(2);
       const journalContent = await getDataByQuery(res.issn,"ISSN");
       setAdditionalContent(journalContent);
       setContent({ ...res, journalTitle: journalContent.title, publisher: journalContent.publisher });
     }
     setLoading(false);
+    setLoadStage(0);
     history.push({
       pathname: '/search',
       search: `?type=${criteria}&value=${query}`
@@ -98,6 +106,16 @@ export default function Search(){
           <div className="formatErrorCross" onClick={() => setFormatError(false)}>X</div>
         </div>
         : null
+      }
+      {loadStage === 1 ?
+      <div style={{width: "100%", textAlign: "center"}}>
+        <h1>Buscando métricas del artículo</h1>
+      </div>
+      : loadStage === 2 ?
+      <div style={{width: "100%", textAlign: "center"}}>
+        <h1>Buscando métricas de la revista</h1>
+      </div>
+      : null
       }
       {loading  ?
       <div

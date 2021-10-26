@@ -53,11 +53,7 @@ export const renderLicenseByURL = (index,licenseURL,containerClass,imageClass) =
 export default function CrossrefCard({identifier, content}){
 
   return (
-    <div className="card--crossref" style={identifier.type === "DOI" ? 
-      { width: "48%",
-        marginRight: "1%" } 
-        : {width: "100%"}
-      } >
+    <div className={identifier.type === "DOI" ? "card--crossref cDOI" : "card--crossref cISSN"} >
       <div className="card--image--container" style={identifier.type === "ISSN" ? {width: "20%" } : null}>
       <a href={ content.error ? `https://www.crossref.org/` 
         : `https://search.crossref.org/?from_ui=yes&q=${identifier.value}`}>

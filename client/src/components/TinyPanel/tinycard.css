@@ -32,7 +32,7 @@
 
 .card--tiny--seal {
   color: #282624;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: bold;
   border: 0.5px;
   width: 100%;
@@ -146,6 +146,10 @@
 
   .biggerer {
     width: 300px;
+  }
+
+  .card--tiny--seal {
+    font-size: 1.25rem;
   }
 
   .card--tiny--license--image {

@@ -5,7 +5,7 @@ import microsoftLogo from '../../images/microsoftLogo.png';
 export default function MicrosoftCard({identifier, content}){
 
   return (
-    <div className="card--microsoft">
+    <div className="card--microsoft dDOI">
       <div className="card--image--container">
         <a href={content ? `https://academic.microsoft.com/paper/${content.Id}` 
           : `https://academic.microsoft.com/home` }>

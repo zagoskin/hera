@@ -126,7 +126,7 @@ export default function AcademicCard({content,additionalContent}){
         <>
         <br />
         <br />
-        <h1 className="card--title">Datos de la revista: {additionalContent.title}</h1>
+        <h1 className="card--title">Publicado en: {additionalContent.title}</h1>
         <br />
         <br />
         <CrossrefCard identifier={additionalContent.identifier} content={additionalContent.crossref} key={'crossref' + additionalContent.identifier.value}/>
