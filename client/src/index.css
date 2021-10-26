@@ -32,7 +32,7 @@ small {
   min-height: 82vh;
   margin: 0 auto;
   max-width: 1200px;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .container a {
@@ -109,6 +109,9 @@ small {
 }
 
 @media (min-width: 832px) {
+  .container {
+    padding: 40px;
+  }
   .titleContainer {
     margin-top: 2%;
     margin-bottom: 4%;
