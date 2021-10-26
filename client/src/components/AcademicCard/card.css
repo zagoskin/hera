@@ -67,6 +67,12 @@
   display: flex;
 }
 
+.cDOI,
+.dDOI,
+.cISSN {
+  width: 100%;
+}
+
 .card--doaj {
   background-image: linear-gradient(
     to right,
@@ -88,8 +94,6 @@
     rgb(196, 210, 255),
     rgb(60, 93, 202)
   );
-  width: 48%;
-  margin-left: 3%;
   display: flex;
 }
 
@@ -162,8 +166,6 @@
     rgb(56, 143, 184),
     rgb(52, 90, 107)
   );
-  width: 48%;
-  margin-right: 1%;
   display: flex;
 }
 
@@ -204,18 +206,18 @@
 
 .card--dimensions--badge {
   padding: 0.5rem;
-  width: 30%;
+  width: 50%;
 }
 .card--dimensions--info {
   float: none;
-  width: 60%;
+  width: 49%;
   margin-top: 0%;
   font-size: 1.5rem;
   font-weight: normal;
 }
 
 .card--dimensions--disclaimer {
-  margin-top: -5%;
+  margin-top: 0%;
   margin-bottom: 2%;
   margin-left: 30%;
   width: 60%;
@@ -619,17 +621,18 @@ a:hover {
 }
 
 .card--altmetric--info {
-  width: 60%;
+  width: 49%;
   font-size: 1.5rem;
 }
 
 .card--altmetric--text {
-  margin-top: 2%;
+  margin-top: 4%;
   width: 100%;
 }
 
 .card--altmetric--logos {
   display: flex;
+  margin-bottom: 1rem;
 }
 
 .card--altmetric--logo--container {
@@ -696,8 +699,16 @@ a:hover {
 
 /* NO SMARTPHONE CSS */
 @media (min-width: 832px) {
+  .cDOI {
+    width: 48%;
+    margin-right: 1%;
+  }
   .card--doaj {
     width: 100%;
+  }
+  .dDOI {
+    width: 48%;
+    margin-left: 3%;
   }
   .card--image--container {
     width: 20%;
@@ -925,10 +936,11 @@ a:hover {
 
   .card--altmetric--logo {
     width: 50px;
+    margin-top: -1%;
   }
 
   .card--altmetric--text {
-    padding-bottom: 0.5rem;
+    margin-top: 1%;
   }
 
   .card--collapse--btn {
