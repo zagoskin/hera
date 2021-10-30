@@ -30,13 +30,18 @@ const fetchWithTimeout = async (url, options, timeout) => {
 }
 
 const fetchJsonContents = async (url,options) => {
-  const data  = await fetch(url,options);
-  if (data.ok){
-    const jsonData = await data.json();
-    return jsonData;
-  } else {
+  try {
+    const data  = await fetchWithTimeout(url,options,15000);
+    if (data.ok){
+      const jsonData = await data.json();
+      return jsonData;
+    } else {
+      console.log('Request failed');
+      return { error: 'Something went wrong' };
+    }
+  } catch (error) {
     console.log('Request failed');
-    return { error: 'Something went wrong' };
+    return { error: 'Timed out' };
   }
 }
 
