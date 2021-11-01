@@ -63,7 +63,7 @@ export default function AcademicCard({content,additionalContent}){
             <b>Año de publicación:</b><em> {content.yearPublished}</em>
           </p> : null
           }
-          {content.abstract ? <div className='card--abstract'><p><b>ABSTRACT: </b>
+          {content.abstract ? <div className='card--abstract'><p><b>Abstract: </b>
           <em><span className="card--abstract--text">
               {content.abstract.replace(/(<([^>]+)>)/ig, '')}
             </span></em></p>

@@ -93,7 +93,6 @@ export default function CrossrefCard({identifier, content}){
             </div>   
           )}
         </div>
-        <p>Información provista por Crossref</p>
       </div> 
       : null     
       }

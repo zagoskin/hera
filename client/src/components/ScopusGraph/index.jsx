@@ -167,7 +167,7 @@ export default function ScopusGraph({data}){
         </div>
         <div className="card--data--container">
         {data === null ?
-            <div className="card--doaj--text--warning"> No indexado en Scopus</div>
+            <div className="card--doaj--text--warning"> No hallado en Scopus</div>
          
           : 
           <div className="card--scopus--info">

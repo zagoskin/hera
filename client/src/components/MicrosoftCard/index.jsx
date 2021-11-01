@@ -34,7 +34,7 @@ export default function MicrosoftCard({identifier, content}){
         </div> 
         : identifier.type === "DOI" ?
         <div className="card--doaj--text--warning">
-          No hallado en Bing! 
+          No hallado en Microsoft Academic 
         </div>
         : null
         }
