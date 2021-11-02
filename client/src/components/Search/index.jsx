@@ -85,18 +85,18 @@ export default function Search(){
         <label className="searchLabel" htmlFor="query">Seleccione DOI o ISSN
         </label>
         }
-          <input className="searchInput" type="text" name="query"
+          <input id="query" className="searchInput" type="text" name="search-query"
             placeholder={criteria === "DOI" ? 'e.g.: 10.1000/xyz123' : criteria === "ISSN" ? 'e.g.: 2049-3630' : 'Seleccione criteria primero'}
             value={query} onChange={(e) => setQuery(e.target.value)}
             disabled={((criteria !== "DOI") && (criteria !== "ISSN"))? true : false}/>
         <button className="searchBtn" type="submit" disabled={((criteria !== "DOI") && (criteria !== "ISSN"))? true : false}>Buscar</button>
         
         <div className="searchCriteria">
-          <label className="searchRadioLabel">DOI
-          <input  className="searchRadioBtn" type="radio" value="DOI" checked={criteria === "DOI"} onChange={(e) => {setCriteria(e.target.value); setFormatError(false)}}/>
+          <label htmlFor="doi-radio" className="searchRadioLabel">DOI
+          <input  id="doi-radio" className="searchRadioBtn" type="radio" value="DOI" name="search-criteria-radio"  onChange={(e) => {setCriteria(e.target.value); setFormatError(false)}}/>
           </label>
-          <label className="searchRadioLabel">ISSN
-          <input className="searchRadioBtn" type="radio" value="ISSN" checked={criteria === "ISSN"} onChange={(e) => {setCriteria(e.target.value); setFormatError(false)}}/>
+          <label htmlFor="issn-radio" className="searchRadioLabel">ISSN
+          <input id="issn-radio" className="searchRadioBtn" type="radio" value="ISSN" name="search-criteria-radio"  onChange={(e) => {setCriteria(e.target.value); setFormatError(false)}}/>
           </label>
         </div>
       </form>
