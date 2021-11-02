@@ -39,6 +39,10 @@ class Main extends React.Component {
               <About />
             </Route>
             <Route path="/faq">
+              <Link to="/"><div className="titleContainer">
+              <div className="titleImgContainer"><img className="titleImg" src={heraLogo} alt="hera logo" /></div>
+              <div className="titleText">Herramienta para Enriquecimiento de Recursos Académicos</div>
+              </div></Link>
               <FAQ />
             </Route>
             <Route path="/">
