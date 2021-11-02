@@ -43,7 +43,7 @@ export default function AcademicCard({content,additionalContent}){
       {content.title ?
         <div className="card--content">
           <h1 className="card--title">{content.title}</h1>
-          <p><b>Tipo de recurso:</b><em> {content.type.charAt(0).toUpperCase()+content.type.slice(1)}</em></p>
+          <p><b>Tipo de recurso:</b><em style={{textTransform: "capitalize"}}> {content.type}</em></p>
           {content.authors ? <p>
             <b>Autores:</b><em> {authors}.</em> 
           </p> : null 
