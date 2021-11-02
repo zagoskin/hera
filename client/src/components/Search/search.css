@@ -133,8 +133,10 @@
   }
 
   .searchCriteria {
+    text-align: left;
     font-size: 2rem;
     margin-top: 2%;
+    margin-left: 4.5%;
   }
 
   .searchBtn {
