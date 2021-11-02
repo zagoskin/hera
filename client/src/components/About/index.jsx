@@ -19,7 +19,7 @@ export default function About(){
       sistemas de evaluación que, aunque comparten objetivos, no siempre lo llevan a cabo de la misma manera.
       </p>
       <p className="aboutP">
-      <em>HERA</em> es una propuesta que busca dar respuesta al problema anterior 
+      <em>HERA (Herramienta para Enriquecimiento de Recursos Académicos)</em> es una propuesta que busca dar respuesta al problema anterior 
       y surge como una iniciativa conjunta entre diferentes unidades de la UNLP: la 
       <a href="https://www.econo.unlp.edu.ar/investigacion_transferencia"> Secretaría de Investigación y Transferencia</a> de la Facultad de Ciencias Económicas, el 
       <a href="http://weblidi.info.unlp.edu.ar/wp/"> III-LIDI</a> de la Facultad de Informática y el 

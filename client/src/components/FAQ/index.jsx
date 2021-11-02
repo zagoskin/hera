@@ -43,6 +43,13 @@ export default function FAQ(){
         Para ello, consulta las bases de datos de <a href="https://www.crossref.org/">CrossRef</a>, <a href="https://doaj.org/">DOAJ</a>, <a href="https://academic.microsoft.com/">Microsoft Academic</a>, <a href="https://www.semanticscholar.org/">SemanticScholar</a>, 
         <a href="https://redib.org/">REDIB</a>, <a href="https://mjl.clarivate.com/">Web of Science</a>, <a href="https://www.scopus.com/home.uri">Scopus</a>, <a href="https://www.scimagojr.com/">SJR</a>, <a href="https://www.dimensions.ai/">Dimensions</a> y <a href="https://www.altmetric.com/">Altmetric</a>.
       </p>
+
+      <h1 className="faqQuestion">¿Qué tan actualizada está la información que provee HERA?</h1>
+      <p className="faqP">
+        HERA no tiene una base de datos propia sino que funciona en tiempo real ante cada búsqueda, 
+        consultando diferentes servicios provistos por cada una de las bases de datos mencionadas. 
+        La información exhibida es la que provee cada base de datos en el momento de la búsqueda.
+      </p>
     </div>
   )
 }
