@@ -1,11 +1,24 @@
 .searchForm {
-  display: grid;
+  display: inline-block;
+  margin-top: 2%;
+}
+
+.formImage {
+  width: 20%;
+  float: left;
+}
+
+.formContent {
+  width: 80%;
+  float: right;
+  margin-top: 1%;
 }
 
 .searchLabel {
   font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
+  margin-right: 1%;
 }
 
 .searchInput {
@@ -15,6 +28,7 @@
   border-radius: 20px;
   border: 1px solid #ccc;
   margin-bottom: 1rem;
+  margin-right: 1%;
 }
 
 .searchInput:focus {
@@ -25,13 +39,15 @@
   background-color: #ad1f1f;
   border: 1px solid rgba(0, 0, 0, 0.75);
   border-radius: 20px;
-  padding: 1rem 2rem;
-  font-size: 1.6rem;
+  padding: 1rem 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #fff !important;
   cursor: pointer;
   transition: background-color 250ms;
   box-shadow: 0 6px #999;
+  float: right;
+  margin-right: 2%;
 }
 
 .searchBtn:hover {
@@ -55,12 +71,12 @@
 }
 
 .searchCriteria {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .searchRadioLabel {
   float: left;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .formatError {
@@ -93,25 +109,44 @@
 }
 
 .searchRadioBtn {
-  margin-left: 2.5rem;
+  margin-left: 1.5rem;
 }
 @media (min-width: 786px) {
+  .searchForm {
+    grid-template-columns: auto 1fr auto;
+    grid-gap: 1rem;
+    align-items: center;
+  }
+
   .searchLabel {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
   }
 
-  .searchForm {
-    grid-template-columns: auto 1fr auto;
-    grid-gap: 1rem;
-    align-items: center;
-  }
   .searchInput {
     margin-bottom: 0;
   }
 
+  .searchCriteria {
+    font-size: 2rem;
+    margin-top: 2%;
+  }
+
+  .searchBtn {
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    float: none;
+    margin-right: 0%;
+  }
+
+  .searchRadioBtn {
+    margin-left: 2.5rem;
+  }
+
   .searchRadioLabel {
+    float: none;
     padding-top: 0;
     padding-right: 4rem;
   }
