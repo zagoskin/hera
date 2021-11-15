@@ -35,8 +35,8 @@ export default function Search(){
     setAdditionalContent(undefined);
     const res = await getDataByQuery(query,criteria);
     
-    // console.log('Todos los resultados:');
-    // console.log(res);
+    console.log('Todos los resultados:');
+    console.log(res);
     
     setFormatError(false);
     
@@ -91,7 +91,7 @@ export default function Search(){
             </label>
             }
               <input id="query" className="searchInput" type="text" name="search-query"
-                placeholder={criteria === "DOI" ? 'e.g.: 10.1000/xyz123' : criteria === "ISSN" ? 'e.g.: 2049-3630' : 'Seleccione criteria primero'}
+                placeholder={criteria === "DOI" ? 'Ejemplo: 10.1000/xyz123' : criteria === "ISSN" ? 'Ejemplo: 2049-3630' : 'Seleccione DOI o ISSN'}
                 value={query} onChange={(e) => setQuery(e.target.value)}
                 disabled={((criteria !== "DOI") && (criteria !== "ISSN"))? true : false}/>
             <button className="searchBtn" type="submit" disabled={((criteria !== "DOI") && (criteria !== "ISSN"))? true : false}>Buscar</button>
