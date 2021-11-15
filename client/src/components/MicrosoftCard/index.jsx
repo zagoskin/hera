@@ -25,12 +25,15 @@ export default function MicrosoftCard({identifier, content}){
             Citas que se estima recibir el próximo año: {content.ECC} 
           </div>
           <br/>
+          { content.F ?
           <div className="card--microsoft--fos">
             <div className="card--microsoft--fos--title">Campos de Estudio</div>
             {content.F.map((field,index) => 
               <div className="card--microsoft--fos--badge" key={index}>{field.DFN}</div>   
             )}
           </div>
+          : null
+          }
         </div> 
         : identifier.type === "DOI" ?
         <div className="card--doaj--text--warning">
