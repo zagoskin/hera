@@ -40,10 +40,11 @@ export default function AcademicCard({content,additionalContent}){
     <div className="card">
 
       {/* Info general de un contenido */}
+      <article>
       {content.title ?
         <div className="card--content">
           <h1 className="card--title">{content.title}</h1>
-          <p><b>Tipo de recurso:</b><em> {content.type.charAt(0).toUpperCase()+content.type.slice(1)}</em></p>
+          <p><b>Tipo de recurso:</b><em style={{textTransform: "capitalize"}}> {content.type}</em></p>
           {content.authors ? <p>
             <b>Autores:</b><em> {authors}.</em> 
           </p> : null 
@@ -76,7 +77,7 @@ export default function AcademicCard({content,additionalContent}){
           <h1 className="card--title">Resultados no encontrados para su búsqueda</h1>
         </div>
       }
-
+      </article>
       <Collapse isOpened={!showMore} theme={{collapse: 'ReactCollapse--collapse'}} key={'collapse1'}>
         <TinyPanel content={content} type={content.identifier.type} identifier={content.identifier.value} key={'tinypanel' + content.identifier.value}></TinyPanel>
         {additionalContent ?

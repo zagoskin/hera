@@ -30,16 +30,19 @@ class Main extends React.Component {
           </div>
         </nav>
         <div className="container">
-          <Link to="/"><div className="titleContainer">
-            <div className="titleImgContainer"><img className="titleImg" src={heraLogo} alt="hera logo" /></div>
-            <div className="titleText">Herramienta para Enriquecimiento de Recursos Académicos</div>
-            </div></Link>
-
           <Switch>
             <Route path="/about">
+              <Link to="/"><div className="titleContainer">
+              <div className="titleImgContainer"><img className="titleImg" src={heraLogo} alt="hera logo" /></div>
+              <div className="titleText">Herramienta para Enriquecimiento de Recursos Académicos</div>
+              </div></Link>
               <About />
             </Route>
             <Route path="/faq">
+              <Link to="/"><div className="titleContainer">
+              <div className="titleImgContainer"><img className="titleImg" src={heraLogo} alt="hera logo" /></div>
+              <div className="titleText">Herramienta para Enriquecimiento de Recursos Académicos</div>
+              </div></Link>
               <FAQ />
             </Route>
             <Route path="/">

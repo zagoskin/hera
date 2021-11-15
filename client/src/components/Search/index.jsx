@@ -7,7 +7,7 @@ import AcademicCard from '../AcademicCard/index';
 import Loader from 'react-loader-spinner';
 import { validDOI, validISSN } from '../../helpers/regex';
 import { getDataByQuery } from '../../api-front/dataBuilder';
-
+import heraLogo from '../../images/heraLogo.png';
 // import instagramLogo from '../../images/insta.png';
 
 export default function Search(){
@@ -35,8 +35,8 @@ export default function Search(){
     setAdditionalContent(undefined);
     const res = await getDataByQuery(query,criteria);
     
-    // console.log('Todos los resultados:');
-    // console.log(res);
+    console.log('Todos los resultados:');
+    console.log(res);
     
     setFormatError(false);
     
@@ -77,28 +77,35 @@ export default function Search(){
 
   return (
     <>
-      <form className="searchForm" onSubmit={validateQuery}>
-        {criteria? 
-        <label className="searchLabel" htmlFor="query">Ingrese {criteria} del contenido a analizar
-        </label>
-        :
-        <label className="searchLabel" htmlFor="query">Seleccione DOI o ISSN
-        </label>
-        }
-          <input className="searchInput" type="text" name="query"
-            placeholder={criteria === "DOI" ? 'e.g.: 10.1000/xyz123' : criteria === "ISSN" ? 'e.g.: 2049-3630' : 'Seleccione criteria primero'}
-            value={query} onChange={(e) => setQuery(e.target.value)}
-            disabled={((criteria !== "DOI") && (criteria !== "ISSN"))? true : false}/>
-        <button className="searchBtn" type="submit" disabled={((criteria !== "DOI") && (criteria !== "ISSN"))? true : false}>Buscar</button>
-        
-        <div className="searchCriteria">
-          <label className="searchRadioLabel">DOI
-          <input  className="searchRadioBtn" type="radio" value="DOI" checked={criteria === "DOI"} onChange={(e) => {setCriteria(e.target.value); setFormatError(false)}}/>
-          </label>
-          <label className="searchRadioLabel">ISSN
-          <input className="searchRadioBtn" type="radio" value="ISSN" checked={criteria === "ISSN"} onChange={(e) => {setCriteria(e.target.value); setFormatError(false)}}/>
-          </label>
-        </div>
+      <form className="searchForm" onSubmit={validateQuery}>   
+        <div> 
+          <div className="formImage">
+            <img className="titleImg" src={heraLogo} alt="hera logo" />
+          </div>  
+          <div className="formContent">
+            {criteria? 
+            <label className="searchLabel" htmlFor="query">Ingrese {criteria} del contenido a analizar
+            </label>
+            :
+            <label className="searchLabel" htmlFor="query">Seleccione DOI o ISSN
+            </label>
+            }
+              <input id="query" className="searchInput" type="text" name="search-query"
+                placeholder={criteria === "DOI" ? 'Ejemplo: 10.1000/xyz123' : criteria === "ISSN" ? 'Ejemplo: 2049-3630' : 'Seleccione DOI o ISSN'}
+                value={query} onChange={(e) => setQuery(e.target.value)}
+                disabled={((criteria !== "DOI") && (criteria !== "ISSN"))? true : false}/>
+            <button className="searchBtn" type="submit" disabled={((criteria !== "DOI") && (criteria !== "ISSN"))? true : false}>Buscar</button>
+            
+            <div className="searchCriteria">
+              <label htmlFor="doi-radio" className="searchRadioLabel">DOI
+              <input  id="doi-radio" className="searchRadioBtn" type="radio" value="DOI" name="search-criteria-radio"  onChange={(e) => {setCriteria(e.target.value); setFormatError(false)}}/>
+              </label>
+              <label htmlFor="issn-radio" className="searchRadioLabel">ISSN
+              <input id="issn-radio" className="searchRadioBtn" type="radio" value="ISSN" name="search-criteria-radio"  onChange={(e) => {setCriteria(e.target.value); setFormatError(false)}}/>
+              </label>
+            </div>
+            </div>
+          </div>
       </form>
       { formatError? 
         <div className="formatError">
