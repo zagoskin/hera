@@ -100,7 +100,7 @@ export const getContentsScimago = async (url, title) => {
   const res = await getHtml(url, `${process.env.REACT_APP_SERVER_BASE_URL}/api/getContentsHtml`, '');
 
   if (res.html.error){
-    return { error: res.html.error };
+    return { error: "Recurso no encontrado" };
   } else {
       const searchHtml = res.html;
 
@@ -113,39 +113,45 @@ export const getContentsScimago = async (url, title) => {
     
       if (errorP) { //busco si hay un resultado en la busqueda
         contents = {
-          error: errorP.innerText
+          error: "Recurso no encontrado"
         }
       } else {
-        const searchResults = searchDOM.body.querySelector(".search_results");
-    
-        const firstTitle = searchResults.querySelector(".jrnlname").innerText;
-    
-        if ((searchResults.children.length === 1) || (firstTitle.split(" ")[0] === title.split(" ")[0])) {
-          const anchorURL = searchResults.querySelector("a").href;
-    
-          const journalURL = "https://www.scimagojr.com/" + anchorURL.replace(/^(?:\/\/|[^/]+)*\//, '');
-          //alert(journalURL);
-          const searchRes = await getHtml(journalURL, `${process.env.REACT_APP_SERVER_BASE_URL}/api/getContentsHtml`, '');
-          const journalHtml = searchRes.html;
-    
-          const journalDOM = parser.parseFromString(journalHtml, 'text/html');
-          const hIndex = journalDOM.body.querySelector(".hindexnumber").innerText;
-          const embedString = journalDOM.getElementById("embed_code").value;
-          const journalData = journalDOM.body.querySelector(".journalgrid").querySelectorAll("div");
-          const country = journalData[0].querySelector("p").querySelector("a").innerText;
-          const coverage = journalData[6].querySelector("p").innerText;
-          const publisher = journalDOM.body.querySelector(".journalgrid").querySelectorAll("div")[2].querySelector("p").innerText;
-          contents = {
-            hIndex,
-            country,
-            coverage,
-            embedString,
-            journalURL,
-            publisher
+        try {
+          const searchResults = searchDOM.body.querySelector(".search_results");
+      
+          const firstTitle = searchResults.querySelector(".jrnlname").innerText;
+      
+          if ((searchResults.children.length === 1) || (firstTitle.split(" ")[0] === title.split(" ")[0])) {
+            const anchorURL = searchResults.querySelector("a").href;
+      
+            const journalURL = "https://www.scimagojr.com/" + anchorURL.replace(/^(?:\/\/|[^/]+)*\//, '');
+            //alert(journalURL);
+            const searchRes = await getHtml(journalURL, `${process.env.REACT_APP_SERVER_BASE_URL}/api/getContentsHtml`, '');
+            const journalHtml = searchRes.html;
+      
+            const journalDOM = parser.parseFromString(journalHtml, 'text/html');
+            const hIndex = journalDOM.body.querySelector(".hindexnumber").innerText;
+            const embedString = journalDOM.getElementById("embed_code").value;
+            const journalData = journalDOM.body.querySelector(".journalgrid").querySelectorAll("div");
+            const country = journalData[0].querySelector("p").querySelector("a").innerText;
+            const coverage = journalData[6].querySelector("p").innerText;
+            const publisher = journalDOM.body.querySelector(".journalgrid").querySelectorAll("div")[2].querySelector("p").innerText;
+            contents = {
+              hIndex,
+              country,
+              coverage,
+              embedString,
+              journalURL,
+              publisher
+            }
+          } else {
+            contents = {
+              error: "Recurso no encontrado"
+            }
           }
-        } else {
+        } catch (e){
           contents = {
-            error: "Not found in list"
+            error: "Falla en la extracción de datos"
           }
         }
       }
@@ -159,11 +165,12 @@ export const getContentsScimago = async (url, title) => {
 }
 
 export const getContentsRedib = async (url) => {
+
   const res = await getHtml(url, `${process.env.REACT_APP_SERVER_BASE_URL}/api/getContentsHtml`, '');
   // console.log("Respuesta de getHtml redib");
   // console.log(res);
   if (res.html.error) {
-    return { error: res.html.error };
+    return { error: "Recurso no encontrado" };
   } else {
       let parser = new DOMParser();
     
@@ -173,49 +180,57 @@ export const getContentsRedib = async (url) => {
     
       if (errorP) {
         contents = {
-          error: errorP.innerText,
+          error: "Recurso no encontrado",
         }
       } else {
-        const journalTitle = resDOM.body.querySelector(".well-text-revista").querySelector("h1").innerText;
-        const journalURL = resDOM.body.querySelector(".table.table-striped").querySelector(".redibLink").href;
-        const redibURL = resDOM.body.querySelector(".dropdown").querySelector(".dropdown-menu").querySelector("a").href.split("?")[0];
-    
-        const listaNodoIndicadores = resDOM.body.querySelector(".indicadores").querySelectorAll(".indicador1");
-        const arrayNodos = Array.from(listaNodoIndicadores);
-        const indicadores = arrayNodos.map((nodo) => nodo.innerText);
-    
-        const listaAcredInter = resDOM.getElementsByClassName("acreditaciones")[0].querySelectorAll(".acreditacion1");
-        const arrayAcredInter = Array.from(listaAcredInter);
-        const acredInter = arrayAcredInter.map((nodo) => nodo.innerText);
-    
-        const listaAcredNac = resDOM.getElementsByClassName("acreditaciones")[1].querySelectorAll(".acreditacion1");
-        const arrayAcredNac = Array.from(listaAcredNac);
-        const acredNac = arrayAcredNac.map((nodo) => nodo.innerText);
-    
-        const widgetDiv = resDOM.body.querySelector(".copia-widget");
-        let widget;
-    
-        if (widgetDiv) {
-          const widgetString = widgetDiv.querySelector("input").value;
-          const widgetBody = parser.parseFromString(widgetString, 'text/html').body;
+        // console.log("Datos");
+        // console.log(resDOM.body.querySelector(".cabecera").querySelector("#languageIconMenu").querySelector("a").href);
+        try {
+          const journalTitle = resDOM.body.querySelector(".well-text-revista").querySelector("h1").innerText;
+          const journalURL = resDOM.body.querySelector(".cabecera").querySelector("#languageIconMenu").querySelector("a").href;
+          const redibURL = resDOM.body.querySelector(".dropdown").querySelector(".dropdown-menu").querySelector("a").href.split("?")[0];
       
-          const anchorHref = widgetBody.querySelector("a").href;
-          const imgSrc = widgetBody.querySelector("img").src;
-          widget = {
-            anchorHref,
-            imgSrc,
+          const listaNodoIndicadores = resDOM.body.querySelector(".indicadores").querySelectorAll(".indicador1");
+          const arrayNodos = Array.from(listaNodoIndicadores);
+          const indicadores = arrayNodos.map((nodo) => nodo.innerText);
+      
+          const listaAcredInter = resDOM.getElementsByClassName("acreditaciones")[0].querySelectorAll(".acreditacion1");
+          const arrayAcredInter = Array.from(listaAcredInter);
+          const acredInter = arrayAcredInter.map((nodo) => nodo.innerText);
+      
+          const listaAcredNac = resDOM.getElementsByClassName("acreditaciones")[1].querySelectorAll(".acreditacion1");
+          const arrayAcredNac = Array.from(listaAcredNac);
+          const acredNac = arrayAcredNac.map((nodo) => nodo.innerText);
+      
+          const widgetDiv = resDOM.body.querySelector(".copia-widget");
+          let widget;
+      
+          if (widgetDiv) {
+            const widgetString = widgetDiv.querySelector("input").value;
+            const widgetBody = parser.parseFromString(widgetString, 'text/html').body;
+        
+            const anchorHref = widgetBody.querySelector("a").href;
+            const imgSrc = widgetBody.querySelector("img").src;
+            widget = {
+              anchorHref,
+              imgSrc,
+            }
           }
-        }
-        //La mayoría de los resultados no tienen esto
-        //const rankingDiv = resDOM.getElementById("rankingSerial");
-        contents = {
-          journalTitle,
-          journalURL,
-          redibURL,
-          indicadores,
-          acredInter,
-          acredNac,
-          widget
+          //La mayoría de los resultados no tienen esto
+          //const rankingDiv = resDOM.getElementById("rankingSerial");
+          contents = {
+            journalTitle,
+            journalURL,
+            redibURL,
+            indicadores,
+            acredInter,
+            acredNac,
+            widget
+          }
+        } catch (e) {
+          contents = {
+            error: "Falla en la extracción de datos"
+          }
         }
       }
       return contents;

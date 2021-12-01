@@ -53,7 +53,11 @@ export const getDataByQuery = async (query, criteria) => {
           doajData.results[0].bibjson.abstract
           : semanticData ? semanticData.abstract            
             : '',
-    title: crossrefData.title ? crossrefData.subtitle ? crossrefData.subtitle.length > 0 ? `${crossrefData.title}: ${crossrefData.subtitle}` : crossrefData.title : crossrefData.title : doajData.total > 0 ? doajData.results[0].bibjson.title : microsoftData ? microsoftData.entities.length > 0 ? microsoftData.entities[0].DN : '' : redibData ? redibData.journalTitle : '',
+    title: crossrefData.title ? crossrefData.subtitle ? crossrefData.subtitle.length > 0 ? `${crossrefData.title}: ${crossrefData.subtitle}` 
+          : crossrefData.title : crossrefData.title 
+          : doajData.total > 0 ? doajData.results[0].bibjson.title 
+          : microsoftData && microsoftData.entities.length > 0 ? microsoftData.entities[0].DN 
+          : redibData && redibData.journalTitle ? redibData.journalTitle : "",
     URL: criteria === 'DOI' ? `https://dx.doi.org/${query}` : doajData.total > 0 ? doajData.results[0].bibjson.ref.journal : `https://portal.issn.org/resource/ISSN/${query}`,
     authors: crossrefData.author ? crossrefData.author : doajData.total > 0 ? doajData.results[0].bibjson.author : microsoftData ? microsoftData.entities.length > 0 ? microsoftData.entities[0].AA : undefined : undefined,
     issn: crossrefData.ISSN ? crossrefData.ISSN[0] : doajData.total > 0 ? doajData.results[0].bibjson.journal ? doajData.results[0].bibjson.journal.issns[0] : null : null,
@@ -76,7 +80,7 @@ export const getDataByQuery = async (query, criteria) => {
           : undefined,
     yearPublished: crossrefData.issued ? crossrefData.issued["date-parts"][0][0] : null
   }
-
+ 
   if (criteria === "ISSN") {
     scimagoData = await getContentsScimago(getURLScimago(), res.title);
     if (res.publisher === undefined){

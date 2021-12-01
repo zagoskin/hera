@@ -133,7 +133,7 @@ export default function TinyPanel({content, type, identifier}){
               <img className="card--tiny--image transparent" src={redibLogo} alt="redib_crossed" /></a>
           </div> 
           <div className="card--tiny--info--data">
-            Recurso no encontrado
+            {content.redib.error}
           </div> 
         </div>
         : 
@@ -378,7 +378,7 @@ export default function TinyPanel({content, type, identifier}){
             <a href="https://www.scimagojr.com/"><img className="card--tiny--image transparent" src={scimagoLogo} alt="scimago_logo" /></a>
           </div> 
           <div className="card--tiny--info--data">
-            Recurso no encontrado
+            {content.scimago.error}
           </div> 
         </div>
         : 
