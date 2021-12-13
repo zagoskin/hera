@@ -53,8 +53,7 @@ export const getDataByQuery = async (query, criteria) => {
           doajData.results[0].bibjson.abstract
           : semanticData ? semanticData.abstract            
             : '',
-    title: crossrefData.title ? crossrefData.subtitle ? crossrefData.subtitle.length > 0 ? `${crossrefData.title}: ${crossrefData.subtitle}` 
-          : crossrefData.title : crossrefData.title 
+    title: crossrefData.title ? crossrefData.subtitle && crossrefData.subtitle.length > 0 ? `${crossrefData.title}: ${crossrefData.subtitle}`: crossrefData.title 
           : doajData.total > 0 ? doajData.results[0].bibjson.title 
           : microsoftData && microsoftData.entities.length > 0 ? microsoftData.entities[0].DN 
           : redibData && redibData.journalTitle ? redibData.journalTitle : "",
