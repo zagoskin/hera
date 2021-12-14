@@ -22,7 +22,7 @@ export default function MicrosoftCard({identifier, content}){
             Citas actuales: {content.CC} 
           </div>
           <div className="card--microsoft--text--cc">
-            Citas que se estima recibir el próximo año: {content.ECC} 
+            Citas que se estiman para el próximo año: {content.ECC} 
           </div>
           <br/>
           { content.F ?

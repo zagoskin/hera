@@ -59,7 +59,12 @@ export const getDataByQuery = async (query, criteria) => {
           : redibData && redibData.journalTitle ? redibData.journalTitle : "",
     URL: criteria === 'DOI' ? `https://dx.doi.org/${query}` : doajData.total > 0 ? doajData.results[0].bibjson.ref.journal : `https://portal.issn.org/resource/ISSN/${query}`,
     authors: crossrefData.author ? crossrefData.author : doajData.total > 0 ? doajData.results[0].bibjson.author : microsoftData ? microsoftData.entities.length > 0 ? microsoftData.entities[0].AA : undefined : undefined,
-    issn: crossrefData.ISSN ? crossrefData.ISSN[0] : doajData.total > 0 ? doajData.results[0].bibjson.journal ? doajData.results[0].bibjson.journal.issns[0] : null : null,
+    issn: crossrefData.ISSN ? crossrefData.ISSN.length > 1 ? crossrefData.ISSN[1] : crossrefData.ISSN[0]
+          : doajData.total > 0 ? 
+            doajData.results[0].bibjson.journal && doajData.results[0].bibjson.journal.issns.length > 1 ? 
+              doajData.results[0].bibjson.journal.issns[0] 
+              : doajData.results[0].bibjson.journal.issns[1]  
+          : null,
     identifier: {
       type: criteria,
       value: query
