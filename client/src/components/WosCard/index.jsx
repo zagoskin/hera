@@ -98,10 +98,10 @@ export default function WosCard({ISSN, content}){
 
           { content.journalProfiles[0].journalProfile.categories.length > 0 ?
           <div style={{flex: '1 auto', width: '60%', flexWrap: 'wrap', alignItems: 'stretch'}} className="card--scimago--info redib">
-            <div style={{fontWeight: "normal", padding: "1rem"}} className="card--tiny--info--data">CATEGORÍAS<br /><br /></div>
-            {content.journalProfiles[0].journalProfile.categories.map((category, index) => 
+            <div style={{fontWeight: "normal", padding: "1rem"}} className="card--tiny--info--data">PRODUCTOS<br /><br /></div>
+            {content.journalProfiles[0].journalProfile.products.map((category, index) => 
             <div key={`${category} ${index}`} style={{fontFamily: 'Roboto', width:'30%', padding: '0.5rem',backgroundColor: '#004aff', color: 'white'}} className="card--tiny--info--indicator">
-              {category.productDescription}
+              {category.description}
             </div>
             )}    
           </div>  
