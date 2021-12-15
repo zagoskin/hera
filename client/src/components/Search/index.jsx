@@ -35,8 +35,8 @@ export default function Search(){
     setAdditionalContent(undefined);
     const res = await getDataByQuery(query,criteria);
     
-    console.log('Todos los resultados:');
-    console.log(res);
+    // console.log('Todos los resultados:');
+    // console.log(res);
     
     setFormatError(false);
     
