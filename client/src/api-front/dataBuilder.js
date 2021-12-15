@@ -28,7 +28,7 @@ export const getDataByQuery = async (query, criteria) => {
   }
   const crossrefData = await getContentsCrossref(getURLCrossref());
   const doajData = await getContentsDoaj(getURLDoaj());
-
+  
   let res = {
     crossref: crossrefData,
     doaj: doajData.total === 0 ? null : doajData.results[0],
@@ -59,11 +59,15 @@ export const getDataByQuery = async (query, criteria) => {
           : redibData && redibData.journalTitle ? redibData.journalTitle : "",
     URL: criteria === 'DOI' ? `https://dx.doi.org/${query}` : doajData.total > 0 ? doajData.results[0].bibjson.ref.journal : `https://portal.issn.org/resource/ISSN/${query}`,
     authors: crossrefData.author ? crossrefData.author : doajData.total > 0 ? doajData.results[0].bibjson.author : microsoftData ? microsoftData.entities.length > 0 ? microsoftData.entities[0].AA : undefined : undefined,
-    issn: crossrefData.ISSN ? crossrefData.ISSN.length > 1 ? crossrefData.ISSN[1] : crossrefData.ISSN[0]
-          : doajData.total > 0 ? 
-            doajData.results[0].bibjson.journal && doajData.results[0].bibjson.journal.issns.length > 1 ? 
-              doajData.results[0].bibjson.journal.issns[0] 
-              : doajData.results[0].bibjson.journal.issns[1]  
+    issnELEC: crossrefData['issn-type'] && crossrefData['issn-type'].some(elem => elem.type === 'electronic') ? 
+            crossrefData['issn-type'].filter(elem => elem.type === 'electronic')[0].value
+          : doajData.total > 0 && doajData.results[0].bibjson.identifier && doajData.results[0].bibjson.identifier.some(elem => elem.type === 'eissn') ? 
+            doajData.results[0].bibjson.identifier.filter(elem => elem.type === 'eissn')[0].value
+          : null,
+    issnPRINT: crossrefData['issn-type'] && crossrefData['issn-type'].some(elem => elem.type === 'print') ? 
+            crossrefData['issn-type'].filter(elem => elem.type === 'print')[0].value
+          : doajData.total > 0 && doajData.results[0].bibjson.identifier && doajData.results[0].bibjson.identifier.some(elem => elem.type === 'pissn') ? 
+            doajData.results[0].bibjson.identifier.filter(elem => elem.type === 'pissn')[0].value
           : null,
     identifier: {
       type: criteria,

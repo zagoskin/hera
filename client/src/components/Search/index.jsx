@@ -42,9 +42,9 @@ export default function Search(){
     
     setContent(res);
 
-    if ((res.issn !== null) && (criteria === "DOI")){
+    if ((res.issnELEC || res.issnPRINT) && (criteria === "DOI")){
       setLoadStage(2);
-      const journalContent = await getDataByQuery(res.issn,"ISSN");
+      const journalContent = await getDataByQuery(res.issnELEC || res.issnPRINT,"ISSN");
       setAdditionalContent(journalContent);
       setContent({ ...res, journalTitle: journalContent.title, publisher: journalContent.publisher });
     }

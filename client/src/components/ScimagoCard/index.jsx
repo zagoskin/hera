@@ -2,12 +2,12 @@ import React from 'react';
 import scimagoLogo from '../../images/scimagoLogo.png';
 import poweredByScopus from '../../images/PoweredbyScopus.png'
 
-export default function ScimagoCard({content}){
+export default function ScimagoCard({ISSN, content}){
 
   return (
     <div className="card--scimago">
       <div className="card--image--container">
-        <a href={content.error ? `https://www.scimagojr.com/` 
+        <a href={content.error ? `https://www.scimagojr.com/journalsearch.php?q=${ISSN}` 
           : content.journalURL }>
           <img className="card--scimago--image"
             src={scimagoLogo}

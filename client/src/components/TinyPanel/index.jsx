@@ -375,7 +375,7 @@ export default function TinyPanel({content, type, identifier}){
         content.scimago.error ?
         <div className="card--tiny--info">
           <div className="card--tiny--info--data padded logoArea">
-            <a href="https://www.scimagojr.com/"><img className="card--tiny--image transparent" src={scimagoLogo} alt="scimago_logo" /></a>
+            <a href={`https://www.scimagojr.com/journalsearch.php?q=${identifier}`}><img className="card--tiny--image transparent" src={scimagoLogo} alt="scimago_logo" /></a>
           </div> 
           <div className="card--tiny--info--data">
             {content.scimago.error}

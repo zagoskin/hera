@@ -118,7 +118,7 @@ export default function AcademicCard({content,additionalContent}){
         <RedibCard ISSN={content.identifier.value} content={content.redib} key={'redib' + content.identifier.value} />
         <WosCard ISSN={content.identifier.value} content={content.wos} key={'wos' + content.identifier.value}/>
         <ScopusGraph data={content.scopus} key={'scopus' + content.identifier.value} />
-        <ScimagoCard content={content.scimago} key={'scimago' + content.identifier.value} />
+        <ScimagoCard ISSN={content.identifier.value} content={content.scimago} key={'scimago' + content.identifier.value} />
         </>
         : null
         }
@@ -135,7 +135,7 @@ export default function AcademicCard({content,additionalContent}){
         <RedibCard ISSN={additionalContent.identifier.value} content={additionalContent.redib} key={'redib' + additionalContent.identifier.value} />
         <WosCard ISSN={additionalContent.identifier.value} content={additionalContent.wos} key={'wos' + additionalContent.identifier.value}/>
         <ScopusGraph data={additionalContent.scopus} key={'scopus' + additionalContent.identifier.value} />
-        <ScimagoCard content={additionalContent.scimago} key={'scimago' + additionalContent.identifier.value} />
+        <ScimagoCard ISSN={additionalContent.identifier.value} content={additionalContent.scimago} key={'scimago' + additionalContent.identifier.value} />
         
         </>
         : null
