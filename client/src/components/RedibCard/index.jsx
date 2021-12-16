@@ -45,7 +45,7 @@ export default function RedibCard({ISSN,content}){
           }
           {content.acredInter.length > 0 ?
           <div className="card--scimago--info redib">
-            <div style={{marginTop: "1.5rem"}} className="card--tiny--info--data">Acreditaciones internacionales <br /><br /></div>
+            <div style={{marginTop: "1.5rem"}} className="card--tiny--info--data">Acreditaciones de calidad nacional <br /><br /></div>
             {content.acredInter.map(acreditacion => 
             <div key={acreditacion} style={{fontFamily: 'Roboto'}} className="card--tiny--info--indicator">
               {acreditacion}
@@ -54,13 +54,13 @@ export default function RedibCard({ISSN,content}){
           </div>
           : 
           <div className="card--scimago--info redib">
-            <div style={{marginTop: "1.5rem"}} className="card--tiny--info--data">Acreditaciones internacionales <br /><br /></div>
-            <div style={{fontWeight: "normal"}} className="card--tiny--info--data">Sin acreditaciones internacionales </div>   
+            <div style={{marginTop: "1.5rem"}} className="card--tiny--info--data">Acreditaciones de calidad nacional <br /><br /></div>
+            <div style={{fontWeight: "normal"}} className="card--tiny--info--data">Sin acreditaciones nacionales </div>   
           </div>
           }
           {content.acredNac.length > 0 ?
           <div className="card--scimago--info redib">
-            <div style={{marginTop: "1.5rem"}} className="card--tiny--info--data">Acreditaciones nacionales <br /><br /></div>
+            <div style={{marginTop: "1.5rem"}} className="card--tiny--info--data">Otros Índices en los que está incluida <br /><br /></div>
             {content.acredNac.map(acreditacion => 
             <div key={acreditacion} style={{fontFamily: 'Roboto'}} className="card--tiny--info--indicator">
               {acreditacion}
@@ -69,8 +69,8 @@ export default function RedibCard({ISSN,content}){
           </div>
           : 
           <div className="card--scimago--info redib">
-            <div style={{marginTop: "1.5rem"}} className="card--tiny--info--data">Acreditaciones nacionales <br /><br /></div>
-            <div style={{fontWeight: "normal"}} className="card--tiny--info--data">Sin acreditaciones nacionales </div>   
+            <div style={{marginTop: "1.5rem"}} className="card--tiny--info--data">Otros Índices en los que está incluida <br /><br /></div>
+            <div style={{fontWeight: "normal"}} className="card--tiny--info--data">Sin información de otros índices</div>   
           </div>
           }
         </div>
