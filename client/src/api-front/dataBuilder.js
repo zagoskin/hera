@@ -28,7 +28,10 @@ export const getDataByQuery = async (query, criteria) => {
   }
   const crossrefData = await getContentsCrossref(getURLCrossref());
   const doajData = await getContentsDoaj(getURLDoaj());
-  
+  if (microsoftData && microsoftData.error) 
+    microsoftData = { 
+            entities : [], 
+          };
   let res = {
     crossref: crossrefData,
     doaj: doajData.total === 0 ? null : doajData.results[0],
